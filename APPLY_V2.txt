@@ -1,0 +1,5 @@
+Meezan Tours v2 patch (apply AFTER v1.1)
+1. Back up first (copy the folder or git commit).
+2. Extract into the project root, choose "Replace files". Nothing is deleted.
+3. npm run typecheck, then npm run build, then npm run preview.
+No new npm packages. No new images are needed.

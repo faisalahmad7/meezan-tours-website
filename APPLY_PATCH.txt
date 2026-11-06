@@ -1,0 +1,5 @@
+Meezan Tours v1.1 patch
+1. Extract this zip INTO your project root (D:\WEBDEV\Meezan tours\meezan-tours), choosing "Replace files".
+2. Delete this file (no longer used):  src\components\Testimonials.tsx
+3. Run:  npm run typecheck   then   npm run build   then   npm run preview
+No new npm packages are needed.
