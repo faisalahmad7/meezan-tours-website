@@ -27,6 +27,8 @@ export const galleryImages: GalleryImage[] = [
   { id: 'g20', slug: 'night-gate-pilgrims', title: 'Moving together at night', alt: 'Pilgrims in ihram and volunteers in high-visibility vests walking toward a lit entrance gate at night', category: 'Journey' },
   { id: 'g21', slug: 'pilgrims-walking', title: 'Pilgrims on the way', alt: 'A large stream of pilgrims in white ihram walking together on a raised walkway with rocky hills behind them', category: 'Journey' },
   { id: 'g22', slug: 'pilgrims-walking-2', title: 'Walking as one group', alt: 'Hajj and Umrah pilgrims in white walking in a crowd under a clear morning sky with mountains in the distance', category: 'Journey' },
+  { id: 'g23', slug: 'buffet-hotel', title: 'Hotel buffet, freshly served', alt: 'Chafing dishes of saffron rice, vegetables and curries laid out at a hotel buffet for Meezan pilgrims', category: 'Stay & Food' },
+  { id: 'g24', slug: 'salad-bar', title: 'Fresh salad and fruit', alt: 'Platter of red cabbage, cucumber, carrot and orange slices being served at a Meezan group meal', category: 'Stay & Food' },
   { id: 'g11', slug: 'group-bridge', title: 'Pilgrims gathered on a terrace', alt: 'A line of pilgrims in ihram and modest dress standing along a railed terrace', category: 'Groups' },
 ]
 
@@ -34,4 +36,4 @@ export const galleryImages: GalleryImage[] = [
 export const galleryVideos: GalleryVideo[] = []
 
 export const galleryCategories = ['All', 'Hajj', 'Kaaba', 'Journey', 'Groups', 'Stay & Food'] as const
-export const HOME_GALLERY_IDS = ['g14', 'g17', 'g2', 'g16', 'g20', 'g9']
+export const HOME_GALLERY_IDS = ['g14', 'g17', 'g23', 'g24', 'g2', 'g16']

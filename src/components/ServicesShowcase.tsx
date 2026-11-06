@@ -29,8 +29,8 @@ export default function ServicesShowcase() {
           </div>
           <Picture slug="buffet" alt="Freshly prepared rice, vegetable and curry dishes at a Meezan hotel buffet" ratio="4/3" sizes="(min-width:1024px) 40vw, 100vw" className="rounded-xl lg:col-span-5 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:min-h-[30rem] lg:!aspect-auto lg:h-full" focus="50% 55%" />
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:col-span-7 lg:col-start-6 lg:row-start-2">
-            <Picture slug="buffet-salads" alt="Platters of spiced salad, pasta and vegetable dishes laid out on a hotel buffet counter" ratio="1/1" sizes="(min-width:1024px) 24vw, 46vw" className="rounded-xl lg:min-h-[15rem] lg:!aspect-auto lg:h-full" focus="40% 50%" />
-            <Picture slug="buffet-grill" alt="Sizzling plate of cauliflower and bell pepper stir-fry served at the buffet" ratio="1/1" sizes="(min-width:1024px) 24vw, 46vw" className="rounded-xl lg:min-h-[15rem] lg:!aspect-auto lg:h-full" focus="55% 50%" />
+            <Picture slug="buffet-hotel" alt="Chafing dishes of saffron rice, vegetables and curries laid out at a hotel buffet" ratio="1/1" sizes="(min-width:1024px) 24vw, 46vw" className="rounded-xl lg:min-h-[15rem] lg:!aspect-auto lg:h-full" focus="35% 60%" />
+            <Picture slug="salad-bar" alt="Fresh red cabbage, cucumber, carrot and orange salad served at a Meezan group meal" ratio="1/1" sizes="(min-width:1024px) 24vw, 46vw" className="rounded-xl lg:min-h-[15rem] lg:!aspect-auto lg:h-full" focus="45% 60%" />
           </div>
         </div>
 

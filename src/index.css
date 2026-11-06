@@ -45,7 +45,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  *:not(.ticker-track), *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
 /* ---- V2: cinematic hero + ticker (CSS only) ---- */
@@ -53,11 +53,8 @@
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .kb img { animation: kenburns 16s ease-in-out infinite alternate; will-change: transform; }
 .ticker-track { display: flex; width: max-content; animation: ticker 48s linear infinite; }
-.ticker:hover .ticker-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
   .kb img { animation: none; }
-  .ticker-track { width: auto; flex-wrap: wrap; justify-content: center; animation: none; }
-  .ticker-dup { display: none; }
 }
 
 /* Hero entrance: transform only, so text is visible from first paint (better LCP). */
@@ -84,7 +81,7 @@
 .ribbon-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
 .ribbon-track { display: flex; width: max-content; animation: ticker var(--dur, 80s) linear infinite; }
 .ribbon-rev { animation-direction: reverse; }
-.ribbon-wrap:hover .ribbon-track, .ribbon-wrap:focus-within .ribbon-track { animation-play-state: paused; }
+@media (hover: hover) { .ribbon-wrap:hover .ribbon-track { animation-play-state: paused; } }
 .ribbon-tab { clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 0.6rem), 0 100%); }
 @media (prefers-reduced-motion: reduce) {
   .ribbon-mask { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x mandatory; padding-inline: 1.25rem; }
@@ -108,3 +105,31 @@
   .route-plane { display: none; }
   .hero-orbit { animation: none; }
 }
+
+/* ---- V4: twin hero CTAs, flight lane, trust doodle ---- */
+.hero-cta { @apply flex min-h-[4.25rem] items-center gap-3 rounded-2xl px-4 py-3 transition duration-200 hover:-translate-y-0.5; }
+.hero-cta-gold { @apply bg-gold-400 text-brand-950 shadow-lift hover:bg-gold-300; }
+.hero-cta-glass { @apply border border-gold-400/70 bg-white/10 text-white backdrop-blur hover:bg-white/20; }
+.hero-cta-glass .btn-chip { @apply bg-gold-400 text-brand-950; }
+
+@keyframes fl-fly { 0% { offset-distance: 0%; opacity: 0; } 5% { opacity: 1; } 84% { offset-distance: 100%; opacity: 1; } 92%, 100% { offset-distance: 100%; opacity: 0; } }
+@keyframes fl-draw { 0% { stroke-dashoffset: 1; opacity: 1; } 84% { stroke-dashoffset: 0; opacity: 1; } 96% { stroke-dashoffset: 0; opacity: 0; } 100% { stroke-dashoffset: 1; opacity: 0; } }
+@keyframes fl-land { 0%, 80% { transform: scale(1); opacity: .6; } 88% { transform: scale(2.4); opacity: 1; } 100% { transform: scale(1); opacity: .6; } }
+@keyframes fl-drift { from { transform: translateX(-12%); } to { transform: translateX(12%); } }
+.fl-trail { stroke-dasharray: 1; stroke-dashoffset: 1; animation: fl-draw 13s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+.fl-plane { offset-rotate: auto; opacity: 0; animation: fl-fly 13s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; filter: drop-shadow(0 0 6px rgb(240 213 136 / 0.9)); }
+.fl-arrive, .fl-ring { transform-box: fill-box; transform-origin: center; animation: fl-land 13s ease-out infinite; }
+.fl-cloud { animation: fl-drift 26s ease-in-out infinite alternate; }
+.fl-cloud-2 { animation-duration: 34s; animation-direction: alternate-reverse; }
+.fl-cloud-3 { animation-duration: 21s; }
+@media (prefers-reduced-motion: reduce) { .fl-plane, .fl-cloud { animation: none; } .fl-plane { opacity: 1; offset-distance: 100%; } .fl-trail { animation: none; stroke-dashoffset: 0; } }
+
+.doodle-s { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.doodle.armed .doodle-d { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.doodle.on .doodle-d { stroke-dasharray: 1; animation: doodle-draw 2.6s ease-out forwards; animation-delay: var(--dl, 0s); }
+@keyframes doodle-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes doodle-glow { 0%, 100% { opacity: .35; transform: scale(1); } 50% { opacity: .9; transform: scale(1.25); } }
+.doodle-heart { transform-box: fill-box; transform-origin: center; animation: doodle-glow 4s ease-in-out infinite; }
+@keyframes doodle-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.doodle-star { animation: doodle-float 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .doodle.armed .doodle-d { stroke-dashoffset: 0; } .doodle-heart, .doodle-star { animation: none; } }

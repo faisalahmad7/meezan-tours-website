@@ -1,9 +1,10 @@
-import { ArrowRight, BadgeCheck, HeartHandshake, ShieldCheck, Wallet } from 'lucide-react'
+import { ArrowRight, BadgeCheck, HeartHandshake, Landmark, MoonStar, ShieldCheck, Wallet } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import AllIndia from '@/components/AllIndia'
 import Button from '@/components/Button'
 import CtaBand from '@/components/CtaBand'
 import Faq from '@/components/Faq'
+import FlightPath from '@/components/FlightPath'
 import HeroSlides from '@/components/HeroSlides'
 import JourneyTimeline from '@/components/JourneyTimeline'
 import PackageCard from '@/components/PackageCard'
@@ -40,17 +41,18 @@ export default function Home() {
       {/* HERO */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
-        <div className="container relative grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-16">
+        <FlightPath />
+        <div className="container relative grid items-center gap-12 pb-10 pt-32 sm:pb-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pb-16 lg:pt-36">
           <div data-hero className="max-w-xl">
             <p className="eyebrow mb-5">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-display-xl text-white">Your sacred journey, guided with care.</h1>
             <p className="mt-4 font-display text-xl italic text-gold-300 sm:text-2xl">From your first intention to your safe return.</p>
             <p className="mt-5 text-lg text-white/85">With 18+ years of experience, Meezan Tours arranges flights, visas, stay and ziyarat for Hajj and Umrah, so you can give your full attention to worship.</p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <Button to="/hajj" variant="gold" className="btn-arrow">Hajj packages <span className="btn-chip"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Button>
-              <Link to="/umrah" className="hero-link">Umrah packages</Link>
-              <Link to="/contact" className="hero-link">Speak to our team</Link>
+            <div className="mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
+              <Link to="/hajj" className="hero-cta hero-cta-gold"><Landmark className="h-6 w-6 shrink-0" aria-hidden="true" /><span className="min-w-0"><span className="block whitespace-nowrap text-base font-semibold leading-tight sm:text-lg">Hajj packages</span><span className="block text-xs opacity-75">Group departures</span></span><span className="btn-chip ml-auto"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Link>
+              <Link to="/umrah" className="hero-cta hero-cta-glass"><MoonStar className="h-6 w-6 shrink-0" aria-hidden="true" /><span className="min-w-0"><span className="block whitespace-nowrap text-base font-semibold leading-tight sm:text-lg">Umrah packages</span><span className="block text-xs opacity-75">All year round</span></span><span className="btn-chip ml-auto"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Link>
             </div>
+            <Link to="/contact" className="hero-link mt-5 inline-block">Speak to our team</Link>
             <div className="mt-10 flex items-center gap-5 border-t border-gold-500/30 pt-6">
               <p className="font-display text-5xl font-semibold leading-none text-gold-400 sm:text-6xl">18+</p>
               <p className="max-w-[16rem] text-sm leading-snug text-white/80 sm:text-base"><span className="block text-xs font-semibold uppercase tracking-[0.16em] text-white">Years of experience</span>A commitment to every Haji, from every corner of India.</p>

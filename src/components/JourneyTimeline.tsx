@@ -1,5 +1,6 @@
 import { ArrowRight, Plane } from 'lucide-react'
 import SectionHeading from './SectionHeading'
+import TrustDoodle from './TrustDoodle'
 
 const steps = [
   ['Enquiry and guidance', 'Speak to our team and choose the right package.'],
@@ -15,8 +16,9 @@ const steps = [
 
 export default function JourneyTimeline() {
   return (
-    <section className="section">
-      <div className="container">
+    <section className="section relative overflow-hidden">
+      <TrustDoodle className="pointer-events-none absolute left-1/2 top-2 w-[30rem] max-w-none -translate-x-1/2 opacity-[0.10] sm:w-[38rem] lg:left-auto lg:right-2 lg:top-10 lg:w-[26rem] lg:translate-x-0 lg:opacity-[0.55] xl:right-6 xl:w-[28rem]" />
+      <div className="container relative">
         <SectionHeading eyebrow="The complete journey" title="From your first intention to your safe return" intro="Based in Pune, Meezan coordinates the whole pilgrimage. Our group journeys are organised from Mumbai airport to Saudi Arabia and back to Mumbai airport." center />
         <div data-reveal className="on-dark mx-auto mb-12 flex max-w-3xl items-center justify-between gap-2 rounded-full bg-brand-900 px-5 py-4 text-sm font-semibold text-white shadow-lift sm:px-8 sm:text-base">
           <span>Mumbai Airport</span>

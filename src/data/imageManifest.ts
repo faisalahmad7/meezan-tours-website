@@ -23,6 +23,6 @@ export const imageManifest: Record<string, ImageMeta> = {
   'night-gate-pilgrims': { w: 1600, h: 2133, widths: [480, 960, 1600], color: '#7e7361' },
   'pilgrims-walking': { w: 1600, h: 2846, widths: [480, 960, 1600], color: '#989898' },
   'pilgrims-walking-2': { w: 1600, h: 2846, widths: [480, 960, 1600], color: '#929192' },
-  'buffet-salads': { w: 960, h: 470, widths: [480, 960], color: '#a48463' },
-  'buffet-grill': { w: 960, h: 460, widths: [480, 960], color: '#a26d2f' },
+  'buffet-hotel': { w: 516, h: 387, widths: [516], color: '#755f3c' },
+  'salad-bar': { w: 640, h: 360, widths: [640], color: '#867962' },
 }
