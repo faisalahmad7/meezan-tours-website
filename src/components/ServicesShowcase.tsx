@@ -21,12 +21,16 @@ export default function ServicesShowcase() {
       <div className="container">
         <SectionHeading eyebrow="Our services" title="Every detail arranged. Every pilgrim valued." intro="Meezan does far more than book flights and hotels. Inclusions differ by package, so each card notes where that applies." center />
 
-        <div data-reveal className="mb-6 grid overflow-hidden rounded-xl2 border border-gold-500/40 bg-white shadow-soft md:grid-cols-[0.8fr_1.2fr]">
-          <Picture slug="buffet" alt="Freshly prepared rice, vegetable and curry dishes at a Meezan hotel buffet" ratio="4/5" sizes="(min-width:768px) 40vw, 100vw" className="md:h-full md:!aspect-auto" focus="50% 50%" />
-          <div className="flex flex-col justify-center p-7 sm:p-10">
+        <div data-reveal className="mb-6 grid gap-3 overflow-hidden rounded-xl2 border border-gold-500/40 bg-white p-3 shadow-soft sm:gap-4 sm:p-4 lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
+          <div className="px-3 pb-1 pt-4 sm:px-5 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:pt-5">
             <Tag>Varies by package</Tag>
             <h3 className="mt-4 text-display-md">A taste of home, during your sacred journey.</h3>
-            <p className="mt-4 text-ink-500">Thoughtfully arranged Indian-style meals to bring comfort and familiarity throughout your journey. Pilgrims often mention the food in their feedback. Buffet-style dining and meal arrangements are confirmed package by package.</p>
+            <p className="mt-3 max-w-2xl text-ink-500">Thoughtfully arranged Indian-style meals to bring comfort and familiarity throughout your journey. Pilgrims often mention the food in their feedback. Buffet-style dining and meal arrangements are confirmed package by package.</p>
+          </div>
+          <Picture slug="buffet" alt="Freshly prepared rice, vegetable and curry dishes at a Meezan hotel buffet" ratio="4/3" sizes="(min-width:1024px) 40vw, 100vw" className="rounded-xl lg:col-span-5 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:min-h-[30rem] lg:!aspect-auto lg:h-full" focus="50% 55%" />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:col-span-7 lg:col-start-6 lg:row-start-2">
+            <Picture slug="buffet-salads" alt="Platters of spiced salad, pasta and vegetable dishes laid out on a hotel buffet counter" ratio="1/1" sizes="(min-width:1024px) 24vw, 46vw" className="rounded-xl lg:min-h-[15rem] lg:!aspect-auto lg:h-full" focus="40% 50%" />
+            <Picture slug="buffet-grill" alt="Sizzling plate of cauliflower and bell pepper stir-fry served at the buffet" ratio="1/1" sizes="(min-width:1024px) 24vw, 46vw" className="rounded-xl lg:min-h-[15rem] lg:!aspect-auto lg:h-full" focus="55% 50%" />
           </div>
         </div>
 

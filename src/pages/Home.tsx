@@ -14,7 +14,7 @@ import Seo from '@/components/Seo'
 import StatsBand from '@/components/StatsBand'
 import TrustRibbon from '@/components/TrustRibbon'
 import VideoTestimonials from '@/components/VideoTestimonials'
-import WrittenTestimonials from '@/components/WrittenTestimonials'
+import TestimonialRibbon from '@/components/TestimonialRibbon'
 import { heroMain, heroSide } from '@/data/hero'
 import { SITE } from '@/data/site'
 import { businessSchema, faqSchema, websiteSchema } from '@/lib/schema'
@@ -40,30 +40,33 @@ export default function Home() {
       {/* HERO */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
-        <div className="container relative grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:py-16">
+        <div className="container relative grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-16">
           <div data-hero className="max-w-xl">
             <p className="eyebrow mb-5">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-display-xl text-white">Your sacred journey, guided with care.</h1>
             <p className="mt-4 font-display text-xl italic text-gold-300 sm:text-2xl">From your first intention to your safe return.</p>
             <p className="mt-5 text-lg text-white/85">With 18+ years of experience, Meezan Tours arranges flights, visas, stay and ziyarat for Hajj and Umrah, so you can give your full attention to worship.</p>
-            <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
-              <Button to="/hajj" variant="gold">Explore Hajj Packages <ArrowRight className="h-4 w-4" aria-hidden="true" /></Button>
-              <Button to="/umrah" variant="ghost-light">Explore Umrah Packages</Button>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <Button to="/hajj" variant="gold" className="btn-arrow">Hajj packages <span className="btn-chip"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Button>
+              <Link to="/umrah" className="hero-link">Umrah packages</Link>
+              <Link to="/contact" className="hero-link">Speak to our team</Link>
             </div>
-            <Link to="/contact" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-gold-300 underline decoration-dotted underline-offset-4 hover:text-white">Speak to our team <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+            <div className="mt-10 flex items-center gap-5 border-t border-gold-500/30 pt-6">
+              <p className="font-display text-5xl font-semibold leading-none text-gold-400 sm:text-6xl">18+</p>
+              <p className="max-w-[16rem] text-sm leading-snug text-white/80 sm:text-base"><span className="block text-xs font-semibold uppercase tracking-[0.16em] text-white">Years of experience</span>A commitment to every Haji, from every corner of India.</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-[1.2fr_1fr] lg:grid-rows-[auto_1fr]">
-            <div className="col-span-2 mx-auto w-full max-w-md lg:col-span-1 lg:row-span-2 lg:max-w-none">
+          {/* Stage: arch + one overlapping group photo + a slow orbit ring */}
+          <div className="relative mx-auto w-full max-w-md pb-10 lg:max-w-none lg:pb-8">
+            <span className="hero-orbit" aria-hidden="true" />
+            <div className="relative ml-auto w-[84%]">
               <div className="arch gold-frame overflow-hidden">
-                <HeroSlides slides={heroMain} ratio="3/4" sizes="(min-width:1024px) 34vw, 90vw" priority className="h-full" />
+                <HeroSlides slides={heroMain} ratio="3/4" sizes="(min-width:1024px) 34vw, 80vw" priority className="h-full" />
               </div>
             </div>
-            <HeroSlides slides={heroSide} ratio="4/3" sizes="(min-width:1024px) 26vw, 50vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border border-gold-500/50 shadow-lift" />
-            <div className="flex flex-col justify-center rounded-xl2 border border-gold-500/50 bg-brand-950/70 p-4 text-center sm:p-6">
-              <p className="font-display text-5xl font-semibold leading-none text-gold-400 sm:text-6xl">18+</p>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-white sm:text-sm">Years of experience</p>
-              <p className="mt-3 hidden text-sm text-white/70 sm:block">A commitment to every Haji, from every corner of India.</p>
+            <div className="absolute bottom-0 left-0 w-[52%] sm:w-[48%]">
+              <HeroSlides slides={heroSide} ratio="4/3" sizes="(min-width:1024px) 20vw, 46vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
             </div>
           </div>
         </div>
@@ -74,9 +77,15 @@ export default function Home() {
       {/* ABOUT */}
       <section className="section">
         <div className="container grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div data-reveal className="grid grid-cols-5 gap-3 sm:gap-4">
-            <Picture slug="group-plaza" alt="Meezan pilgrims holding the Meezan Tours banner in a paved plaza" sizes="(min-width:1024px) 30vw, 60vw" ratio="4/5" className="col-span-3 rounded-t-[5rem] rounded-b-xl2 shadow-lift" />
-            <Picture slug="buffet" alt="Hotel buffet with rice and vegetable dishes" sizes="(min-width:1024px) 20vw, 40vw" ratio="4/5" className="col-span-2 mt-10 rounded-xl2 shadow-lift" />
+          <div data-reveal className="relative pb-10 sm:pb-12">
+            <div className="grid grid-cols-5 gap-3 sm:gap-4">
+              <Picture slug="haram-group-portrait" alt="Meezan pilgrims in ihram standing together in front of the Kaaba in Makkah" sizes="(min-width:1024px) 28vw, 56vw" ratio="4/5" className="col-span-3 rounded-t-[5rem] rounded-b-xl2 shadow-lift" focus="50% 45%" />
+              <Picture slug="airport-banner-group" alt="Meezan Tours pilgrims holding the Meezan banner at the airport on departure day" sizes="(min-width:1024px) 20vw, 40vw" ratio="4/5" className="col-span-2 mt-10 rounded-xl2 shadow-lift" focus="62% 60%" />
+            </div>
+            <div className="absolute bottom-0 left-3 right-3 flex items-center gap-3 rounded-xl2 border border-gold-500/50 bg-white/95 px-4 py-3 shadow-lift backdrop-blur sm:left-6 sm:right-auto sm:max-w-sm">
+              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-900 text-gold-400"><ShieldCheck className="h-5 w-5" aria-hidden="true" /></span>
+              <p className="text-sm leading-snug text-ink-700"><span className="block font-semibold text-ink-900">Registered Hajj Group Organiser</span>Ministry of Minority Affairs, Govt. of India</p>
+            </div>
           </div>
           <div>
             <SectionHeading eyebrow="18+ years of dedicated pilgrim service" title="A trusted partner for sacred journeys" />
@@ -155,13 +164,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WRITTEN TESTIMONIALS */}
-      <section className="section">
-        <div className="container">
-          <SectionHeading eyebrow="Testimonials" title="In their own words" center />
-          <WrittenTestimonials />
-          <p className="mt-4 text-center"><a className="text-sm font-semibold text-brand-700 underline underline-offset-4" href={SITE.mapLink} target="_blank" rel="noopener noreferrer">Read our reviews on Google{SITE.googleReviews.rating ? ` (${SITE.googleReviews.rating} stars${SITE.googleReviews.reviewCount ? `, ${SITE.googleReviews.reviewCount} reviews` : ''})` : ''}</a></p>
-        </div>
+      {/* WRITTEN TESTIMONIALS: moving ribbon */}
+      <section className="section overflow-hidden">
+        <div className="container"><SectionHeading eyebrow="Testimonials" title="In their own words" center /></div>
+        <div className="-mt-4"><TestimonialRibbon /></div>
+        <div className="container"><p className="mt-8 text-center"><a className="text-sm font-semibold text-brand-700 underline underline-offset-4" href={SITE.mapLink} target="_blank" rel="noopener noreferrer">Read our reviews on Google{SITE.googleReviews.rating ? ` (${SITE.googleReviews.rating} stars${SITE.googleReviews.reviewCount ? `, ${SITE.googleReviews.reviewCount} reviews` : ''})` : ''}</a></p></div>
       </section>
 
       {/* GALLERY PREVIEW: mosaic */}
