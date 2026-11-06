@@ -17,7 +17,7 @@ import VideoTestimonials from '@/components/VideoTestimonials'
 import WrittenTestimonials from '@/components/WrittenTestimonials'
 import { heroMain, heroSide } from '@/data/hero'
 import { SITE } from '@/data/site'
-import { businessSchema, websiteSchema } from '@/lib/schema'
+import { businessSchema, faqSchema, websiteSchema } from '@/lib/schema'
 import { getFaqs, getHomeGallery, getPackages } from '@/services/content'
 
 const reasons = [
@@ -34,7 +34,7 @@ export default function Home() {
         path="/"
         title="Hajj & Umrah Tour Operator in Pune | Meezan Tours"
         description="Meezan Tours & Travels, Pune: licensed Hajj Group Organiser with 18+ years of experience, arranging Hajj, Umrah and Ziyarat packages for pilgrims across India."
-        jsonLd={[businessSchema(), websiteSchema()]}
+        jsonLd={[businessSchema(), websiteSchema(), faqSchema(getFaqs())]}
       />
 
       {/* HERO */}

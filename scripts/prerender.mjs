@@ -41,6 +41,10 @@ await writeFile(
   path.join(dist, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
 )
-await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`)
+await writeFile(path.join(dist, 'robots.txt'), [
+    'User-agent: *\nAllow: /\nDisallow: /admin',
+    ...['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended'].map((b) => `User-agent: ${b}\nAllow: /`),
+    `Sitemap: ${SITE}/sitemap.xml`,
+  ].join('\n\n') + '\n')
 await rm(path.join(root, 'dist-ssr'), { recursive: true, force: true })
 console.log('done: sitemap.xml, robots.txt, 404.html written')

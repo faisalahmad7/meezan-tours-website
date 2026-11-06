@@ -112,18 +112,18 @@ export default function Header() {
           </div>
         </div>
 
-        <div id="mobile-menu" hidden={!open} className="fixed inset-x-0 bottom-0 top-[4.25rem] z-30 overflow-y-auto bg-ivory lg:hidden">
-          <nav aria-label="Mobile" className="container flex flex-col py-4">
-            {MOBILE_LINKS.map((l) => (
-              <NavLink key={l.to} to={l.to} end={l.to === '/'} className={({ isActive }) => `border-b border-sand-200 px-2 py-4 font-display text-2xl font-semibold ${isActive ? 'text-brand-700' : 'text-ink-900'}`}>{l.label}</NavLink>
-            ))}
-            <div className="mt-6 grid gap-3 pb-8">
-              <Button href={whatsappLink(ENQUIRY)} variant="whatsapp"><MessageCircle className="h-5 w-5" aria-hidden="true" />WhatsApp us</Button>
-              <Button href={`tel:${SITE.phones[0].tel}`} variant="outline"><Phone className="h-5 w-5" aria-hidden="true" />Call {SITE.phones[0].display}</Button>
-            </div>
-          </nav>
-        </div>
       </header>
+      <div id="mobile-menu" hidden={!open} className="fixed inset-0 z-30 overflow-y-auto bg-ivory pt-[4.25rem] md:pt-[6.25rem] lg:hidden">
+        <nav aria-label="Mobile" className="container flex flex-col py-4">
+          {MOBILE_LINKS.map((l) => (
+            <NavLink key={l.to} to={l.to} end={l.to === '/'} className={({ isActive }) => `border-b border-sand-200 px-2 py-4 font-display text-2xl font-semibold ${isActive ? 'text-brand-700' : 'text-ink-900'}`}>{l.label}</NavLink>
+          ))}
+          <div className="mt-6 grid gap-3 pb-8">
+            <Button href={whatsappLink(ENQUIRY)} variant="whatsapp"><MessageCircle className="h-5 w-5" aria-hidden="true" />WhatsApp us</Button>
+            <Button href={`tel:${SITE.phones[0].tel}`} variant="outline"><Phone className="h-5 w-5" aria-hidden="true" />Call {SITE.phones[0].display}</Button>
+          </div>
+        </nav>
+      </div>
     </>
   )
 }

@@ -31,6 +31,8 @@ export const businessSchema = () => ({
       closes: '19:00',
     },
   ],
+  identifier: { '@type': 'PropertyValue', name: `${SITE.licence.role} licence (MOMA Hajj Cell)`, value: SITE.licence.number },
+  contactPoint: SITE.phones.map((ph) => ({ '@type': 'ContactPoint', contactType: 'customer service', telephone: ph.tel, areaServed: 'IN', availableLanguage: ['English', 'Hindi', 'Urdu'] })),
   areaServed: [{ '@type': 'AdministrativeArea', name: 'Maharashtra' }, { '@type': 'Country', name: 'India' }],
   knowsAbout: ['Hajj', 'Umrah', 'Ziyarat'],
   hasMap: SITE.mapLink,
@@ -65,4 +67,15 @@ export const serviceSchema = (name: string, description: string, path: string) =
   url: SITE.url + path,
   provider: { '@id': ID },
   areaServed: { '@type': 'Country', name: 'India' },
+})
+
+/** FAQPage structured data: lets search and AI answer engines quote the answers. */
+export const faqSchema = (items: { q: string; a: string }[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
 })

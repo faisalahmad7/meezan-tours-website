@@ -59,3 +59,11 @@
   .ticker-track { width: auto; flex-wrap: wrap; justify-content: center; animation: none; }
   .ticker-dup { display: none; }
 }
+
+/* Hero entrance: transform only, so text is visible from first paint (better LCP). */
+@keyframes rise { from { transform: translateY(1.25rem); } to { transform: none; } }
+[data-hero] > * { animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+[data-hero] > :nth-child(2) { animation-delay: 0.06s; }
+[data-hero] > :nth-child(3) { animation-delay: 0.12s; }
+[data-hero] > :nth-child(4) { animation-delay: 0.18s; }
+[data-hero] > :nth-child(5) { animation-delay: 0.24s; }
