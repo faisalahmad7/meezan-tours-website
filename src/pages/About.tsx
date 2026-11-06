@@ -30,7 +30,7 @@ export default function About() {
               <p className="rounded-xl border border-sand-300 bg-white p-4 text-sm text-ink-700">Registration No. <a className="font-semibold text-brand-700 underline" href={SITE.licence.certificateUrl} target="_blank" rel="noopener noreferrer">{SITE.licence.number}</a><br />{SITE.licence.role} &middot; {SITE.licence.authority}</p>
             </div>
           </div>
-          <Picture slug="group-banner-hill" alt="Meezan pilgrims holding a green Meezan Tours & Travels banner" ratio="4/3" sizes="(min-width:1024px) 45vw, 100vw" className="rounded-xl2 shadow-lift" />
+          <Picture slug="airport-banner-group" alt="Meezan Tours pilgrims in ihram holding the Meezan banner at the airport on departure day" focus="55% 65%" ratio="4/3" sizes="(min-width:1024px) 45vw, 100vw" className="rounded-xl2 shadow-lift" />
         </div>
       </section>
       <StatsBand />

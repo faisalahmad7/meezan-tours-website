@@ -67,3 +67,44 @@
 [data-hero] > :nth-child(3) { animation-delay: 0.12s; }
 [data-hero] > :nth-child(4) { animation-delay: 0.18s; }
 [data-hero] > :nth-child(5) { animation-delay: 0.24s; }
+
+/* ---- V3: hero detail, testimonial ribbon, glowing route ---- */
+.btn-arrow { @apply gap-3 py-2 pl-6 pr-2; }
+.btn-chip { @apply inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-950 text-gold-300 transition duration-200; }
+.btn-arrow:hover .btn-chip { @apply translate-x-0.5 bg-brand-900; }
+.hero-link { @apply relative text-sm font-semibold text-white/90 transition hover:text-gold-300 sm:text-base; }
+.hero-link::after { content: ''; @apply absolute -bottom-1 left-0 h-px w-full origin-left scale-x-50 bg-gold-400 transition-transform duration-300; }
+.hero-link:hover::after { @apply scale-x-100; }
+
+@keyframes orbit { to { transform: rotate(360deg); } }
+.hero-orbit { position: absolute; right: -2%; top: 4%; width: 92%; aspect-ratio: 1; border-radius: 9999px; border: 1px dashed rgb(217 185 106 / 0.35); animation: orbit 90s linear infinite; pointer-events: none; }
+.hero-orbit::after { content: ''; position: absolute; top: 12%; left: 6%; width: 0.6rem; height: 0.6rem; border-radius: 9999px; background: #d9b96a; box-shadow: 0 0 14px 3px rgb(217 185 106 / 0.7); }
+
+/* testimonial ribbon: same ticker keyframes, per-row duration and direction */
+.ribbon-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.ribbon-track { display: flex; width: max-content; animation: ticker var(--dur, 80s) linear infinite; }
+.ribbon-rev { animation-direction: reverse; }
+.ribbon-wrap:hover .ribbon-track, .ribbon-wrap:focus-within .ribbon-track { animation-play-state: paused; }
+.ribbon-tab { clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 0.6rem), 0 100%); }
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-mask { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x mandatory; padding-inline: 1.25rem; }
+  .ribbon-track { width: auto; animation: none; }
+  .ribbon-card { scroll-snap-align: start; }
+}
+
+/* glowing journey line behind the "From across India" section */
+@keyframes route-flow { to { stroke-dashoffset: -26; } }
+@keyframes route-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes route-travel { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+.route-glow { opacity: 0.8; }
+.route-flow { animation: route-flow 2.4s linear infinite; }
+.route-pulse { animation: route-pulse 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.route-plane { opacity: 0; }
+@supports (offset-path: path('M0 0')) {
+  .route-plane { opacity: 1; animation: route-travel 9s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+  .route-plane-b { animation-delay: -4.5s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-plane { display: none; }
+  .hero-orbit { animation: none; }
+}
