@@ -143,3 +143,7 @@
   background-repeat: no-repeat; }
 .gal-card:hover .gal-corners, .gal-card:focus-visible .gal-corners { opacity: 1; inset: 0.9rem; }
 @media (prefers-reduced-motion: reduce) { .gal-seal { animation: none; } }
+
+/* Meezan watermark: the logo's own shape, tinted gold and blended into the hero */
+.meezan-mark { position: absolute; left: -6%; top: 50%; z-index: 0; width: min(54rem, 130vw); aspect-ratio: 560 / 258; transform: translateY(-50%) rotate(-6deg); pointer-events: none; background: linear-gradient(110deg, #f0d588, #d9b96a 60%, transparent); opacity: 0.1; -webkit-mask: url(/images/brand/meezan-logo-560.png) center / contain no-repeat; mask: url(/images/brand/meezan-logo-560.png) center / contain no-repeat; }
+@media (min-width: 1024px) { .meezan-mark { left: -3%; opacity: 0.12; } }

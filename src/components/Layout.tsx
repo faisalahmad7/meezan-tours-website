@@ -1,10 +1,10 @@
-import { MessageCircle } from 'lucide-react'
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { whatsappLink } from '@/data/site'
 import { useMotion } from '@/lib/useMotion'
 import Footer from './Footer'
 import Header from './Header'
+import { WhatsAppIcon } from './BrandIcons'
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
@@ -26,7 +26,7 @@ export default function Layout() {
         aria-label="Chat with Meezan on WhatsApp"
         className="fixed bottom-4 right-4 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#1faa59] text-white shadow-lift transition hover:scale-105 sm:hidden"
       >
-        <MessageCircle className="h-7 w-7" aria-hidden="true" />
+        <WhatsAppIcon className="h-7 w-7" aria-hidden="true" />
       </a>
     </>
   )

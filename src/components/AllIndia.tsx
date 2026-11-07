@@ -1,7 +1,8 @@
-import { MessageCircle, Plane } from 'lucide-react'
+import {Plane} from 'lucide-react'
 import { whatsappLink } from '@/data/site'
 import Button from './Button'
 import Picture from './Picture'
+import { WhatsAppIcon } from './BrandIcons'
 
 /** Mumbai hub -> Madinah and Makkah. Origin nodes are deliberately unlabelled dots: no outline of India is traced (map borders are legally sensitive in India). */
 const ORIGINS: [number, number][] = [[70, 286], [150, 340], [48, 374], [205, 410], [262, 300], [118, 420]]
@@ -69,7 +70,7 @@ export default function AllIndia() {
             <p className="mx-auto mt-6 max-w-md border-gold-400/70 py-1 font-display text-lg italic leading-snug text-gold-300 lg:mx-0 lg:border-l-2 lg:pl-5 sm:text-xl">One journey. One group. One commitment to every Haji.</p>
             <p className="sr-only">Group journeys leave from Mumbai airport for Madinah and Makkah and return to Mumbai.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start [&>*]:whitespace-nowrap">
-              <Button href={whatsappLink('Assalamu Alaikum, I am enquiring from outside Pune about Hajj / Umrah packages.')} variant="gold"><MessageCircle className="h-5 w-5" aria-hidden="true" />Enquire from your city</Button>
+              <Button href={whatsappLink('Assalamu Alaikum, I am enquiring from outside Pune about Hajj / Umrah packages.')} variant="gold"><WhatsAppIcon className="h-5 w-5" aria-hidden="true" />Enquire from your city</Button>
               <Button to="/contact" variant="ghost-light">Contact our Pune office</Button>
             </div>
           </div>

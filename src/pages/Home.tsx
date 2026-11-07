@@ -6,6 +6,7 @@ import CtaBand from '@/components/CtaBand'
 import Faq from '@/components/Faq'
 import FlightPath from '@/components/FlightPath'
 import GalleryMosaic from '@/components/GalleryMosaic'
+import SocialLinks from '@/components/SocialLinks'
 import HeroSlides from '@/components/HeroSlides'
 import JourneyTimeline from '@/components/JourneyTimeline'
 import PackageCard from '@/components/PackageCard'
@@ -42,6 +43,7 @@ export default function Home() {
       {/* HERO */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
+        <span className="meezan-mark" aria-hidden="true" />
                 <div className="container relative grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-16">
           <div data-hero className="max-w-xl">
             <p className="eyebrow mb-5">Based in Pune. Trusted by pilgrims across India.</p>
@@ -170,7 +172,7 @@ export default function Home() {
       <section className="section overflow-hidden">
         <div className="container"><SectionHeading eyebrow="Testimonials" title="In their own words" center /></div>
         <div className="-mt-4"><TestimonialRibbon /></div>
-        <div className="container"><p className="mt-8 text-center"><a className="text-sm font-semibold text-brand-700 underline underline-offset-4" href={SITE.mapLink} target="_blank" rel="noopener noreferrer">Read our reviews on Google{SITE.googleReviews.rating ? ` (${SITE.googleReviews.rating} stars${SITE.googleReviews.reviewCount ? `, ${SITE.googleReviews.reviewCount} reviews` : ''})` : ''}</a></p></div>
+        <div className="container"><SocialLinks /><p className="mt-8 text-center"><a className="text-sm font-semibold text-brand-700 underline underline-offset-4" href={SITE.mapLink} target="_blank" rel="noopener noreferrer">Read our reviews on Google{SITE.googleReviews.rating ? ` (${SITE.googleReviews.rating} stars${SITE.googleReviews.reviewCount ? `, ${SITE.googleReviews.reviewCount} reviews` : ''})` : ''}</a></p></div>
       </section>
 
       {/* GALLERY PREVIEW: mosaic */}

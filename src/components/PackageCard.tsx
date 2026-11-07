@@ -1,4 +1,4 @@
-import { CalendarDays, Check, ChevronDown, Clock, MapPin, MessageCircle, Star, TriangleAlert } from 'lucide-react'
+import {CalendarDays, Check, ChevronDown, Clock, MapPin, Star, TriangleAlert} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { formatInr } from '@/data/packages'
 import { whatsappLink } from '@/data/site'
@@ -6,6 +6,7 @@ import type { TravelPackage } from '@/data/types'
 import { useIsPast } from '@/lib/useIsPast'
 import Button from './Button'
 import Picture from './Picture'
+import { WhatsAppIcon } from './BrandIcons'
 
 export default function PackageCard({ pkg }: { pkg: TravelPackage }) {
   const past = useIsPast(pkg.departureDate)
@@ -91,7 +92,7 @@ export default function PackageCard({ pkg }: { pkg: TravelPackage }) {
           {pkg.taxNote && <p className="mt-1 text-xs font-medium text-ink-700">{pkg.taxNote}</p>}
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <Link to={`/contact?package=${pkg.id}`} className="btn btn-primary">Book this package</Link>
-            <Button href={whatsappLink(msg)} variant="whatsapp"><MessageCircle className="h-4 w-4" aria-hidden="true" />WhatsApp</Button>
+            <Button href={whatsappLink(msg)} variant="whatsapp"><WhatsAppIcon className="h-4 w-4" aria-hidden="true" />WhatsApp</Button>
           </div>
         </div>
       </div>

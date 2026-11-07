@@ -1,17 +1,17 @@
-import { AtSign, Clock, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone, Youtube } from 'lucide-react'
-import type { ReactNode } from 'react'
+import { Clock, Mail, MapPin, Phone } from 'lucide-react'
+import type { ComponentType, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { FOOTER_LINKS } from '@/data/navigation'
 import { COPYRIGHT_YEAR, SITE, addressLine, whatsappLink } from '@/data/site'
+import { SOCIAL_BRAND, WhatsAppIcon } from './BrandIcons'
 import { Logo } from './Header'
 
-const icons: Record<string, typeof Youtube> = { YouTube: Youtube, Facebook, Instagram, Threads: AtSign }
 const link = 'text-white/80 transition hover:text-white'
 
 /** One cell of the "ticket strip": icon, small label, then the details. */
-const Cell = ({ icon: Icon, label, children }: { icon: typeof Phone; label: string; children: ReactNode }) => (
+const Cell = ({ icon: Icon, label, children }: { icon: ComponentType<{ className?: string }>; label: string; children: ReactNode }) => (
   <div className="flex gap-3 p-5 sm:p-6">
-    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold-400" aria-hidden="true" />
+    <span aria-hidden="true" className="mt-0.5 shrink-0"><Icon className="h-5 w-5 text-gold-400" /></span>
     <div className="min-w-0 text-sm leading-relaxed text-white/85">
       <h2 className="mb-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold-300">{label}</h2>
       {children}
@@ -30,7 +30,7 @@ export default function Footer() {
             <p className="max-w-md text-sm text-white/75">Pune-based Hajj and Umrah operator with 18+ years of experience, serving pilgrims across India. Flights, visas, accommodation and guided support, so you can focus on worship.</p>
           </div>
           {SITE.social.length > 0 && (
-            <ul className="flex gap-3">{SITE.social.map((s) => { const Icon = icons[s.label] ?? AtSign; return <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold-500/50 text-gold-300 transition hover:bg-gold-400 hover:text-brand-950"><Icon className="h-4 w-4" /></a></li> })}</ul>
+            <ul className="flex gap-3">{SITE.social.map((s) => { const Icon = SOCIAL_BRAND[s.label]?.Icon ?? WhatsAppIcon; return <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold-500/50 text-gold-300 transition hover:bg-gold-400 hover:text-brand-950"><Icon className="h-4 w-4" /></a></li> })}</ul>
           )}
         </div>
 
@@ -40,7 +40,7 @@ export default function Footer() {
           <Cell icon={Phone} label="Call">
             <ul>{SITE.phones.map((p) => <li key={p.tel}><a className={link} href={`tel:${p.tel}`}>{p.display}</a></li>)}</ul>
           </Cell>
-          <Cell icon={MessageCircle} label="Message">
+          <Cell icon={WhatsAppIcon} label="Message">
             <a className={`${link} block`} href={whatsappLink('Assalamu Alaikum')} target="_blank" rel="noopener noreferrer">WhatsApp {SITE.whatsapp.display}</a>
             <a className={`${link} mt-1 flex items-center gap-1.5 break-all`} href={`mailto:${SITE.email}`}><Mail className="h-3.5 w-3.5 shrink-0 text-gold-400" aria-hidden="true" />{SITE.email}</a>
           </Cell>

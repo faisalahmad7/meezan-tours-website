@@ -1,6 +1,7 @@
-import { MessageCircle, Phone } from 'lucide-react'
+import {Phone} from 'lucide-react'
 import { SITE, whatsappLink } from '@/data/site'
 import Button from './Button'
+import { WhatsAppIcon } from './BrandIcons'
 
 /** Compact call-to-action card that overlaps the top edge of the footer, so the two read as one closing block. */
 export default function CtaBand({ title = 'Your intention begins the journey.', text = 'Let Meezan help you take the next step. Speak to our team about dates, packages and documents.' }: { title?: string; text?: string }) {
@@ -15,7 +16,7 @@ export default function CtaBand({ title = 'Your intention begins the journey.', 
             <p className="mt-2 text-base text-white/80 sm:text-lg">{text}</p>
           </div>
           <div className="relative mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center lg:mt-0 lg:shrink-0">
-            <Button href={whatsappLink('Assalamu Alaikum, I would like to enquire about Hajj / Umrah packages.')} variant="whatsapp"><MessageCircle className="h-5 w-5" aria-hidden="true" />WhatsApp us</Button>
+            <Button href={whatsappLink('Assalamu Alaikum, I would like to enquire about Hajj / Umrah packages.')} variant="whatsapp"><WhatsAppIcon className="h-5 w-5" aria-hidden="true" />WhatsApp us</Button>
             <Button href={`tel:${SITE.phones[0].tel}`} variant="ghost-light"><Phone className="h-5 w-5" aria-hidden="true" />{SITE.phones[0].display}</Button>
           </div>
         </div>
