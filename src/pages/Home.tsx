@@ -5,6 +5,7 @@ import Button from '@/components/Button'
 import CtaBand from '@/components/CtaBand'
 import Faq from '@/components/Faq'
 import FlightPath from '@/components/FlightPath'
+import GalleryMosaic from '@/components/GalleryMosaic'
 import HeroSlides from '@/components/HeroSlides'
 import JourneyTimeline from '@/components/JourneyTimeline'
 import PackageCard from '@/components/PackageCard'
@@ -19,7 +20,7 @@ import TestimonialRibbon from '@/components/TestimonialRibbon'
 import { heroMain, heroSide } from '@/data/hero'
 import { SITE } from '@/data/site'
 import { businessSchema, faqSchema, websiteSchema } from '@/lib/schema'
-import { getFaqs, getHomeGallery, getPackages } from '@/services/content'
+import { getFaqs, getGalleryImages, getHomeGallery, getPackages } from '@/services/content'
 
 const reasons = [
   { icon: BadgeCheck, title: 'Proven experience', text: 'Specialists focused on Hajj and Umrah travel, with 18+ years of organising group and personalised departures for Indian pilgrims.' },
@@ -41,8 +42,7 @@ export default function Home() {
       {/* HERO */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
-        <FlightPath />
-        <div className="container relative grid items-center gap-12 pb-10 pt-32 sm:pb-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:pb-16 lg:pt-36">
+                <div className="container relative grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-16">
           <div data-hero className="max-w-xl">
             <p className="eyebrow mb-5">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-display-xl text-white">Your sacred journey, guided with care.</h1>
@@ -61,7 +61,7 @@ export default function Home() {
 
           {/* Stage: arch + one overlapping group photo + a slow orbit ring */}
           <div className="relative mx-auto w-full max-w-md pb-10 lg:max-w-none lg:pb-8">
-            <span className="hero-orbit" aria-hidden="true" />
+            <FlightPath className="absolute left-[-2%] top-1/2 z-20 w-[120%] -translate-y-1/2" />
             <div className="relative ml-auto w-[84%]">
               <div className="arch gold-frame overflow-hidden">
                 <HeroSlides slides={heroMain} ratio="3/4" sizes="(min-width:1024px) 34vw, 80vw" priority className="h-full" />
@@ -177,12 +177,8 @@ export default function Home() {
       <section className="section bg-sand-100">
         <div className="container">
           <SectionHeading eyebrow="Gallery" title="Moments from our pilgrims' journeys" />
-          <div className="grid auto-rows-[9rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] md:grid-cols-4 md:gap-4">
-            {gallery.map((g, i) => (
-              <Picture key={g.id} slug={g.slug} alt={g.alt} sizes={i === 0 ? '(min-width:768px) 50vw, 100vw' : '(min-width:768px) 25vw, 50vw'} className={`h-full rounded-xl2 shadow-soft ${i === 0 ? 'col-span-2 row-span-2' : ''}`} focus={i === 0 ? '50% 60%' : undefined} />
-            ))}
-          </div>
-          <div className="mt-10 text-center"><Button to="/gallery" variant="outline">Open the gallery</Button></div>
+          <GalleryMosaic items={gallery} />
+          <div className="mt-10 text-center"><Button to="/gallery" variant="outline">Open the full gallery ({getHomeGallery().length > 0 ? getGalleryImages().length : 0} photographs)</Button></div>
         </div>
       </section>
 

@@ -61,21 +61,21 @@ export default function AllIndia() {
       <RouteGlow />
       <div className="container relative">
         <div className="mx-auto mb-10 h-px max-w-3xl bg-gradient-to-r from-transparent via-gold-400/60 to-transparent sm:mb-14" aria-hidden="true" />
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
-          <div data-reveal>
-            <p className="eyebrow mb-3">Based in Pune. Trusted by pilgrims across India.</p>
-            <h2 className="text-display-md">From across India, together towards the House of Allah.</h2>
-            <p className="mt-5 text-lg text-white/80">Rooted in Pune, Meezan Tours & Travels welcomes pilgrims from every part of India. Wherever your journey begins, our commitment remains the same: thoughtful arrangements, personal attention and support throughout your sacred pilgrimage.</p>
-            <p className="mt-4 text-white/70">One journey. One group. One commitment to every Haji.</p>
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div data-reveal className="mx-auto max-w-xl text-center lg:col-span-5 lg:mx-0 lg:max-w-none lg:text-left">
+            <p className="eyebrow mb-4 !flex justify-center lg:justify-start">Based in Pune. Trusted by pilgrims across India.</p>
+            <h2 className="font-display text-[1.9rem] font-semibold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.6rem]">From across India, together towards the House of Allah.</h2>
+            <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-[1.05rem]">Rooted in Pune, Meezan Tours &amp; Travels welcomes pilgrims from every part of India. Wherever your journey begins, our commitment remains the same: thoughtful arrangements, personal attention and support throughout your sacred pilgrimage.</p>
+            <p className="mx-auto mt-6 max-w-md border-gold-400/70 py-1 font-display text-lg italic leading-snug text-gold-300 lg:mx-0 lg:border-l-2 lg:pl-5 sm:text-xl">One journey. One group. One commitment to every Haji.</p>
             <p className="sr-only">Group journeys leave from Mumbai airport for Madinah and Makkah and return to Mumbai.</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start [&>*]:whitespace-nowrap">
               <Button href={whatsappLink('Assalamu Alaikum, I am enquiring from outside Pune about Hajj / Umrah packages.')} variant="gold"><MessageCircle className="h-5 w-5" aria-hidden="true" />Enquire from your city</Button>
               <Button to="/contact" variant="ghost-light">Contact our Pune office</Button>
             </div>
           </div>
-          <div data-reveal className="relative pb-10 lg:pb-12">
-            <Picture slug="group-plateau" alt="A large group of Meezan pilgrims posing together near a rocky mountain" ratio="16/10" sizes="(min-width:1024px) 46vw, 100vw" className="rounded-xl2 border border-gold-500/50 shadow-lift" />
-            <Picture slug="haram-group-wide-2" alt="Meezan pilgrims in ihram on the Masjid al-Haram plaza with the Kaaba behind them" ratio="4/3" sizes="(min-width:1024px) 22vw, 46vw" className="absolute -bottom-0 -left-1 w-[44%] rounded-xl2 border-2 border-gold-400/80 shadow-lift sm:-left-4" focus="50% 60%" />
+          <div data-reveal className="relative pb-10 lg:col-span-7 lg:pb-12 lg:pl-4">
+            <Picture slug="group-plateau" alt="A large group of Meezan pilgrims posing together near a rocky mountain" ratio="16/10" sizes="(min-width:1024px) 52vw, 100vw" className="rounded-xl2 border border-gold-500/50 shadow-lift" />
+            <Picture slug="haram-group-wide-2" alt="Meezan pilgrims in ihram on the Masjid al-Haram plaza with the Kaaba behind them" ratio="4/3" sizes="(min-width:1024px) 24vw, 46vw" className="absolute bottom-0 left-0 w-[42%] rounded-xl2 border-2 border-gold-400/80 shadow-lift lg:-left-6" focus="50% 60%" />
             <div className="on-dark absolute right-3 top-3 inline-flex items-center gap-2 rounded-full border border-gold-500/50 bg-brand-950/75 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-gold-300 backdrop-blur sm:right-4 sm:top-4"><Plane className="h-4 w-4" aria-hidden="true" />Mumbai to Makkah &amp; Madinah</div>
           </div>
         </div>

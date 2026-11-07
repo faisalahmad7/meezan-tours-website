@@ -41,7 +41,7 @@ export interface GalleryImage {
   slug: string
   title: string
   alt: string
-  category: 'Hajj' | 'Kaaba' | 'Journey' | 'Groups' | 'Stay & Food'
+  category: 'Hajj' | 'Kaaba' | 'Journey' | 'Groups' | 'Stay & Food' | 'Events'
 }
 
 export interface GalleryVideo {
