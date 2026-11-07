@@ -144,6 +144,6 @@
 .gal-card:hover .gal-corners, .gal-card:focus-visible .gal-corners { opacity: 1; inset: 0.9rem; }
 @media (prefers-reduced-motion: reduce) { .gal-seal { animation: none; } }
 
-/* Meezan watermark: the logo's own shape, tinted gold and blended into the hero */
-.meezan-mark { position: absolute; left: -6%; top: 50%; z-index: 0; width: min(54rem, 130vw); aspect-ratio: 560 / 258; transform: translateY(-50%) rotate(-6deg); pointer-events: none; background: linear-gradient(110deg, #f0d588, #d9b96a 60%, transparent); opacity: 0.1; -webkit-mask: url(/images/brand/meezan-logo-560.png) center / contain no-repeat; mask: url(/images/brand/meezan-logo-560.png) center / contain no-repeat; }
-@media (min-width: 1024px) { .meezan-mark { left: -3%; opacity: 0.12; } }
+/* Meezan watermark: the logo as a quiet, staggered gold monogram wallpaper, rotated and faded out toward the photo side */
+.meezan-mark { position: absolute; inset: -35%; z-index: 0; pointer-events: none; transform: rotate(-14deg); background: linear-gradient(120deg, #f0d588, #d9b96a); opacity: 0.075; -webkit-mask: url(/images/brand/meezan-mark-tile.png) 0 0 / 480px 340px repeat, linear-gradient(#000, #000); -webkit-mask-composite: source-in; mask: url(/images/brand/meezan-mark-tile.png) 0 0 / 480px 340px repeat; }
+@media (max-width: 1023px) { .meezan-mark { opacity: 0.06; } }
