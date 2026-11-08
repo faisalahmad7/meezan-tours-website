@@ -208,3 +208,12 @@
 @keyframes hint-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
 .scroll-hint svg { animation: hint-nudge 1.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .scroll-hint svg { animation: none; } }
+
+/* Desktop hero: keep the coach route on a clearly separate inner lane without changing phone geometry. */
+@media (min-width: 1024px) {
+  .ho-coach-track {
+    transform-box: view-box;
+    transform-origin: center;
+    transform: scale(0.955);
+  }
+}
