@@ -11,6 +11,7 @@ import HeroWatermark from '@/components/HeroWatermark'
 import JourneyTimeline from '@/components/JourneyTimeline'
 import PackageCard from '@/components/PackageCard'
 import Picture from '@/components/Picture'
+import ScrollRow from '@/components/ScrollRow'
 import SectionHeading from '@/components/SectionHeading'
 import ServicesShowcase from '@/components/ServicesShowcase'
 import Seo from '@/components/Seo'
@@ -21,8 +22,7 @@ import TestimonialRibbon from '@/components/TestimonialRibbon'
 import { heroMain, heroSide } from '@/data/hero'
 import { SITE } from '@/data/site'
 import { businessSchema, websiteSchema } from '@/lib/schema'
-import { getGalleryImages, getHomeGallery, getPackages } from '@/services/content'
-
+import { getHomeGallery, getPackages } from '@/services/content'
 const reasons = [
   { icon: BadgeCheck, title: 'Proven experience', text: 'Specialists focused on Hajj and Umrah travel, with 18+ years of organising group and personalised departures for Indian pilgrims.' },
   { icon: HeartHandshake, title: 'Personal attention', text: 'Clear communication and a familiar face from booking to return.' },
@@ -39,17 +39,37 @@ export default function Home() {
         description="Meezan Tours & Travels, Pune: licensed Hajj Group Organiser with 18+ years of experience, arranging Hajj, Umrah and Ziyarat packages for pilgrims across India."
         jsonLd={[businessSchema(), websiteSchema()]}
       />
-
-      {/* HERO */}
+      {/*
+        HERO. Phone order: photographs, then the headline (overlapping the photographs), then the text and buttons, then the route.
+        From lg up: headline and text in the left column, photographs and route in the right column.
+      */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
         <HeroWatermark />
-        <div className="container relative grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-16">
-          <div data-hero className="max-w-xl">
-            <p className="eyebrow mb-5">Based in Pune. Trusted by pilgrims across India.</p>
+        <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16">
+          {/* right column on desktop; its children are re-ordered individually on phones */}
+          <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
+            <div className="relative order-1 mx-auto w-full max-w-md pb-10 lg:max-w-none lg:pb-8">
+              <div className="relative ml-auto w-[84%]">
+                <div className="arch gold-frame overflow-hidden">
+                  <HeroSlides slides={heroMain} ratio="3/4" sizes="(min-width:1024px) 34vw, 80vw" priority className="h-full" />
+                </div>
+              </div>
+              <div className="absolute bottom-0 left-0 w-[52%] sm:w-[48%]">
+                <HeroSlides slides={heroSide} ratio="4/3" sizes="(min-width:1024px) 20vw, 46vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
+              </div>
+            </div>
+            <div className="order-4 mx-auto mt-10 w-full max-w-md rounded-2xl border border-gold-400/40 bg-brand-950/35 p-3 backdrop-blur-sm sm:max-w-lg lg:mt-6 lg:max-w-none">
+              <FlightPath className="mx-auto block w-full" />
+            </div>
+          </div>
+          <div data-hero className="relative z-30 order-2 -mx-5 -mt-28 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/85 to-transparent px-5 pb-1 pt-24 sm:-mt-32 lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0">
+            <p className="eyebrow mb-4">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-display-xl text-white">Your sacred journey, guided with care.</h1>
             <p className="mt-4 font-display text-xl italic text-gold-300 sm:text-2xl">From your first intention to your safe return.</p>
-            <p className="mt-5 text-lg text-white/85">With 18+ years of experience, Meezan Tours arranges flights, visas, stay and ziyarat for Hajj and Umrah, so you can give your full attention to worship.</p>
+          </div>
+          <div data-hero className="order-3 max-w-xl lg:col-start-1 lg:row-start-2 lg:self-start">
+            <p className="mt-3 text-lg text-white/85 lg:mt-5">With 18+ years of experience, Meezan Tours arranges flights, visas, stay and ziyarat for Hajj and Umrah, so you can give your full attention to worship.</p>
             <div className="mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
               <Link to="/hajj" className="hero-cta hero-cta-gold"><Landmark className="h-6 w-6 shrink-0" aria-hidden="true" /><span className="min-w-0"><span className="block whitespace-nowrap text-base font-semibold leading-tight sm:text-lg">Hajj packages</span><span className="block text-xs opacity-75">Group departures</span></span><span className="btn-chip ml-auto"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Link>
               <Link to="/umrah" className="hero-cta hero-cta-glass"><MoonStar className="h-6 w-6 shrink-0" aria-hidden="true" /><span className="min-w-0"><span className="block whitespace-nowrap text-base font-semibold leading-tight sm:text-lg">Umrah packages</span><span className="block text-xs opacity-75">All year round</span></span><span className="btn-chip ml-auto"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Link>
@@ -60,24 +80,9 @@ export default function Home() {
               <p className="max-w-[16rem] text-sm leading-snug text-white/80 sm:text-base"><span className="block text-xs font-semibold uppercase tracking-[0.16em] text-white">Years of experience</span>A commitment to every Haji, from every corner of India.</p>
             </div>
           </div>
-
-          {/* Stage: arch + one overlapping group photo + a slow orbit ring */}
-          <div className="relative mx-auto w-full max-w-md pb-10 lg:max-w-none lg:pb-8">
-            <FlightPath className="pointer-events-none absolute -top-5 left-[-5%] z-20 w-[110%] sm:-top-7" />
-            <div className="relative ml-auto w-[84%]">
-              <div className="arch gold-frame overflow-hidden">
-                <HeroSlides slides={heroMain} ratio="3/4" sizes="(min-width:1024px) 34vw, 80vw" priority className="h-full" />
-              </div>
-            </div>
-            <div className="absolute bottom-0 left-0 w-[52%] sm:w-[48%]">
-              <HeroSlides slides={heroSide} ratio="4/3" sizes="(min-width:1024px) 20vw, 46vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
-            </div>
-          </div>
         </div>
       </section>
-
       <TrustRibbon />
-
       {/* ABOUT */}
       <section className="section">
         <div className="container grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -101,15 +106,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <StatsBand />
       <AllIndia />
-
       {/* PATHWAYS: editorial composition */}
       <section className="section">
         <div className="container">
           <SectionHeading eyebrow="Pilgrimage" title="Hajj, Umrah and Ziyarat" center />
-          <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-2 lg:grid-rows-2">
+          <ScrollRow className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:gap-5 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-2 lg:grid-rows-2">
             {[
               { to: '/hajj', title: 'Hajj', text: 'Long and short duration group departures, with managed travel, stay and guidance.', slug: 'mina-tent', big: true },
               { to: '/umrah', title: 'Umrah', text: 'Umrah tours with flights, hotels and transport arranged.', slug: 'group-mosque' },
@@ -125,30 +128,27 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
+          </ScrollRow>
         </div>
       </section>
-
       {/* PACKAGES */}
       <section className="section bg-sand-100 pb-10 sm:pb-12 lg:pb-14">
         <div className="container">
           <SectionHeading eyebrow="Packages" title="Choose your sacred journey" intro="Prices are per person. Tap Full details on a card, then book or ask us on WhatsApp." center />
-          <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">{getPackages().map((p) => <div key={p.id} className="flex shrink-0 basis-[86%] snap-start md:basis-auto [&>*]:w-full"><PackageCard pkg={p} /></div>)}</div>
+          <ScrollRow className="no-scrollbar -mx-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-2 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">{getPackages().map((p) => <div key={p.id} className="flex shrink-0 basis-[86%] snap-start md:basis-auto [&>*]:w-full"><PackageCard pkg={p} /></div>)}</ScrollRow>
           <p className="mt-2 text-center text-sm font-semibold text-brand-700 md:hidden">Swipe sideways to compare &rarr;</p>
           <div className="mt-8 text-center"><Button to="/packages" variant="outline">View all packages</Button></div>
           <div data-reveal className="gs-frame mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4 p-8 text-center sm:flex-row sm:text-left">
-            <div className="flex-1"><h3 className="text-2xl font-bold">Need a custom package?</h3><p className="mt-1 text-ink-500">Tell us your dates, group size and budget and our experts will design a package around you.</p></div>
+            <div className="flex-1"><h3 className="text-2xl">Need a custom package?</h3><p className="mt-1 text-ink-500">Tell us your dates, group size and budget and our experts will design a package around you.</p></div>
             <Button to="/contact" variant="primary">Request a custom quote</Button>
           </div>
         </div>
       </section>
-
       <ServicesShowcase />
-
       {/* WHY MEEZAN */}
       <section className="section pattern-dark on-dark text-white">
         <div className="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <div><SectionHeading eyebrow="Why Meezan" title="18+ years of experience. A commitment to every Haji." intro="Our attention to detail and personal care are why pilgrims return to Meezan." /></div>
+          <div><SectionHeading bold eyebrow="Why Meezan" title="18+ years of experience. A commitment to every Haji." intro="Our attention to detail and personal care are why pilgrims return to Meezan." /></div>
           <ul className="divide-y divide-gold-500/30 border-y border-gold-500/30">
             {reasons.map((r) => (
               <li key={r.title} data-reveal className="flex gap-5 py-6">
@@ -159,18 +159,15 @@ export default function Home() {
           </ul>
         </div>
       </section>
-
-      {/* GALLERY PREVIEW: emerald arch lattice, mosaic */}
+      {/* GALLERY PREVIEW: deep midnight blue with gold arch lattice, so it stands apart from the emerald section above */}
       <section className="gallery-bg on-dark relative isolate overflow-hidden border-y-2 border-gold-500/60 py-16 text-white sm:py-20 lg:py-24">
         <div className="container">
-          <SectionHeading eyebrow="Gallery" title="Moments from our pilgrims' journeys" intro="Real pilgrims, real moments: from the airport to the Haram, captured on Meezan journeys." center />
+          <SectionHeading bold eyebrow="Gallery" title="Moments from our pilgrims' journeys" intro="Real pilgrims, real moments: from the airport to the Haram, captured on Meezan journeys." center />
           <GalleryMosaic items={gallery} />
-          <div className="mt-10 text-center"><Button to="/gallery" variant="gold">Open the full gallery ({getHomeGallery().length > 0 ? getGalleryImages().length : 0} photographs)</Button></div>
+          <div className="mt-10 text-center"><Button to="/gallery" variant="gold">Open the full gallery</Button></div>
         </div>
       </section>
-
       <JourneyTimeline />
-
       {/* VIDEO TESTIMONIALS */}
       <section className="section pattern-dark on-dark text-white">
         <div className="container">
@@ -178,14 +175,12 @@ export default function Home() {
           <VideoTestimonials />
         </div>
       </section>
-
       {/* WRITTEN TESTIMONIALS: moving ribbon */}
       <section className="section overflow-hidden">
         <div className="container"><SectionHeading eyebrow="Testimonials" title="In their own words" center /></div>
         <div className="-mt-4"><TestimonialRibbon /></div>
         <div className="container"><SocialLinks /><p className="mt-8 text-center"><a className="text-sm font-semibold text-brand-700 underline underline-offset-4" href={SITE.mapLink} target="_blank" rel="noopener noreferrer">Read our reviews on Google{SITE.googleReviews.rating ? ` (${SITE.googleReviews.rating} stars${SITE.googleReviews.reviewCount ? `, ${SITE.googleReviews.reviewCount} reviews` : ''})` : ''}</a></p></div>
       </section>
-
       <CtaBand text={`Visit us at ${SITE.address.line2}, ${SITE.address.city}, or speak to our team today.`} />
     </>
   )

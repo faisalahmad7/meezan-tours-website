@@ -1,17 +1,16 @@
 import { Play } from 'lucide-react'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
 import type { Testimonial } from '@/data/types'
 import { getTestimonials } from '@/services/content'
 import Modal from './Modal'
-
 const initials = (n: string) =>
   n.replace(/^(Dr\.?|Haji|Hajjan|Mr\.?|Mrs\.?|Ms\.?)\s+/i, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase()
-
 function Card({ t, onOpen, dup }: { t: Testimonial; onOpen: (t: Testimonial) => void; dup?: boolean }) {
   return (
     <li className="ribbon-card relative mr-5 w-[19rem] shrink-0 sm:mr-6 sm:w-[24rem]">
       <button
         type="button"
+        draggable={false}
         onClick={() => onOpen(t)}
         tabIndex={dup ? -1 : undefined}
         aria-label={`Read ${t.name}'s full review`}
@@ -36,17 +35,88 @@ function Card({ t, onOpen, dup }: { t: Testimonial; onOpen: (t: Testimonial) => 
     </li>
   )
 }
-
-const Row = ({ items, dup, onOpen }: { items: Testimonial[]; dup?: boolean; onOpen: (t: Testimonial) => void }) => (
-  <ul className={`flex shrink-0 ${dup ? 'ticker-dup' : ''}`} aria-hidden={dup || undefined}>
-    {items.map((t) => <Card key={t.id} t={t} onOpen={onOpen} dup={dup} />)}
-  </ul>
-)
-
+const DRAG_THRESHOLD = 6
+/**
+ * One ribbon row. It drifts on its own and NEVER stops: hovering, tapping or opening a review does not pause it.
+ * You can also grab it (mouse, or finger held and dragged) and move it wherever you like; it carries on from there.
+ * Vertical swipes still scroll the page. Reduced-motion users get a plain swipeable row (see revisions.css).
+ */
+function RibbonRow({ items, dir, speed, onOpen }: { items: Testimonial[]; dir: 1 | -1; speed: number; onOpen: (t: Testimonial) => void }) {
+  const track = useRef<HTMLDivElement>(null)
+  const s = useRef({ pos: 0, half: 0, down: false, id: -1, startX: 0, startPos: 0, moved: 0, captured: false })
+  useEffect(() => {
+    const el = track.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const st = s.current
+    const measure = () => { st.half = el.scrollWidth / 2 }
+    measure()
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null
+    ro?.observe(el)
+    let raf = 0
+    let last = performance.now()
+    const tick = (now: number) => {
+      const dt = Math.min(64, now - last) / 1000
+      last = now
+      if (!st.down) st.pos += dir * speed * dt
+      if (st.half > 0) st.pos = ((st.pos % st.half) + st.half) % st.half
+      el.style.transform = `translate3d(${-st.pos}px,0,0)`
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => { cancelAnimationFrame(raf); ro?.disconnect() }
+  }, [dir, speed])
+  const onDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return
+    const st = s.current
+    st.down = true
+    st.id = e.pointerId
+    st.startX = e.clientX
+    st.startPos = st.pos
+    st.moved = 0
+    st.captured = false
+  }
+  const onMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const st = s.current
+    if (!st.down || e.pointerId !== st.id) return
+    const dx = e.clientX - st.startX
+    st.moved = Math.max(st.moved, Math.abs(dx))
+    if (!st.captured && st.moved > DRAG_THRESHOLD) {
+      st.captured = true
+      e.currentTarget.setPointerCapture(e.pointerId)
+    }
+    if (st.captured) st.pos = st.startPos - dx
+  }
+  const onUp = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const st = s.current
+    if (e.pointerId !== st.id) return
+    st.down = false
+    if (st.captured && e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId)
+  }
+  // a drag must not count as a tap on a card
+  const onClickCapture = (e: React.MouseEvent) => {
+    if (s.current.moved > DRAG_THRESHOLD) { e.preventDefault(); e.stopPropagation(); s.current.moved = 0 }
+  }
+  return (
+    <div
+      className="ribbon-mask ribbon-grab overflow-hidden py-5"
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerCancel={onUp}
+      onClickCapture={onClickCapture}
+    >
+      <div ref={track} className="ribbon-js flex w-max">
+        <ul className="flex shrink-0">{items.map((t) => <Card key={t.id} t={t} onOpen={onOpen} />)}</ul>
+        <ul className="flex shrink-0" aria-hidden="true">{items.map((t) => <Card key={t.id} t={t} onOpen={onOpen} dup />)}</ul>
+      </div>
+    </div>
+  )
+}
 /**
  * "In their own words": two ribbons of pilgrim quotes drifting in opposite directions, never stopping.
- * Hovering a card makes it grow slightly (the ribbon keeps moving); clicking opens the full review in a larger card.
- * Reduced-motion users get a plain swipeable row instead.
+ * Drag either one around with a mouse or a finger. Hovering a card makes it grow; clicking or tapping opens the
+ * full review in a larger card.
  */
 export default function TestimonialRibbon() {
   const all = getTestimonials()
@@ -55,14 +125,9 @@ export default function TestimonialRibbon() {
   const rows = [all.filter((_, i) => i % 2 === 0), all.filter((_, i) => i % 2 === 1)].filter((r) => r.length > 0)
   return (
     <>
-      <div className="ribbon-wrap space-y-2" role="region" aria-label="Pilgrim testimonials">
+      <div className="ribbon-wrap space-y-2" role="region" aria-label="Pilgrim testimonials. Drag to move.">
         {rows.map((items, r) => (
-          <div key={r} className="ribbon-mask overflow-hidden py-5">
-            <div className={`ribbon-track ${r % 2 ? 'ribbon-rev' : ''}`} style={{ ['--dur' as string]: `${(r % 2 ? 90 : 75) * Math.max(1, items.length / 4)}s` }}>
-              <Row items={items} onOpen={setOpen} />
-              <Row items={items} dup onOpen={setOpen} />
-            </div>
-          </div>
+          <RibbonRow key={r} items={items} dir={r % 2 ? -1 : 1} speed={r % 2 ? 34 : 40} onOpen={setOpen} />
         ))}
       </div>
       <Modal open={!!open} onClose={close} label={open ? `Review by ${open.name}` : 'Review'} width="max-w-2xl">

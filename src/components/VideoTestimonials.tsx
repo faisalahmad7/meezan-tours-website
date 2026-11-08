@@ -2,14 +2,13 @@ import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import { useRef } from 'react'
 import { SITE } from '@/data/site'
 import { YouTubeIcon } from './BrandIcons'
+import ScrollRow from './ScrollRow'
 import type { PackageKind } from '@/data/types'
 import { getTestimonials } from '@/services/content'
-
 const thumb = (id: string, q: string) => `https://i.ytimg.com/vi/${id}/${q}.jpg`
-
 /** Swipeable carousel of YouTube testimonial cards. Each whole card links to the real video. */
 export default function VideoTestimonials({ kind }: { kind?: PackageKind }) {
-  const track = useRef<HTMLDivElement>(null)
+  const track = useRef<HTMLElement>(null)
   const scroll = (dir: 1 | -1) => {
     const el = track.current
     if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' })
@@ -17,10 +16,10 @@ export default function VideoTestimonials({ kind }: { kind?: PackageKind }) {
   const channel = SITE.social.find((s) => s.label === 'YouTube')
   return (
     <div>
-      <div
-        ref={track}
+      <ScrollRow
+        scrollerRef={track}
         tabIndex={0}
-        aria-label="Video testimonials. Scroll sideways to see more."
+        label="Video testimonials. Scroll sideways to see more."
         className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:-mx-8 md:gap-6 md:px-8 lg:mx-0 lg:px-0"
       >
         {getTestimonials(kind).map((v) => (
@@ -56,7 +55,7 @@ export default function VideoTestimonials({ kind }: { kind?: PackageKind }) {
             </span>
           </a>
         ))}
-      </div>
+      </ScrollRow>
       <div className="mt-4 flex items-center justify-between">
         <div className="hidden gap-2 md:flex">
           <button type="button" onClick={() => scroll(-1)} aria-label="Previous videos" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white hover:border-gold-400 hover:text-gold-300"><ChevronLeft className="h-5 w-5" /></button>
