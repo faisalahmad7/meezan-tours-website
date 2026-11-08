@@ -39,8 +39,7 @@ export default function Home() {
         jsonLd={[businessSchema(), websiteSchema()]}
       />
       {/*
-        HERO. Phone order: the photographs with the route round them, then the small headline OVERLAPPING the foot of the main photo,
-        then the "Based in Pune" line, the tagline, the text and the buttons.
+        HERO. Phone order: photographs and route first, followed by the headline, location line, tagline, text and buttons.
         From sm up the headline block (small line, headline, tagline) keeps its earlier layout.
         From lg up: headline and text in the left column, photographs and the route ring in the right column (the ring is capped by the screen height so it fits).
       */}
@@ -50,11 +49,11 @@ export default function Home() {
         <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[0.95fr_1.05fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16 xl:grid-cols-[0.9fr_1.1fr]">
           {/* right column on desktop: the photographs with the pilgrim route running round them in an oval */}
           <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
-            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[min(44rem,calc((100vh_-_6rem)_*_0.8))]">
+            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[min(50rem,calc((100vh_-_6rem)_*_0.9))]">
               <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
-          <div data-hero className="relative z-30 order-2 -mx-5 -mt-44 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/80 to-transparent px-5 pb-16 pt-14 text-center [text-shadow:0_2px_14px_rgb(8_42_33/0.9)] sm:-mt-28 sm:pb-1 sm:pt-24 sm:text-left lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
+          <div data-hero className="relative z-30 order-2 -mx-5 mt-0 max-w-none px-5 pb-2 pt-6 text-center [text-shadow:0_2px_14px_rgb(8_42_33/0.9)] sm:-mt-28 sm:pb-1 sm:pt-24 sm:text-left lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
             <p className="eyebrow mb-4 hidden sm:inline-flex">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-[1.65rem] leading-[1.12] text-white sm:text-display-xl">Your sacred journey, guided with care.</h1>
             <p className="mt-4 hidden font-display text-xl italic text-gold-300 sm:block sm:text-2xl">From your first intention to your safe return.</p>
