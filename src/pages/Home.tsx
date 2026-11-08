@@ -49,7 +49,7 @@ export default function Home() {
         <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[0.95fr_1.05fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16 xl:grid-cols-[0.9fr_1.1fr]">
           {/* right column on desktop: the photographs with the pilgrim route running round them in an oval */}
           <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
-            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[min(50rem,calc((100vh_-_6rem)_*_0.9))]">
+            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[min(44rem,calc((100vh_-_6rem)_*_0.8))]">
               <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
