@@ -153,8 +153,8 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      {/* GALLERY PREVIEW: a soft red (close to the logo red, lighter) with the same gold arch lattice, so it stands apart from the emerald section above */}
-      <section className="gallery-bg on-dark relative isolate overflow-hidden border-y-2 border-gold-500/60 py-16 text-white sm:py-20 lg:py-24">
+      {/* GALLERY PREVIEW: silver and ivory white with a silver arch lattice, so it stands apart from the emerald section above */}
+      <section className="gallery-bg relative isolate overflow-hidden border-y-2 border-[#b9bfc4] py-16 text-ink-900 sm:py-20 lg:py-24">
         <div className="container">
           <SectionHeading bold eyebrow="Gallery" title="Moments from our pilgrims' journeys" intro="Real pilgrims, real moments: from the airport to the Haram, captured on Meezan journeys." center />
           <GalleryMosaic items={gallery} />
