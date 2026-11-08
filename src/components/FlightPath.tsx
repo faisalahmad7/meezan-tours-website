@@ -1,34 +1,73 @@
 /**
- * Hero route: one slim gold aircraft flies a clean arc from Mumbai to Makkah while the route draws itself behind it.
- * No trail, no loop: the line is simply "the part already flown", then it fades and the flight starts again.
- * Decorative only. Sized and placed by the parent. The plane and the drawing line share one timeline (see .fp-* in index.css).
+ * Pilgrim route, drawn as a clean loop:
+ *   Mumbai -> Jeddah (flight), Jeddah -> Makkah (coach), Makkah -> Madinah (coach), Madinah -> Jeddah (coach), Jeddah -> Mumbai (flight).
+ * Static geometry, gently flowing dashes show the direction of travel. No moving aircraft to drift out of line.
+ * Purely illustrative (not to scale). Sized by the parent; see .fp-* in revisions.css.
  */
-const ROUTE = 'M14 124 C 104 -8, 282 -8, 386 70'
 const PLANE = 'M12 0 L4 -2 L-1 -10 L-4 -10 L-2 -2 L-8 -2 L-10 -5 L-12 -5 L-11 0 L-12 5 L-10 5 L-8 2 L-2 2 L-4 10 L-1 10 L4 2 Z'
-
+const M = [30, 104] as const
+const J = [250, 100] as const
+const K = [330, 152] as const
+const D = [352, 46] as const
+const OUT = `M${M[0]} ${M[1]} C 96 36, 180 36, ${J[0]} ${J[1]}`
+const BACK = `M${J[0]} ${J[1]} C 180 172, 96 172, ${M[0]} ${M[1]}`
+const J_K = `M${J[0]} ${J[1]} Q 296 112, ${K[0]} ${K[1]}`
+const K_D = `M${K[0]} ${K[1]} Q 372 100, ${D[0]} ${D[1]}`
+const D_J = `M${D[0]} ${D[1]} Q 306 56, ${J[0]} ${J[1]}`
+function Bus({ x, y }: { x: number; y: number }) {
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      <circle r="11" fill="#134234" stroke="#e8c767" strokeWidth="1.2" />
+      <g fill="none" stroke="#fff1c2" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="-6" y="-5" width="12" height="9" rx="1.6" />
+        <path d="M-6 -1h12M-3.5 4v1.6M3.5 4v1.6" />
+      </g>
+    </g>
+  )
+}
+function Plane({ x, y, r }: { x: number; y: number; r: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r})`}>
+      <circle r="12" fill="#134234" stroke="#e8c767" strokeWidth="1.2" />
+      <g transform="scale(.6)"><path d={PLANE} fill="#fff1c2" stroke="#e8c767" strokeWidth="1" strokeLinejoin="round" /></g>
+    </g>
+  )
+}
+const label = { fill: '#fff7dc', fontSize: 10, fontWeight: 700, letterSpacing: 1.6, paintOrder: 'stroke', stroke: 'rgba(8,42,33,.85)', strokeWidth: 3.5 } as const
 export default function FlightPath({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 400 150" aria-hidden="true" focusable="false" className={`fp ${className}`}>
-      <defs>
-        <linearGradient id="fp-line" x1="0" x2="1"><stop offset="0" stopColor="#f0d588" stopOpacity=".25" /><stop offset="1" stopColor="#fff1c2" stopOpacity="1" /></linearGradient>
-      </defs>
-      {/* the full route, always faintly visible */}
-      <path d={ROUTE} fill="none" stroke="#e9d8a6" strokeOpacity=".5" strokeWidth="1.2" strokeDasharray="1.5 6" strokeLinecap="round" />
-      {/* the part already flown */}
-      <path d={ROUTE} pathLength="1" fill="none" stroke="url(#fp-line)" strokeWidth="2" strokeLinecap="round" className="fp-draw" />
-
-      {/* origin */}
-      <circle cx="14" cy="124" r="4.5" fill="#fbf8f0" stroke="#d9b96a" strokeWidth="1.5" />
-      <text x="14" y="143" fill="#fff7dc" fontSize="9.5" fontWeight="700" letterSpacing="1.6" style={{ paintOrder: 'stroke', stroke: 'rgba(8,42,33,.65)', strokeWidth: 3 }}>MUMBAI</text>
-      {/* destination: a tiny Kaaba */}
-      <g transform="translate(386 70)">
-        <rect x="-7" y="-7" width="14" height="14" rx="1.5" fill="#101a16" stroke="#d9b96a" strokeWidth="1.3" />
-        <rect x="-7" y="-3.2" width="14" height="2.4" fill="#d9b96a" />
+    <svg viewBox="0 0 420 200" role="img" aria-label="Pilgrim route: Mumbai to Jeddah by flight, coach from Jeddah to Makkah, Makkah to Madinah and Madinah back to Jeddah, then flight from Jeddah to Mumbai." className={`fp ${className}`}>
+      <g fill="none" strokeLinecap="round">
+        {/* flights: solid gold, flowing */}
+        <path d={OUT} stroke="#f0d588" strokeWidth="2" strokeDasharray="5 5" className="fp-flow" />
+        <path d={BACK} stroke="#f0d588" strokeWidth="2" strokeDasharray="5 5" className="fp-flow" />
+        {/* coaches: lighter, shorter dashes */}
+        <path d={J_K} stroke="#fbf8f0" strokeOpacity=".85" strokeWidth="1.8" strokeDasharray="2 5" className="fp-flow" />
+        <path d={K_D} stroke="#fbf8f0" strokeOpacity=".85" strokeWidth="1.8" strokeDasharray="2 5" className="fp-flow" />
+        <path d={D_J} stroke="#fbf8f0" strokeOpacity=".85" strokeWidth="1.8" strokeDasharray="2 5" className="fp-flow" />
       </g>
-      <text x="392" y="94" textAnchor="end" fill="#fff7dc" fontSize="9.5" fontWeight="700" letterSpacing="1.6" style={{ paintOrder: 'stroke', stroke: 'rgba(8,42,33,.65)', strokeWidth: 3 }}>MAKKAH</text>
-
-      <g className="fp-plane" style={{ offsetPath: `path('${ROUTE}')` }}>
-        <g transform="scale(.62)"><path d={PLANE} fill="#fff7dc" stroke="#d9b96a" strokeWidth="1.1" strokeLinejoin="round" /></g>
+      <Plane x={134} y={55} r={0} />
+      <Plane x={134} y={153} r={180} />
+      <Bus x={284} y={119} />
+      <Bus x={346} y={99} />
+      <Bus x={296} y={64} />
+      {/* cities */}
+      {[M, J, K, D].map(([x, y], i) => (
+        <g key={i}>
+          <circle cx={x} cy={y} r="9" fill="#e8c767" fillOpacity=".25" className="fp-pulse" />
+          <circle cx={x} cy={y} r="5.5" fill="#fbf8f0" stroke="#e8c767" strokeWidth="1.8" />
+        </g>
+      ))}
+      <text x={M[0] - 8} y={M[1] + 22} style={label}>MUMBAI</text>
+      <text x={J[0] - 6} y={J[1] + 24} textAnchor="middle" style={label}>JEDDAH</text>
+      <text x={K[0]} y={K[1] + 22} textAnchor="middle" style={label}>MAKKAH</text>
+      <text x={D[0]} y={D[1] - 12} textAnchor="middle" style={label}>MADINAH</text>
+      {/* legend */}
+      <g transform="translate(14 176)" style={{ fontSize: 9, fontWeight: 600 }} fill="#fff7dc">
+        <path d="M0 0h18" stroke="#f0d588" strokeWidth="2" strokeDasharray="5 5" />
+        <text x="24" y="3" style={{ ...label, strokeWidth: 3, letterSpacing: 0.6 }}>Flight</text>
+        <path d="M70 0h18" stroke="#fbf8f0" strokeOpacity=".85" strokeWidth="1.8" strokeDasharray="2 5" />
+        <text x="94" y="3" style={{ ...label, strokeWidth: 3, letterSpacing: 0.6 }}>Coach</text>
       </g>
     </svg>
   )

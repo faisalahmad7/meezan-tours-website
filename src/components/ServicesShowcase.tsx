@@ -4,15 +4,12 @@ import { whatsappLink } from '@/data/site'
 import { WhatsAppIcon } from './BrandIcons'
 import Modal from './Modal'
 import Picture from './Picture'
-import SectionHeading from './SectionHeading'
+import ScrollRow from './ScrollRow'
 import ServicesDoodles from './ServicesDoodles'
-
 const Tag = ({ children }: { children: string }) => (
   <span className="inline-block rounded-full bg-gold-300/50 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-brand-900">{children}</span>
 )
-
 interface Service { icon: LucideIcon; title: string; text: string; more: string[]; tag?: string }
-
 const items: Service[] = [
   {
     icon: FileText, title: 'Travel and documentation', text: 'Flights, visa assistance, document guidance and a pre-departure briefing before you travel.',
@@ -42,7 +39,6 @@ const items: Service[] = [
     more: ['A familiar team from booking to return', 'Our team checks in with every member of the group', 'Support continues until the journey is complete'],
   },
 ]
-
 export default function ServicesShowcase() {
   const [active, setActive] = useState<Service | null>(null)
   const close = useCallback(() => setActive(null), [])
@@ -57,11 +53,10 @@ export default function ServicesShowcase() {
           <span aria-hidden="true" className="mx-auto mt-5 block h-1 w-20 rounded-full bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500" />
           <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-700">Meezan does far more than book flights and hotels. Here is what goes into every journey. Inclusions differ by package, so each service notes where that applies.</p>
         </div>
-
         <div data-reveal className="mb-10 grid gap-3 overflow-hidden rounded-xl2 border border-gold-500/50 bg-white p-3 shadow-soft sm:gap-4 sm:p-4 lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
           <div className="px-3 pb-1 pt-4 sm:px-5 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:pt-5">
             <Tag>Varies by package</Tag>
-            <h3 className="mt-4 text-display-md font-bold">A taste of home, during your sacred journey.</h3>
+            <h3 className="mt-4 text-display-md">A taste of home, during your sacred journey.</h3>
             <p className="mt-3 max-w-2xl text-ink-500">Thoughtfully arranged Indian-style meals to bring comfort and familiarity throughout your journey. Pilgrims often mention the food in their feedback. Buffet-style dining and meal arrangements are confirmed package by package.</p>
           </div>
           <Picture slug="buffet" alt="Freshly prepared rice, vegetable and curry dishes at a Meezan hotel buffet" ratio="4/3" sizes="(min-width:1024px) 40vw, 100vw" className="rounded-xl lg:col-span-5 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:min-h-[30rem] lg:!aspect-auto lg:h-full" imgClassName="food-boost" focus="50% 55%" />
@@ -71,9 +66,8 @@ export default function ServicesShowcase() {
             <Picture slug="dessert-buffet" alt="Desserts arranged on the buffet table at a Meezan group meal" ratio="1/1" sizes="(min-width:1024px) 16vw, 31vw" className="rounded-xl lg:min-h-[15rem] lg:!aspect-auto lg:h-full" imgClassName="food-boost" />
           </div>
         </div>
-
         <p className="mb-3 text-center text-sm font-semibold text-brand-700 sm:mb-5"><span className="sm:hidden">Swipe sideways, tap a card for details &rarr;</span><span className="hidden sm:inline">Select a service for more details</span></p>
-        <ul className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 pt-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+        <ScrollRow as="ul" className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 pt-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
           {items.map((it) => (
             <li key={it.title} data-reveal className="flex shrink-0 basis-[78%] snap-start sm:basis-auto">
               <button
@@ -83,7 +77,7 @@ export default function ServicesShowcase() {
                 className="svc-card group flex w-full flex-col rounded-xl2 border border-sand-200 bg-white p-6 text-left shadow-soft transition duration-300 hover:z-10 hover:scale-[1.04] hover:border-gold-500/70 hover:shadow-lift focus-visible:scale-[1.04]"
               >
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-900 text-gold-400"><it.icon className="h-6 w-6" aria-hidden="true" /></span>
-                <h3 className="mt-4 text-xl font-bold leading-snug">{it.title}</h3>
+                <h3 className="mt-4 text-xl font-semibold leading-snug">{it.title}</h3>
                 <p className="mt-2 text-sm text-ink-500">{it.text}</p>
                 <span className="mt-auto flex items-center justify-between gap-2 pt-4">
                   {it.tag ? <Tag>{it.tag}</Tag> : <span />}
@@ -92,14 +86,13 @@ export default function ServicesShowcase() {
               </button>
             </li>
           ))}
-        </ul>
+        </ScrollRow>
       </div>
-
       <Modal open={!!active} onClose={close} label={active?.title ?? 'Service'} width="max-w-xl">
         {active && (
           <div>
             <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-900 text-gold-400"><active.icon className="h-7 w-7" aria-hidden="true" /></span>
-            <h3 className="mt-4 pr-10 text-2xl font-bold leading-snug sm:text-3xl">{active.title}</h3>
+            <h3 className="mt-4 pr-10 text-2xl font-semibold leading-snug sm:text-3xl">{active.title}</h3>
             <p className="mt-3 text-ink-700">{active.text}</p>
             <ul className="mt-5 space-y-2.5 border-t border-gold-500/40 pt-5">
               {active.more.map((m) => (
