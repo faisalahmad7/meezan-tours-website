@@ -46,10 +46,10 @@ export default function Home() {
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
         <HeroWatermark />
-        <div className="mx-auto grid w-full max-w-[1720px] grid-cols-1 gap-x-8 px-5 pb-10 pt-6 sm:px-8 sm:pb-14 sm:pt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-x-[clamp(1.5rem,3vw,3.5rem)] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:px-10 lg:py-14 xl:px-14 2xl:px-16">
+        <div className="mx-auto grid w-full max-w-[1720px] grid-cols-1 gap-x-8 px-5 pb-10 pt-6 sm:px-8 sm:pb-14 sm:pt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-x-[clamp(1.5rem,3vw,3.5rem)] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:px-10 lg:pt-8 lg:pb-8 xl:px-14 2xl:px-16">
           {/* right column on desktop: the photographs with the pilgrim route running round them in an oval */}
           <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
-            <div className="order-1 min-w-0 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-0 lg:mr-0 lg:w-full lg:max-w-none">
+            <div className="order-1 min-w-0 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-0 lg:mr-0 lg:w-full lg:max-w-[min(100%,calc((100svh_-_10.75rem)_*_0.8))]">
               <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
