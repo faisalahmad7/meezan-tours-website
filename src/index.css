@@ -144,7 +144,7 @@
 .hero-wm-rim { transform-origin: 500px 500px; animation: wm-turn 260s linear infinite; }
 .hero-wm-star { transform-origin: 500px 500px; animation: wm-turn 420s linear infinite reverse; }
 @keyframes wm-turn { to { transform: rotate(360deg); } }
-@media (max-width: 1023px) { .hero-wm { left: -42%; width: 155vw; opacity: 0.09; -webkit-mask-image: none; mask-image: none; } }
+@media (max-width: 1023px) { .hero-wm { left: 50%; top: 34%; width: 88vw; transform: translate(-50%, -50%); opacity: 0.08; -webkit-mask-image: none; mask-image: none; } }
 
 /* hero route ring (HeroOrbit): the dashes flow in the direction of travel; the vehicles are SVG animateMotion */
 .ho { filter: drop-shadow(0 2px 6px rgb(8 42 33 / 0.5)); }
