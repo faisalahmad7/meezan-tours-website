@@ -118,9 +118,9 @@ export default function HeroOrbit({ main, side }: Props) {
             )
           })}
         </svg>
-        {/* small side photo: on phones it floats above the headline that overlaps the foot of the main photo */}
-        <div className="absolute bottom-[42%] left-[0%] z-20 w-[32%] sm:bottom-[9%]">
-          <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 14vw, 36vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
+        {/* Secondary photo: larger, anchored to the lower-left of the main image; the phone headline may overlap it. */}
+        <div className="absolute bottom-[7%] left-[0%] z-20 w-[44.8%] sm:bottom-[7%] sm:w-[36%]">
+          <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 16vw, 45vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
         </div>
       </div>
       <p className="mt-1 hidden items-center sm:flex justify-center gap-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
