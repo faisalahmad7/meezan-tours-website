@@ -41,24 +41,24 @@ export default function Home() {
       {/*
         HERO. Phone order: photographs and route first, followed by the headline, location line, tagline, text and buttons.
         From sm up the headline block (small line, headline, tagline) keeps its earlier layout.
-        From lg up: headline and text in the left column, photographs and the route ring in the right column (the ring is capped by the screen height so it fits).
+        From lg up: the headline and text stay in the left column while the photographs and route ring fill the right column.
       */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
         <HeroWatermark />
-        <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[0.95fr_1.05fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16 xl:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid w-full max-w-[1720px] grid-cols-1 gap-x-8 px-5 pb-10 pt-6 sm:px-8 sm:pb-14 sm:pt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-x-[clamp(1.5rem,3vw,3.5rem)] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:px-10 lg:py-14 xl:px-14 2xl:px-16">
           {/* right column on desktop: the photographs with the pilgrim route running round them in an oval */}
           <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
-            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[min(50rem,calc((100vh_-_6rem)_*_0.9))]">
+            <div className="order-1 min-w-0 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-0 lg:mr-0 lg:w-full lg:max-w-none">
               <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
-          <div data-hero className="relative z-30 order-2 -mx-5 mt-0 max-w-none px-5 pb-2 pt-6 text-center [text-shadow:0_2px_14px_rgb(8_42_33/0.9)] sm:-mt-28 sm:pb-1 sm:pt-24 sm:text-left lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
+          <div data-hero className="relative z-30 order-2 min-w-0 -mx-5 mt-0 max-w-none px-5 pb-2 pt-6 text-center [text-shadow:0_2px_14px_rgb(8_42_33/0.9)] sm:-mt-28 sm:pb-1 sm:pt-24 sm:text-left lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-[40rem] lg:self-center lg:bg-none lg:p-0 lg:[text-shadow:none]">
             <p className="eyebrow mb-4 hidden sm:inline-flex">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-[1.65rem] leading-[1.12] text-white sm:text-display-xl">Your sacred journey, guided with care.</h1>
             <p className="mt-4 hidden font-display text-xl italic text-gold-300 sm:block sm:text-2xl">From your first intention to your safe return.</p>
           </div>
-          <div data-hero className="order-3 max-w-xl lg:col-start-1 lg:row-start-2 lg:self-start">
+          <div data-hero className="order-3 min-w-0 max-w-xl lg:col-start-1 lg:row-start-2 lg:max-w-[40rem] lg:self-start">
             {/* phone only: these two lines come after the overlapping headline */}
             <p className="eyebrow mb-3 items-start gap-2 before:mt-2 before:shrink-0 sm:hidden">Based in Pune. Trusted by pilgrims across India.</p>
             <p className="mb-3 font-display text-lg italic text-gold-300 sm:hidden">From your first intention to your safe return.</p>
