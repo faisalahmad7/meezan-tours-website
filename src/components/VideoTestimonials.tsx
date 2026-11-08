@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import { useRef } from 'react'
 import { SITE } from '@/data/site'
+import { YouTubeIcon } from './BrandIcons'
 import type { PackageKind } from '@/data/types'
 import { getTestimonials } from '@/services/content'
 
@@ -61,8 +62,17 @@ export default function VideoTestimonials({ kind }: { kind?: PackageKind }) {
           <button type="button" onClick={() => scroll(-1)} aria-label="Previous videos" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white hover:border-gold-400 hover:text-gold-300"><ChevronLeft className="h-5 w-5" /></button>
           <button type="button" onClick={() => scroll(1)} aria-label="Next videos" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white hover:border-gold-400 hover:text-gold-300"><ChevronRight className="h-5 w-5" /></button>
         </div>
-        {channel && <a href={channel.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-gold-300 underline decoration-dotted underline-offset-4 hover:text-white">More videos on our YouTube channel</a>}
       </div>
+      {channel && (
+        <a href={channel.url} target="_blank" rel="noopener noreferrer" className="group mt-8 flex items-center gap-4 rounded-2xl border-2 border-gold-400 bg-gradient-to-r from-[#e60012] to-[#a8000d] p-3.5 pr-4 text-white shadow-lift ring-4 ring-gold-400/20 transition duration-300 hover:-translate-y-1 hover:ring-gold-400/40 sm:mx-auto sm:max-w-2xl sm:p-4">
+          <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white text-[#ff0000] shadow-soft sm:h-16 sm:w-16"><YouTubeIcon className="h-8 w-8 sm:h-9 sm:w-9" /></span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-display text-lg font-bold leading-tight text-white sm:text-2xl">More videos on our YouTube channel</span>
+            <span className="mt-0.5 block text-sm text-white/85">Watch more pilgrim stories on Meezan Tours</span>
+          </span>
+          <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-400 text-brand-950 transition group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+        </a>
+      )}
     </div>
   )
 }

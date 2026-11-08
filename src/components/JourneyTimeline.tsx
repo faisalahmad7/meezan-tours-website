@@ -1,4 +1,5 @@
 import { ArrowRight, Plane } from 'lucide-react'
+import { useState } from 'react'
 import SectionHeading from './SectionHeading'
 import JourneyBackdrop from './JourneyBackdrop'
 
@@ -15,6 +16,7 @@ const steps = [
 ]
 
 export default function JourneyTimeline() {
+  const [all, setAll] = useState(false)
   return (
     <section className="section relative overflow-hidden">
       <JourneyBackdrop />
@@ -31,12 +33,13 @@ export default function JourneyTimeline() {
         </div>
         <ol className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map(([t, d], i) => (
-            <li key={t} data-reveal className="flex gap-4 border-t border-gold-500/40 pt-5">
+            <li key={t} data-reveal className={`${i >= 4 && !all ? 'hidden sm:flex' : 'flex'} gap-4 border-t border-gold-500/40 pt-5`}>
               <span className="font-display text-4xl font-semibold leading-none text-gold-500">{String(i + 1).padStart(2, '0')}</span>
-              <div><h3 className="text-lg font-semibold leading-snug">{t}</h3><p className="mt-1 text-sm text-ink-500">{d}</p></div>
+              <div><h3 className="text-lg font-bold leading-snug">{t}</h3><p className="mt-1 text-sm text-ink-500">{d}</p></div>
             </li>
           ))}
         </ol>
+        {!all && <div className="mt-6 text-center sm:hidden"><button type="button" onClick={() => setAll(true)} className="btn btn-outline">Show all {steps.length} steps</button></div>}
         <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-ink-500">Services and their order depend on the package. Not every package departs from Pune airport, and home pickup is not included unless a package says so. Our team confirms what applies to yours.</p>
       </div>
     </section>

@@ -19,7 +19,7 @@ export default function PackageCard({ pkg }: { pkg: TravelPackage }) {
   return (
     <article data-reveal className="card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-lift">
       <div className="relative">
-        <Picture slug={pkg.image.slug} alt="" ratio="16/11" focus={pkg.image.focus} sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" />
+        <Picture slug={pkg.image.slug} alt={`${pkg.name}: Meezan pilgrims on a ${pkg.kind === 'hajj' ? 'Hajj' : 'Umrah'} journey`} ratio="16/11" focus={pkg.image.focus} sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/25 to-transparent" />
         <div className="absolute left-4 top-4 flex gap-2">
           <span className="rounded-full bg-brand-950/80 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-widest text-gold-300 backdrop-blur">{pkg.kind === 'hajj' ? 'Hajj' : 'Umrah'}</span>

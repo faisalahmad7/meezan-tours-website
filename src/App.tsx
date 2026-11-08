@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import FaqPage from './pages/Faq'
 import Gallery from './pages/Gallery'
 import Hajj from './pages/Hajj'
 import Home from './pages/Home'
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="ziyarat" element={<Ziyarat />} />
         <Route path="about" element={<About />} />
         <Route path="gallery" element={<Gallery />} />
+        <Route path="faq" element={<FaqPage />} />
         <Route path="contact" element={<Contact />} />
         <Route path="privacy-policy" element={<Privacy />} />
         <Route path="terms" element={<Terms />} />

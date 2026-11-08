@@ -36,7 +36,7 @@ export default function Footer() {
 
         {/* ticket strip: perforated dividers, like a boarding pass */}
         <div className="mt-8 grid overflow-hidden rounded-xl2 border border-gold-500/40 bg-brand-950/40 sm:grid-cols-2 lg:grid-cols-[1.25fr_1fr_1.1fr_1fr] [&>*]:border-gold-500/30 max-sm:[&>*+*]:border-t max-sm:[&>*+*]:border-dashed sm:[&>*:nth-child(n+3)]:border-t sm:[&>*:nth-child(n+3)]:border-dashed sm:[&>*:nth-child(even)]:border-l sm:[&>*:nth-child(even)]:border-dashed lg:[&>*]:border-t-0 lg:[&>*+*]:border-l lg:[&>*+*]:border-dashed">
-          <Cell icon={MapPin} label="Visit us"><address className="not-italic">{addressLine()}</address></Cell>
+          <Cell icon={MapPin} label="Visit us"><address className="not-italic"><a className={`${link} underline decoration-gold-400/60 decoration-dotted underline-offset-4`} href={SITE.mapLink} target="_blank" rel="noopener noreferrer" aria-label={`Open ${SITE.name} on Google Maps: ${addressLine()}`}>{addressLine()}</a></address></Cell>
           <Cell icon={Phone} label="Call">
             <ul>{SITE.phones.map((p) => <li key={p.tel}><a className={link} href={`tel:${p.tel}`}>{p.display}</a></li>)}</ul>
           </Cell>

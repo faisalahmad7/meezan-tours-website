@@ -6,6 +6,8 @@
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body { @apply bg-ivory font-sans text-base leading-relaxed text-ink-700 antialiased; }
   h1, h2, h3, h4 { @apply font-display text-ink-900; text-wrap: balance; }
+  h1, h2 { font-weight: 700; letter-spacing: -0.012em; }
+  h3, h4 { font-weight: 600; }
   :focus-visible { @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-sand-50; }
   .on-dark :focus-visible { @apply ring-gold-400 ring-offset-brand-900; }
   .on-dark h1, .on-dark h2, .on-dark h3, .on-dark h4 { @apply text-white; }
@@ -73,13 +75,11 @@
 .hero-link::after { content: ''; @apply absolute -bottom-1 left-0 h-px w-full origin-left scale-x-50 bg-gold-400 transition-transform duration-300; }
 .hero-link:hover::after { @apply scale-x-100; }
 
-@keyframes orbit { to { transform: rotate(360deg); } }
 
 /* testimonial ribbon: same ticker keyframes, per-row duration and direction */
 .ribbon-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
 .ribbon-track { display: flex; width: max-content; animation: ticker var(--dur, 80s) linear infinite; }
 .ribbon-rev { animation-direction: reverse; }
-@media (hover: hover) { .ribbon-wrap:hover .ribbon-track { animation-play-state: paused; } }
 .ribbon-tab { clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 0.6rem), 0 100%); }
 @media (prefers-reduced-motion: reduce) {
   .ribbon-mask { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x mandatory; padding-inline: 1.25rem; }
@@ -109,16 +109,6 @@
 .hero-cta-glass { @apply border border-gold-400/70 bg-white/10 text-white backdrop-blur hover:bg-white/20; }
 .hero-cta-glass .btn-chip { @apply bg-gold-400 text-brand-950; }
 
-@keyframes orbit-go { to { offset-distance: 100%; } }
-@keyframes orbit-dash { from { stroke-dashoffset: var(--a); } to { stroke-dashoffset: calc(var(--a) - 1); } }
-@keyframes orbit-twinkle { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
-.orbit-plane { offset-rotate: auto; offset-distance: 0%; animation: orbit-go 30s linear infinite; filter: drop-shadow(0 0 4px rgb(240 213 136 / 0.9)); }
-.orbit-tail { stroke-dasharray: var(--a) calc(1 - var(--a)); animation: orbit-dash 30s linear infinite; }
-.orbit-tail-1 { --a: 0.22; }
-.orbit-tail-2 { --a: 0.12; }
-.orbit-tail-3 { --a: 0.045; }
-.orbit-twinkle { animation: orbit-twinkle 3.4s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) { .orbit-plane, .orbit-tail { animation: none; } .orbit-plane { offset-distance: 12%; } .orbit-tail { stroke-dashoffset: calc(var(--a) - 0.12); } }
 
 /* journey backdrop: sacred-geometry lattice, interlocking circles, flowing thread */
 .jb-draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
@@ -144,6 +134,61 @@
 .gal-card:hover .gal-corners, .gal-card:focus-visible .gal-corners { opacity: 1; inset: 0.9rem; }
 @media (prefers-reduced-motion: reduce) { .gal-seal { animation: none; } }
 
-/* Meezan watermark: the logo as a quiet, staggered gold monogram wallpaper, rotated and faded out toward the photo side */
-.meezan-mark { position: absolute; inset: -35%; z-index: 0; pointer-events: none; transform: rotate(-14deg); background: linear-gradient(120deg, #f0d588, #d9b96a); opacity: 0.075; -webkit-mask: url(/images/brand/meezan-mark-tile.png) 0 0 / 480px 340px repeat, linear-gradient(#000, #000); -webkit-mask-composite: source-in; mask: url(/images/brand/meezan-mark-tile.png) 0 0 / 480px 340px repeat; }
-@media (max-width: 1023px) { .meezan-mark { opacity: 0.06; } }
+
+/* ================= V5: loader-era polish, FAQ, services, modals, mobile menu ================= */
+
+/* hero watermark: a single large Meezan seal behind the headline, fading out toward the photos */
+.hero-wm { position: absolute; left: -7%; top: 50%; z-index: 0; width: min(100vw, 800px); aspect-ratio: 1; transform: translateY(-50%); color: #e8c767; opacity: 0.12;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 80%); mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 80%); }
+.hero-wm-rim { transform-origin: 500px 500px; animation: wm-turn 260s linear infinite; }
+.hero-wm-star { transform-origin: 500px 500px; animation: wm-turn 420s linear infinite reverse; }
+@keyframes wm-turn { to { transform: rotate(360deg); } }
+@media (max-width: 1023px) { .hero-wm { left: -42%; width: 155vw; opacity: 0.09; -webkit-mask-image: none; mask-image: none; } }
+
+/* hero route: plane and the line it has already flown share one 9s timeline */
+.fp { overflow: visible; filter: drop-shadow(0 2px 6px rgb(8 42 33 / 0.55)); }
+.fp-draw { stroke-dasharray: 1 1; animation: fp-draw 9s ease-in-out infinite; }
+.fp-plane { offset-rotate: auto; offset-distance: 0%; opacity: 0; animation: fp-fly 9s ease-in-out infinite; filter: drop-shadow(0 0 5px rgb(240 213 136 / 0.9)); }
+@keyframes fp-draw { 0% { stroke-dashoffset: 1; opacity: 1; } 78% { stroke-dashoffset: 0; opacity: 1; } 90% { stroke-dashoffset: 0; opacity: 0; } 100% { stroke-dashoffset: 1; opacity: 0; } }
+@keyframes fp-fly { 0% { offset-distance: 0%; opacity: 0; } 5% { opacity: 1; } 78% { offset-distance: 100%; opacity: 1; } 90% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 0%; opacity: 0; } }
+@supports not (offset-path: path('M0 0')) { .fp-plane { display: none; } }
+@media (prefers-reduced-motion: reduce) { .fp-draw { animation: none; stroke-dashoffset: 0; } .fp-plane { animation: none; opacity: 1; offset-distance: 55%; } }
+
+/* testimonial cards grow on hover while the ribbon keeps moving */
+.ribbon-card { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+@media (hover: hover) { .ribbon-card:hover { transform: scale(1.07); z-index: 5; } }
+.ribbon-card:focus-within { z-index: 5; }
+
+/* dialogs */
+@keyframes modal-in { from { opacity: 0; transform: translateY(1rem) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.modal-card { animation: modal-in 0.28s ease-out both; }
+.modal-backdrop { animation: fade-in 0.25s ease-out both; }
+
+/* gallery: dark emerald with a lattice of pointed arches and warm gold light */
+.gallery-bg { background-color: #0c3228;
+  background-image: radial-gradient(60% 50% at 50% 0%, rgb(232 199 103 / 0.2), transparent 70%), radial-gradient(45% 40% at 100% 100%, rgb(232 199 103 / 0.12), transparent 70%), radial-gradient(45% 40% at 0% 70%, rgb(232 199 103 / 0.08), transparent 70%), url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%20viewBox='0%200%20100%20100'%3E%3Cg%20fill='none'%20stroke='%23e8c767'%20stroke-opacity='.17'%20stroke-width='1.2'%20stroke-linejoin='round'%3E%3Cpath%20d='M10%20100V55C10%2028%2035%2014%2050%200C65%2014%2090%2028%2090%2055V100'/%3E%3Cpath%20d='M24%20100V58C24%2040%2040%2027%2050%2014C60%2027%2076%2040%2076%2058V100'/%3E%3C/g%3E%3Cg%20fill='%23e8c767'%20fill-opacity='.3'%3E%3Ccircle%20cx='0'%20cy='50'%20r='1.6'/%3E%3Ccircle%20cx='100'%20cy='50'%20r='1.6'/%3E%3Ccircle%20cx='50'%20cy='0'%20r='1.6'/%3E%3C/g%3E%3C/svg%3E"); }
+
+/* "Need a custom package?" gold and silver frame */
+.gs-frame { border: 4px solid transparent; border-radius: 1.25rem;
+  background: linear-gradient(#fff, #fff) padding-box, linear-gradient(115deg, #9a7628, #f0d588 14%, #c9a24a 28%, #dfe3e6 46%, #8a9197 62%, #e8c767 80%, #9a7628) border-box;
+  box-shadow: 0 0 0 1px rgb(201 162 74 / 0.3), 0 16px 36px -16px rgb(168 134 47 / 0.55); }
+
+/* food photos: a little more colour and warmth */
+.food-boost { filter: saturate(1.22) contrast(1.07) brightness(1.04); }
+
+/* mobile menu: circular reveal from the burger, staggered entrance */
+.mm-panel { visibility: hidden; clip-path: circle(0px at calc(100% - 2.4rem) 2.4rem); transition: clip-path 0.55s cubic-bezier(0.7, 0, 0.2, 1), visibility 0s linear 0.55s; }
+.mm-panel.open { visibility: visible; clip-path: circle(160% at calc(100% - 2.4rem) 2.4rem); transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.2, 1), visibility 0s; }
+.mm-item { opacity: 0; transform: translateY(1.1rem); transition: opacity 0.2s ease, transform 0.2s ease; }
+.mm-panel.open .mm-item { opacity: 1; transform: none; transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); transition-delay: calc(0.2s + var(--i, 0) * 55ms); }
+.burger-bars { position: relative; display: block; width: 1.3rem; height: 1rem; }
+.burger-bars i { position: absolute; left: 0; display: block; height: 2px; border-radius: 2px; background: currentColor; transition: transform 0.35s ease, top 0.35s ease, width 0.35s ease, opacity 0.2s ease; }
+.burger-bars i:nth-child(1) { top: 0; width: 100%; }
+.burger-bars i:nth-child(2) { top: calc(50% - 1px); width: 68%; }
+.burger-bars i:nth-child(3) { top: calc(100% - 2px); width: 100%; }
+.burger[aria-expanded='true'] { background: #134234; color: #e8c767; border-color: #e8c767; }
+.burger[aria-expanded='true'] i:nth-child(1) { top: calc(50% - 1px); transform: rotate(45deg); }
+.burger[aria-expanded='true'] i:nth-child(2) { width: 0; opacity: 0; }
+.burger[aria-expanded='true'] i:nth-child(3) { top: calc(50% - 1px); transform: rotate(-45deg); }
+@media (prefers-reduced-motion: reduce) { .mm-panel { clip-path: none; transition: none; } .mm-panel:not(.open) { visibility: hidden; } .mm-item { opacity: 1; transform: none; } }

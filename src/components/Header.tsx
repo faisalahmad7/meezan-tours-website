@@ -1,10 +1,11 @@
-import { ChevronDown, Menu, Phone, X } from 'lucide-react'
+import { ChevronDown, Phone } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { NAV } from '@/data/navigation'
 import { SITE, whatsappLink } from '@/data/site'
-import { WhatsAppIcon } from './BrandIcons'
+import { SOCIAL_BRAND, WhatsAppIcon } from './BrandIcons'
 import Button from './Button'
+import Picture from './Picture'
 
 const ENQUIRY = 'Assalamu Alaikum, I would like to enquire about Hajj / Umrah packages.'
 
@@ -27,8 +28,13 @@ export function Logo({ className = 'h-11 w-auto sm:h-12' }: { className?: string
 }
 
 const MOBILE_LINKS = [
-  { label: 'Home', to: '/' }, { label: 'Hajj', to: '/hajj' }, { label: 'Umrah', to: '/umrah' }, { label: 'Packages', to: '/packages' },
-  { label: 'Ziyarat', to: '/ziyarat' }, { label: 'Gallery', to: '/gallery' }, { label: 'About Us', to: '/about' }, { label: 'Contact', to: '/contact' },
+  { label: 'Home', to: '/' }, { label: 'Packages', to: '/packages' }, { label: 'Gallery', to: '/gallery' },
+  { label: 'FAQ', to: '/faq' }, { label: 'About Us', to: '/about' }, { label: 'Contact', to: '/contact' },
+]
+const MOBILE_TILES = [
+  { label: 'Hajj', to: '/hajj', slug: 'mina-tent' },
+  { label: 'Umrah', to: '/umrah', slug: 'group-mosque' },
+  { label: 'Ziyarat', to: '/ziyarat', slug: 'group-hilltop' },
 ]
 
 export default function Header() {
@@ -86,22 +92,48 @@ export default function Header() {
             <Button href={whatsappLink(ENQUIRY)} variant="primary" className="hidden sm:inline-flex">
               <WhatsAppIcon className="h-[1.15rem] w-[1.15rem]" />Enquire on WhatsApp
             </Button>
-            <button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold-500/60 bg-white text-brand-800 lg:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((v) => !v)}>
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <button type="button" className="burger relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold-500/60 bg-white text-brand-800 shadow-soft lg:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((v) => !v)}>
+              <span aria-hidden="true" className="burger-bars"><i /><i /><i /></span>
             </button>
           </div>
         </div>
 
       </header>
-      <div id="mobile-menu" hidden={!open} className="fixed inset-0 z-30 overflow-y-auto bg-ivory pt-[4.25rem] lg:hidden">
-        <nav aria-label="Mobile" className="container flex flex-col py-4">
-          {MOBILE_LINKS.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.to === '/'} className={({ isActive }) => `border-b border-sand-200 px-2 py-4 font-display text-2xl font-semibold ${isActive ? 'text-brand-700' : 'text-ink-900'}`}>{l.label}</NavLink>
-          ))}
-          <div className="mt-6 grid gap-3 pb-8">
+      <div id="mobile-menu" aria-hidden={!open} className={`mm-panel pattern-dark on-dark fixed inset-0 z-30 overflow-y-auto pt-[4.25rem] text-white lg:hidden ${open ? 'open' : ''}`}>
+        <nav aria-label="Mobile" className="container flex flex-col py-6">
+          <p className="mm-item eyebrow mb-3" style={{ ['--i' as string]: 0 }}>The pilgrimage</p>
+          <ul className="grid grid-cols-3 gap-3">
+            {MOBILE_TILES.map((t, i) => (
+              <li key={t.to} className="mm-item" style={{ ['--i' as string]: i + 1 }}>
+                <Link to={t.to} className="group relative block overflow-hidden rounded-2xl border border-gold-400/70 shadow-lift">
+                  <Picture slug={t.slug} alt="" ratio="3/4" sizes="30vw" className="w-full" />
+                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/20 to-transparent" />
+                  <span className="absolute inset-x-0 bottom-0 p-2.5 text-center font-display text-lg font-bold text-white">{t.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <ul className="mt-6 border-t border-gold-500/40">
+            {MOBILE_LINKS.map((l, i) => (
+              <li key={l.to} className="mm-item" style={{ ['--i' as string]: i + 4 }}>
+                <NavLink to={l.to} end={l.to === '/'} className={({ isActive }) => `flex items-baseline gap-4 border-b border-white/10 py-3.5 font-display text-[1.75rem] font-bold leading-none ${isActive ? 'text-gold-300' : 'text-white'}`}>
+                  <span className="w-7 text-sm font-semibold tracking-widest text-gold-400/80">{String(i + 1).padStart(2, '0')}</span>{l.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mm-item mt-7 grid gap-3" style={{ ['--i' as string]: 11 }}>
             <Button href={whatsappLink(ENQUIRY)} variant="whatsapp"><WhatsAppIcon className="h-5 w-5" />WhatsApp us</Button>
-            <Button href={`tel:${SITE.phones[0].tel}`} variant="outline"><Phone className="h-5 w-5" aria-hidden="true" />Call {SITE.phones[0].display}</Button>
+            <Button href={`tel:${SITE.phones[0].tel}`} variant="ghost-light"><Phone className="h-5 w-5" aria-hidden="true" />Call {SITE.phones[0].display}</Button>
           </div>
+          <ul className="mm-item mt-6 flex justify-center gap-3 pb-10" style={{ ['--i' as string]: 12 }}>
+            {SITE.social.filter((x) => SOCIAL_BRAND[x.label]).map((x) => {
+              const { Icon } = SOCIAL_BRAND[x.label]
+              return <li key={x.url}><a href={x.url} target="_blank" rel="noopener noreferrer" aria-label={x.label} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold-500/60 text-gold-300"><Icon className="h-5 w-5" /></a></li>
+            })}
+          </ul>
         </nav>
       </div>
     </>

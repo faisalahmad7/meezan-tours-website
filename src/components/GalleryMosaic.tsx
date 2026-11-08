@@ -17,7 +17,7 @@ const SIZES = ['(min-width:768px) 34vw, 100vw', '(min-width:768px) 42vw, 100vw',
 
 function Seal() {
   return (
-    <div className="pointer-events-none absolute left-[33.333%] top-1/2 z-10 hidden h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-900 shadow-lift ring-4 ring-sand-100 md:flex" aria-hidden="true">
+    <div className="pointer-events-none absolute left-[33.333%] top-1/2 z-10 hidden h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-900 shadow-lift ring-4 ring-gold-400/70 md:flex" aria-hidden="true">
       <svg viewBox="0 0 120 120" className="gal-seal absolute inset-0 h-full w-full">
         <defs><path id="seal-path" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0" /></defs>
         <text fill="#e8c767" fontSize="9.6" letterSpacing="2.6" fontWeight="600"><textPath href="#seal-path">REAL PILGRIMS · REAL MOMENTS ·</textPath></text>
