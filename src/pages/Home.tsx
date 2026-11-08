@@ -39,25 +39,30 @@ export default function Home() {
         jsonLd={[businessSchema(), websiteSchema()]}
       />
       {/*
-        HERO. Phone order: the photographs with the route round them, then the headline (just overlapping the foot of the ring), then the text and buttons.
-        From lg up: headline and text in the left column, photographs and the route ring in the right column.
+        HERO. Phone order: the photographs with the route round them, then the small headline OVERLAPPING the foot of the main photo,
+        then the "Based in Pune" line, the tagline, the text and the buttons.
+        From sm up the headline block (small line, headline, tagline) keeps its earlier layout.
+        From lg up: headline and text in the left column, photographs and the route ring in the right column (the ring is capped by the screen height so it fits).
       */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
         <HeroWatermark />
-        <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16">
-          {/* right column on desktop: the photographs with the pilgrim route running round them in a circle */}
+        <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[0.95fr_1.05fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16 xl:grid-cols-[0.9fr_1.1fr]">
+          {/* right column on desktop: the photographs with the pilgrim route running round them in an oval */}
           <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
-            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[34rem]">
+            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[min(44rem,calc((100vh_-_6rem)_*_0.8))]">
               <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
-          <div data-hero className="relative z-30 order-2 -mx-5 -mt-24 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/70 to-transparent px-5 pb-1 pt-20 [text-shadow:0_2px_14px_rgb(8_42_33/0.85)] sm:-mt-28 sm:pt-24 lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
-            <p className="eyebrow mb-4">Based in Pune. Trusted by pilgrims across India.</p>
-            <h1 className="font-display text-display-xl text-white">Your sacred journey, guided with care.</h1>
-            <p className="mt-4 font-display text-xl italic text-gold-300 sm:text-2xl">From your first intention to your safe return.</p>
+          <div data-hero className="relative z-30 order-2 -mx-5 -mt-44 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/80 to-transparent px-5 pb-16 pt-14 text-center [text-shadow:0_2px_14px_rgb(8_42_33/0.9)] sm:-mt-28 sm:pb-1 sm:pt-24 sm:text-left lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
+            <p className="eyebrow mb-4 hidden sm:inline-flex">Based in Pune. Trusted by pilgrims across India.</p>
+            <h1 className="font-display text-[1.65rem] leading-[1.12] text-white sm:text-display-xl">Your sacred journey, guided with care.</h1>
+            <p className="mt-4 hidden font-display text-xl italic text-gold-300 sm:block sm:text-2xl">From your first intention to your safe return.</p>
           </div>
           <div data-hero className="order-3 max-w-xl lg:col-start-1 lg:row-start-2 lg:self-start">
+            {/* phone only: these two lines come after the overlapping headline */}
+            <p className="eyebrow mb-3 items-start gap-2 before:mt-2 before:shrink-0 sm:hidden">Based in Pune. Trusted by pilgrims across India.</p>
+            <p className="mb-3 font-display text-lg italic text-gold-300 sm:hidden">From your first intention to your safe return.</p>
             <p className="mt-3 text-lg text-white/85 lg:mt-5">With 18+ years of experience, Meezan Tours arranges flights, visas, stay and ziyarat for Hajj and Umrah, so you can give your full attention to worship.</p>
             <div className="mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
               <Link to="/hajj" className="hero-cta hero-cta-gold"><Landmark className="h-6 w-6 shrink-0" aria-hidden="true" /><span className="min-w-0"><span className="block whitespace-nowrap text-base font-semibold leading-tight sm:text-lg">Hajj packages</span><span className="block text-xs opacity-75">Group departures</span></span><span className="btn-chip ml-auto"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Link>
@@ -148,7 +153,7 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      {/* GALLERY PREVIEW: midnight navy with the same gold arch lattice, so it stands apart from the emerald section above */}
+      {/* GALLERY PREVIEW: a soft red (close to the logo red, lighter) with the same gold arch lattice, so it stands apart from the emerald section above */}
       <section className="gallery-bg on-dark relative isolate overflow-hidden border-y-2 border-gold-500/60 py-16 text-white sm:py-20 lg:py-24">
         <div className="container">
           <SectionHeading bold eyebrow="Gallery" title="Moments from our pilgrims' journeys" intro="Real pilgrims, real moments: from the airport to the Haram, captured on Meezan journeys." center />

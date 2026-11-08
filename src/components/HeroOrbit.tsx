@@ -7,15 +7,16 @@ import HeroSlides from './HeroSlides'
  *   Mumbai -> Jeddah (flight), Jeddah -> Makkah (coach), Makkah -> Madinah (coach), Madinah -> Jeddah (coach),
  *   Jeddah -> Mumbai (flight).
  * Jeddah therefore appears twice on the ring, once on the way out and once on the way back.
- * One vehicle at a time travels each leg, in order, on a shared 12 second loop (SVG animateMotion, so there is no
- * script and nothing can drift out of line). The route is illustrative and not to scale. Styles: .ho-* in index.css.
+ * One vehicle at a time travels each leg, in order, on a shared 40 second loop (SVG animateMotion, so there is no
+ * script and nothing can drift out of line). The loop used to be 12 seconds; it is now 40 so the plane and coaches
+ * move about 70% slower. The route is illustrative and not to scale. Styles: .ho-* in index.css.
  */
 const W = 480
-const H = 580
+const H = 600
 const CX = W / 2
 const CY = H / 2
-const RX = 198
-const RY = 262
+const RX = 208
+const RY = 274
 const f = (n: number) => n.toFixed(2)
 /** Point on the ring (an oval hugging the tall photograph), angle in degrees clockwise from twelve o'clock. */
 const pt = (deg: number): [number, number] => {
@@ -30,15 +31,16 @@ const arc = (from: number, to: number) => {
   return `M${f(x1)} ${f(y1)}A${RX} ${RY} 0 ${span > 180 ? 1 : 0} 1 ${f(x2)} ${f(y2)}`
 }
 
-const STOPS = { M: 300, J1: 20, K: 60, D: 95, J2: 125 } as const
+/* the second Jeddah stop sits a little higher on the ring (112 degrees) so its label clears the phone headline */
+const STOPS = { M: 300, J1: 20, K: 60, D: 95, J2: 112 } as const
 const LEGS = [
-  { id: 'l1', kind: 'flight', d: arc(STOPS.M, STOPS.J1), t: [0, 2.4] },
-  { id: 'l2', kind: 'coach', d: arc(STOPS.J1, STOPS.K), t: [2.6, 4.0] },
-  { id: 'l3', kind: 'coach', d: arc(STOPS.K, STOPS.D), t: [4.2, 5.4] },
-  { id: 'l4', kind: 'coach', d: arc(STOPS.D, STOPS.J2), t: [5.6, 6.8] },
-  { id: 'l5', kind: 'flight', d: arc(STOPS.J2, STOPS.M), t: [7.0, 10.0] },
+  { id: 'l1', kind: 'flight', d: arc(STOPS.M, STOPS.J1), t: [0, 8] },
+  { id: 'l2', kind: 'coach', d: arc(STOPS.J1, STOPS.K), t: [8.67, 13.33] },
+  { id: 'l3', kind: 'coach', d: arc(STOPS.K, STOPS.D), t: [14, 18] },
+  { id: 'l4', kind: 'coach', d: arc(STOPS.D, STOPS.J2), t: [18.67, 22.67] },
+  { id: 'l5', kind: 'flight', d: arc(STOPS.J2, STOPS.M), t: [23.33, 33.33] },
 ] as const
-const LOOP = 12
+const LOOP = 40
 const NODES = [
   { name: 'MUMBAI', a: STOPS.M },
   { name: 'JEDDAH', a: STOPS.J1 },
@@ -98,9 +100,9 @@ export default function HeroOrbit({ main, side }: Props) {
           </g>
           {LEGS.map((l) => <Vehicle key={l.id} leg={l} />)}
         </svg>
-        <div className="absolute left-1/2 top-1/2 z-10 w-[70%] -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2 lg:w-[74%]">
           <div className="arch gold-frame overflow-hidden">
-            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 34vw, 72vw" priority className="h-full" />
+            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 40vw, 72vw" priority className="h-full" />
           </div>
         </div>
         {/* labels sit above the photograph so no stop is ever hidden behind it */}
@@ -116,7 +118,8 @@ export default function HeroOrbit({ main, side }: Props) {
             )
           })}
         </svg>
-        <div className="absolute bottom-[9%] left-[0%] z-20 w-[32%]">
+        {/* small side photo: on phones it floats above the headline that overlaps the foot of the main photo */}
+        <div className="absolute bottom-[42%] left-[0%] z-20 w-[32%] sm:bottom-[9%]">
           <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 14vw, 36vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
         </div>
       </div>
