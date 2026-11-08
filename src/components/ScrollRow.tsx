@@ -10,8 +10,8 @@ interface Props {
   tabIndex?: number
 }
 /**
- * Horizontal scroller with a mild arrow at the right edge. The arrow shows only while the row really overflows
- * (so never on desktop grids) and fades away for good as soon as the visitor scrolls or swipes it.
+ * Horizontal scroller with a mild arrow at the right edge. Phones only (hidden from md up). The arrow shows only while the row really overflows
+ * and fades away for good as soon as the visitor scrolls or swipes it.
  */
 export default function ScrollRow({ as = 'div', className = '', children, scrollerRef, label, tabIndex }: Props) {
   const own = useRef<HTMLElement>(null)
@@ -30,11 +30,18 @@ export default function ScrollRow({ as = 'div', className = '', children, scroll
       measure()
     }
     measure()
+    const t = window.setTimeout(measure, 400)
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null
+    ro?.observe(el)
     el.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', measure)
+    window.addEventListener('load', measure)
     return () => {
+      window.clearTimeout(t)
+      ro?.disconnect()
       el.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', measure)
+      window.removeEventListener('load', measure)
     }
   }, [ref])
   const Tag = as as 'div'
@@ -43,7 +50,7 @@ export default function ScrollRow({ as = 'div', className = '', children, scroll
       <Tag ref={ref as RefObject<HTMLDivElement>} className={className} aria-label={label} tabIndex={tabIndex}>
         {children}
       </Tag>
-      <span aria-hidden="true" className={`scroll-hint pointer-events-none absolute right-1 top-1/2 z-20 -mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-brand-800 shadow-soft ring-1 ring-gold-500/50 backdrop-blur transition-opacity duration-500 ${hint ? 'opacity-90' : 'opacity-0'}`}>
+      <span aria-hidden="true" className={`scroll-hint pointer-events-none absolute right-2 top-1/2 z-20 -mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-brand-800 shadow-lift ring-2 ring-gold-500/70 transition-opacity duration-500 md:hidden ${hint ? 'opacity-95' : 'opacity-0'}`}>
         <ChevronRight className="h-5 w-5" />
       </span>
     </div>
