@@ -56,7 +56,7 @@ function Vehicle({ leg }: { leg: (typeof LEGS)[number] }) {
   const ke = e / LOOP
   const fade = 0.012
   return (
-    <g className="ho-vehicle" opacity="0">
+    <g className={`ho-vehicle ${leg.kind === 'coach' ? 'ho-coach-track' : ''}`} opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes={`0;${f(ks)};${f(ks + fade)};${f(ke - fade)};${f(ke)};1`} dur={`${LOOP}s`} repeatCount="indefinite" />
       <animateMotion path={leg.d} dur={`${LOOP}s`} repeatCount="indefinite" rotate={leg.kind === 'flight' ? 'auto' : '0'} calcMode="linear" keyPoints="0;0;1;1" keyTimes={`0;${f(ks)};${f(ke)};1`} />
       <circle r="13" fill="#082a21" stroke="#e8c767" strokeWidth="1.4" />
@@ -94,7 +94,7 @@ export default function HeroOrbit({ main, side }: Props) {
               l.kind === 'flight' ? (
                 <path key={l.id} d={l.d} stroke="#f0d588" strokeWidth="2.6" strokeDasharray="7 7" className="ho-flow" />
               ) : (
-                <path key={l.id} d={l.d} stroke="#fbf8f0" strokeOpacity=".9" strokeWidth="2.4" strokeDasharray="2.5 7" className="ho-flow" />
+                <path key={l.id} d={l.d} stroke="#fbf8f0" strokeOpacity=".95" strokeWidth="2.5" strokeDasharray="2.5 7" className="ho-flow ho-coach-track" />
               ),
             )}
           </g>
