@@ -3,39 +3,44 @@ import type { HeroSlide } from '@/data/hero'
 import HeroSlides from './HeroSlides'
 
 /**
- * Hero stage: the main photograph sits in the middle and the pilgrim route runs once around it as a full circle.
+ * Hero stage: the main photograph sits in the middle and the pilgrim route runs once around it as a closed oval loop.
  *   Mumbai -> Jeddah (flight), Jeddah -> Makkah (coach), Makkah -> Madinah (coach), Madinah -> Jeddah (coach),
  *   Jeddah -> Mumbai (flight).
  * Jeddah therefore appears twice on the ring, once on the way out and once on the way back.
- * One vehicle at a time travels each leg, in order, on a shared 12 second loop (SVG animateMotion, so there is no
- * script and nothing can drift out of line). The route is illustrative and not to scale. Styles: .ho-* in index.css.
+ * One vehicle at a time travels each leg, in order, on a shared 40 second loop (SVG animateMotion, so there is no
+ * script and nothing can drift out of line). The loop used to be 12 seconds; it is now 40 so the plane and coaches
+ * move about 70% slower. The route is illustrative and not to scale. Styles: .ho-* in index.css.
  */
-const VB = 440
-const C = VB / 2
-const R = 186
+const W = 480
+const H = 600
+const CX = W / 2
+const CY = H / 2
+const RX = 208
+const RY = 274
 const f = (n: number) => n.toFixed(2)
-/** Point on the ring, angle in degrees clockwise from twelve o'clock. */
+/** Point on the ring (an oval hugging the tall photograph), angle in degrees clockwise from twelve o'clock. */
 const pt = (deg: number): [number, number] => {
   const a = (deg * Math.PI) / 180
-  return [C + R * Math.sin(a), C - R * Math.cos(a)]
+  return [CX + RX * Math.sin(a), CY - RY * Math.cos(a)]
 }
 /** Clockwise arc along the ring from one angle to another. */
 const arc = (from: number, to: number) => {
   const [x1, y1] = pt(from)
   const [x2, y2] = pt(to)
   const span = (to - from + 360) % 360
-  return `M${f(x1)} ${f(y1)}A${R} ${R} 0 ${span > 180 ? 1 : 0} 1 ${f(x2)} ${f(y2)}`
+  return `M${f(x1)} ${f(y1)}A${RX} ${RY} 0 ${span > 180 ? 1 : 0} 1 ${f(x2)} ${f(y2)}`
 }
 
-const STOPS = { M: 300, J1: 15, K: 68, D: 128, J2: 185 } as const
+/* the second Jeddah stop sits a little higher on the ring (112 degrees) so its label clears the phone headline */
+const STOPS = { M: 300, J1: 20, K: 60, D: 95, J2: 112 } as const
 const LEGS = [
-  { id: 'l1', kind: 'flight', d: arc(STOPS.M, STOPS.J1), t: [0, 2.4] },
-  { id: 'l2', kind: 'coach', d: arc(STOPS.J1, STOPS.K), t: [2.6, 4.0] },
-  { id: 'l3', kind: 'coach', d: arc(STOPS.K, STOPS.D), t: [4.2, 5.4] },
-  { id: 'l4', kind: 'coach', d: arc(STOPS.D, STOPS.J2), t: [5.6, 6.8] },
-  { id: 'l5', kind: 'flight', d: arc(STOPS.J2, STOPS.M), t: [7.0, 10.0] },
+  { id: 'l1', kind: 'flight', d: arc(STOPS.M, STOPS.J1), t: [0, 8] },
+  { id: 'l2', kind: 'coach', d: arc(STOPS.J1, STOPS.K), t: [8.67, 13.33] },
+  { id: 'l3', kind: 'coach', d: arc(STOPS.K, STOPS.D), t: [14, 18] },
+  { id: 'l4', kind: 'coach', d: arc(STOPS.D, STOPS.J2), t: [18.67, 22.67] },
+  { id: 'l5', kind: 'flight', d: arc(STOPS.J2, STOPS.M), t: [23.33, 33.33] },
 ] as const
-const LOOP = 12
+const LOOP = 40
 const NODES = [
   { name: 'MUMBAI', a: STOPS.M },
   { name: 'JEDDAH', a: STOPS.J1 },
@@ -75,15 +80,15 @@ interface Props {
 export default function HeroOrbit({ main, side }: Props) {
   return (
     <div>
-      <div className="relative mx-auto aspect-square w-full">
+      <div className="relative mx-auto w-full" style={{ aspectRatio: `${W}/${H}` }}>
         <svg
-          viewBox={`0 0 ${VB} ${VB}`}
+          viewBox={`0 0 ${W} ${H}`}
           role="img"
           aria-label="Pilgrim route around the Meezan journey: flight from Mumbai to Jeddah, coach from Jeddah to Makkah, Makkah to Madinah and Madinah back to Jeddah, then the flight from Jeddah to Mumbai."
           className="ho absolute inset-0 z-0 h-full w-full overflow-visible"
         >
-          <circle cx={C} cy={C} r={R} fill="none" stroke="#e8c767" strokeOpacity=".16" strokeWidth="12" />
-          <circle cx={C} cy={C} r={R + 15} fill="none" stroke="#e8c767" strokeOpacity=".2" strokeWidth="1" strokeDasharray="1 7" strokeLinecap="round" />
+          <ellipse cx={CX} cy={CY} rx={RX} ry={RY} fill="none" stroke="#e8c767" strokeOpacity=".16" strokeWidth="12" />
+          <ellipse cx={CX} cy={CY} rx={RX + 15} ry={RY + 15} fill="none" stroke="#e8c767" strokeOpacity=".2" strokeWidth="1" strokeDasharray="1 7" strokeLinecap="round" />
           <g fill="none" strokeLinecap="round">
             {LEGS.map((l) =>
               l.kind === 'flight' ? (
@@ -94,6 +99,14 @@ export default function HeroOrbit({ main, side }: Props) {
             )}
           </g>
           {LEGS.map((l) => <Vehicle key={l.id} leg={l} />)}
+        </svg>
+        <div className="absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2 lg:w-[74%]">
+          <div className="arch gold-frame overflow-hidden">
+            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 40vw, 72vw" priority className="h-full" />
+          </div>
+        </div>
+        {/* labels sit above the photograph so no stop is ever hidden behind it */}
+        <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false" className="pointer-events-none absolute inset-0 z-[15] h-full w-full overflow-visible">
           {NODES.map((n, i) => {
             const [x, y] = pt(n.a)
             const w = n.name.length * 8.6 + 20
@@ -105,16 +118,12 @@ export default function HeroOrbit({ main, side }: Props) {
             )
           })}
         </svg>
-        <div className="absolute left-1/2 top-1/2 z-10 w-[48%] -translate-x-1/2 -translate-y-1/2">
-          <div className="arch gold-frame overflow-hidden">
-            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 24vw, 52vw" priority className="h-full" />
-          </div>
-        </div>
-        <div className="absolute bottom-[1%] left-[1%] z-20 w-[30%]">
+        {/* small side photo: on phones it floats above the headline that overlaps the foot of the main photo */}
+        <div className="absolute bottom-[42%] left-[0%] z-20 w-[32%] sm:bottom-[9%]">
           <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 14vw, 36vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
         </div>
       </div>
-      <p className="mt-1 flex items-center justify-center gap-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
+      <p className="mt-1 hidden items-center sm:flex justify-center gap-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
         <span className="inline-flex items-center gap-1.5"><PlaneIcon className="h-4 w-4 text-gold-400" aria-hidden="true" />Flight</span>
         <span className="inline-flex items-center gap-1.5"><BusIcon className="h-4 w-4 text-gold-400" aria-hidden="true" />Coach</span>
       </p>
