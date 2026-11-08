@@ -48,8 +48,8 @@ export default function ServicesShowcase() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_32%_at_50%_9%,#fbf8f0_35%,transparent_100%)]" aria-hidden="true" />
       <div className="container">
         <div data-reveal className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
-          <p className="eyebrow mb-4 justify-center">What we arrange for you</p>
-          <h2 className="text-display-lg font-extrabold">Every detail arranged. Every pilgrim valued.</h2>
+          <p className="eyebrow eyebrow-strong mb-4 justify-center">What we arrange for you</p>
+          <h2 className="text-display-lg">Every detail arranged. Every pilgrim valued.</h2>
           <span aria-hidden="true" className="mx-auto mt-5 block h-1 w-20 rounded-full bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500" />
           <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-700">Meezan does far more than book flights and hotels. Here is what goes into every journey. Inclusions differ by package, so each service notes where that applies.</p>
         </div>

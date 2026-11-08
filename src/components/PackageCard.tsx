@@ -17,7 +17,7 @@ export default function PackageCard({ pkg }: { pkg: TravelPackage }) {
     : []
   const msg = `Assalamu Alaikum, I would like to enquire about the "${pkg.name}" package${pkg.dates ? ` (${pkg.dates})` : ''}.`
   return (
-    <article data-reveal className="card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+    <article data-reveal className="card flex flex-col self-start overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-lift">
       <div className="relative">
         <Picture slug={pkg.image.slug} alt={`${pkg.name}: Meezan pilgrims on a ${pkg.kind === 'hajj' ? 'Hajj' : 'Umrah'} journey`} ratio="16/11" focus={pkg.image.focus} sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/25 to-transparent" />

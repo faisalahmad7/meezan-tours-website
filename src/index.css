@@ -6,8 +6,6 @@
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body { @apply bg-ivory font-sans text-base leading-relaxed text-ink-700 antialiased; }
   h1, h2, h3, h4 { @apply font-display text-ink-900; text-wrap: balance; }
-  h1, h2 { font-weight: 700; letter-spacing: -0.012em; }
-  h3, h4 { font-weight: 600; }
   :focus-visible { @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-sand-50; }
   .on-dark :focus-visible { @apply ring-gold-400 ring-offset-brand-900; }
   .on-dark h1, .on-dark h2, .on-dark h3, .on-dark h4 { @apply text-white; }
@@ -23,6 +21,9 @@
   .eyebrow { @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-700; }
   .eyebrow::before { content: ''; @apply h-px w-8 bg-accent-500; }
   .on-dark .eyebrow { @apply text-gold-400; }
+  .eyebrow-strong { @apply text-[0.95rem] font-extrabold tracking-[0.2em] text-ink-900 sm:text-[1.1rem]; }
+  .eyebrow-strong::before { @apply h-[3px] w-10 rounded-full bg-gold-500; }
+  .on-dark .eyebrow-strong { @apply text-gold-300; }
   .btn { @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition duration-200 sm:text-base; }
   .btn-primary { @apply bg-brand-600 text-white shadow-soft hover:bg-brand-700 hover:shadow-lift; }
   .btn-gold { @apply bg-gold-400 text-brand-950 shadow-soft hover:bg-gold-300 hover:shadow-lift; }
@@ -145,14 +146,11 @@
 @keyframes wm-turn { to { transform: rotate(360deg); } }
 @media (max-width: 1023px) { .hero-wm { left: -42%; width: 155vw; opacity: 0.09; -webkit-mask-image: none; mask-image: none; } }
 
-/* hero route: plane and the line it has already flown share one 9s timeline */
-.fp { overflow: visible; filter: drop-shadow(0 2px 6px rgb(8 42 33 / 0.55)); }
-.fp-draw { stroke-dasharray: 1 1; animation: fp-draw 9s ease-in-out infinite; }
-.fp-plane { offset-rotate: auto; offset-distance: 0%; opacity: 0; animation: fp-fly 9s ease-in-out infinite; filter: drop-shadow(0 0 5px rgb(240 213 136 / 0.9)); }
-@keyframes fp-draw { 0% { stroke-dashoffset: 1; opacity: 1; } 78% { stroke-dashoffset: 0; opacity: 1; } 90% { stroke-dashoffset: 0; opacity: 0; } 100% { stroke-dashoffset: 1; opacity: 0; } }
-@keyframes fp-fly { 0% { offset-distance: 0%; opacity: 0; } 5% { opacity: 1; } 78% { offset-distance: 100%; opacity: 1; } 90% { offset-distance: 100%; opacity: 0; } 100% { offset-distance: 0%; opacity: 0; } }
-@supports not (offset-path: path('M0 0')) { .fp-plane { display: none; } }
-@media (prefers-reduced-motion: reduce) { .fp-draw { animation: none; stroke-dashoffset: 0; } .fp-plane { animation: none; opacity: 1; offset-distance: 55%; } }
+/* hero route ring (HeroOrbit): the dashes flow in the direction of travel; the vehicles are SVG animateMotion */
+.ho { filter: drop-shadow(0 2px 6px rgb(8 42 33 / 0.5)); }
+.ho-flow { animation: ho-dash 2.6s linear infinite; }
+@keyframes ho-dash { to { stroke-dashoffset: -28; } }
+@media (prefers-reduced-motion: reduce) { .ho-flow { animation: none; } .ho-vehicle { display: none; } }
 
 /* testimonial cards grow on hover while the ribbon keeps moving */
 .ribbon-card { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -165,9 +163,10 @@
 .modal-card { animation: modal-in 0.28s ease-out both; }
 .modal-backdrop { animation: fade-in 0.25s ease-out both; }
 
-/* gallery: dark emerald with a lattice of pointed arches and warm gold light */
-.gallery-bg { background-color: #0c3228;
-  background-image: radial-gradient(60% 50% at 50% 0%, rgb(232 199 103 / 0.2), transparent 70%), radial-gradient(45% 40% at 100% 100%, rgb(232 199 103 / 0.12), transparent 70%), radial-gradient(45% 40% at 0% 70%, rgb(232 199 103 / 0.08), transparent 70%), url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%20viewBox='0%200%20100%20100'%3E%3Cg%20fill='none'%20stroke='%23e8c767'%20stroke-opacity='.17'%20stroke-width='1.2'%20stroke-linejoin='round'%3E%3Cpath%20d='M10%20100V55C10%2028%2035%2014%2050%200C65%2014%2090%2028%2090%2055V100'/%3E%3Cpath%20d='M24%20100V58C24%2040%2040%2027%2050%2014C60%2027%2076%2040%2076%2058V100'/%3E%3C/g%3E%3Cg%20fill='%23e8c767'%20fill-opacity='.3'%3E%3Ccircle%20cx='0'%20cy='50'%20r='1.6'/%3E%3Ccircle%20cx='100'%20cy='50'%20r='1.6'/%3E%3Ccircle%20cx='50'%20cy='0'%20r='1.6'/%3E%3C/g%3E%3C/svg%3E"); }
+/* gallery: midnight navy with the gold arch lattice and warm gold light, so it never reads as the emerald section above it */
+.gallery-bg { background-color: #0c1633;
+  background-image: radial-gradient(60% 50% at 50% 0%, rgb(232 199 103 / 0.2), transparent 70%), radial-gradient(45% 40% at 100% 100%, rgb(232 199 103 / 0.12), transparent 70%), radial-gradient(45% 40% at 0% 70%, rgb(96 120 200 / 0.18), transparent 70%), url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%20viewBox='0%200%20100%20100'%3E%3Cg%20fill='none'%20stroke='%23e8c767'%20stroke-opacity='.17'%20stroke-width='1.2'%20stroke-linejoin='round'%3E%3Cpath%20d='M10%20100V55C10%2028%2035%2014%2050%200C65%2014%2090%2028%2090%2055V100'/%3E%3Cpath%20d='M24%20100V58C24%2040%2040%2027%2050%2014C60%2027%2076%2040%2076%2058V100'/%3E%3C/g%3E%3Cg%20fill='%23e8c767'%20fill-opacity='.3'%3E%3Ccircle%20cx='0'%20cy='50'%20r='1.6'/%3E%3Ccircle%20cx='100'%20cy='50'%20r='1.6'/%3E%3Ccircle%20cx='50'%20cy='0'%20r='1.6'/%3E%3C/g%3E%3C/svg%3E"); }
+.gallery-bg .eyebrow-strong { color: #f0d588; }
 
 /* "Need a custom package?" gold and silver frame */
 .gs-frame { border: 4px solid transparent; border-radius: 1.25rem;
@@ -192,3 +191,19 @@
 .burger[aria-expanded='true'] i:nth-child(2) { width: 0; opacity: 0; }
 .burger[aria-expanded='true'] i:nth-child(3) { top: calc(50% - 1px); transform: rotate(-45deg); }
 @media (prefers-reduced-motion: reduce) { .mm-panel { clip-path: none; transition: none; } .mm-panel:not(.open) { visibility: hidden; } .mm-item { opacity: 1; transform: none; } }
+
+/* testimonial ribbon: drifts on its own, never stops, and can be dragged with a mouse or a held finger */
+.ribbon-grab { cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.ribbon-grab:active { cursor: grabbing; }
+.ribbon-js { will-change: transform; }
+.ribbon-btn { -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-grab { cursor: auto; touch-action: auto; }
+  .ribbon-js { transform: none !important; }
+  .ribbon-js > ul[aria-hidden='true'] { display: none; }
+}
+
+/* mild arrow that tells phone visitors a row scrolls sideways; ScrollRow fades it out for good after the first swipe */
+@keyframes hint-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+.scroll-hint svg { animation: hint-nudge 1.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .scroll-hint svg { animation: none; } }

@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom'
 import AllIndia from '@/components/AllIndia'
 import Button from '@/components/Button'
 import CtaBand from '@/components/CtaBand'
-import FlightPath from '@/components/FlightPath'
 import GalleryMosaic from '@/components/GalleryMosaic'
 import SocialLinks from '@/components/SocialLinks'
-import HeroSlides from '@/components/HeroSlides'
+import HeroOrbit from '@/components/HeroOrbit'
 import HeroWatermark from '@/components/HeroWatermark'
 import JourneyTimeline from '@/components/JourneyTimeline'
 import PackageCard from '@/components/PackageCard'
@@ -40,30 +39,20 @@ export default function Home() {
         jsonLd={[businessSchema(), websiteSchema()]}
       />
       {/*
-        HERO. Phone order: photographs, then the headline (overlapping the photographs), then the text and buttons, then the route.
-        From lg up: headline and text in the left column, photographs and route in the right column.
+        HERO. Phone order: the photographs with the route round them, then the headline (just overlapping the foot of the ring), then the text and buttons.
+        From lg up: headline and text in the left column, photographs and the route ring in the right column.
       */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
         <HeroWatermark />
         <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16">
-          {/* right column on desktop; its children are re-ordered individually on phones */}
+          {/* right column on desktop: the photographs with the pilgrim route running round them in a circle */}
           <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
-            <div className="relative order-1 mx-auto w-full max-w-md pb-10 lg:max-w-none lg:pb-8">
-              <div className="relative ml-auto w-[84%]">
-                <div className="arch gold-frame overflow-hidden">
-                  <HeroSlides slides={heroMain} ratio="3/4" sizes="(min-width:1024px) 34vw, 80vw" priority className="h-full" />
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 w-[52%] sm:w-[48%]">
-                <HeroSlides slides={heroSide} ratio="4/3" sizes="(min-width:1024px) 20vw, 46vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
-              </div>
-            </div>
-            <div className="order-4 mx-auto mt-10 w-full max-w-md rounded-2xl border border-gold-400/40 bg-brand-950/35 p-3 backdrop-blur-sm sm:max-w-lg lg:mt-6 lg:max-w-none">
-              <FlightPath className="mx-auto block w-full" />
+            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[34rem]">
+              <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
-          <div data-hero className="relative z-30 order-2 -mx-5 -mt-28 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/85 to-transparent px-5 pb-1 pt-24 sm:-mt-32 lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0">
+          <div data-hero className="relative z-30 order-2 -mx-5 -mt-7 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/85 to-transparent px-5 pb-1 pt-10 sm:-mt-8 sm:pt-12 lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0">
             <p className="eyebrow mb-4">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-display-xl text-white">Your sacred journey, guided with care.</h1>
             <p className="mt-4 font-display text-xl italic text-gold-300 sm:text-2xl">From your first intention to your safe return.</p>
@@ -159,7 +148,7 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      {/* GALLERY PREVIEW: deep midnight blue with gold arch lattice, so it stands apart from the emerald section above */}
+      {/* GALLERY PREVIEW: midnight navy with the same gold arch lattice, so it stands apart from the emerald section above */}
       <section className="gallery-bg on-dark relative isolate overflow-hidden border-y-2 border-gold-500/60 py-16 text-white sm:py-20 lg:py-24">
         <div className="container">
           <SectionHeading bold eyebrow="Gallery" title="Moments from our pilgrims' journeys" intro="Real pilgrims, real moments: from the airport to the Haram, captured on Meezan journeys." center />

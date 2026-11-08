@@ -30,7 +30,7 @@ export const galleryImages: GalleryImage[] = [
   { id: 'g23', slug: 'buffet-hotel', title: 'Hotel buffet, freshly served', alt: 'Chafing dishes of saffron rice, vegetables and curries laid out at a hotel buffet for Meezan pilgrims', category: 'Stay & Food' },
   { id: 'g24', slug: 'salad-bar', title: 'Fresh salad and fruit', alt: 'Platter of red cabbage, cucumber, carrot and orange slices being served at a Meezan group meal', category: 'Stay & Food' },
   { id: 'g25', slug: 'arafat-banner-wide', title: 'Meezan group at the Mount of Mercy', alt: 'Wide view of a large Meezan Tours group in ihram holding the Meezan banner in front of a rocky hill', category: 'Groups' },
-  { id: 'g26', slug: 'hill-group-blue-sky', title: 'Group beneath the hill', alt: 'Meezan pilgrims holding a green Meezan Tours banner under a bright sky with a rocky hill behind them', category: 'Groups' },
+  { id: 'g26', slug: 'hill-group-blue-sky', title: 'Ziyarat with the group', alt: 'Meezan pilgrims holding a green Meezan Tours banner under a bright sky with a rocky hill behind them', category: 'Ziyarat' },
   { id: 'g27', slug: 'group-hill-banner-small', title: 'Husbands and wives, side by side', alt: 'Four pilgrims in white ihram holding a Meezan banner with a rocky hill and umbrellas behind', category: 'Groups' },
   { id: 'g28', slug: 'banner-held-hill', title: 'Holding the Meezan banner', alt: 'Two pilgrims holding a large Meezan Tours & Travels Hajj and Umrah banner on a stone plaza below a hill', category: 'Groups' },
   { id: 'g29', slug: 'banner-mural-group', title: 'Group with the banner before the mural', alt: 'Meezan pilgrims standing with the Meezan banner in front of a large carved stone mural', category: 'Groups' },
@@ -55,5 +55,5 @@ export const galleryImages: GalleryImage[] = [
 /** Empty for now: no video files were available in the supplied snapshot. */
 export const galleryVideos: GalleryVideo[] = []
 
-export const galleryCategories = ['All', 'Hajj', 'Kaaba', 'Journey', 'Groups', 'Stay & Food', 'Events'] as const
-export const HOME_GALLERY_IDS = ['g14', 'g17', 'g23', 'g24', 'g2', 'g16']
+export const galleryCategories = ['All', 'Hajj', 'Kaaba', 'Journey', 'Groups', 'Ziyarat', 'Stay & Food', 'Events'] as const
+export const HOME_GALLERY_IDS = ['g14', 'g17', 'g23', 'g26', 'g2', 'g16']
