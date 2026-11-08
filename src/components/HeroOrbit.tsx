@@ -100,9 +100,9 @@ export default function HeroOrbit({ main, side }: Props) {
           </g>
           {LEGS.map((l) => <Vehicle key={l.id} leg={l} />)}
         </svg>
-        <div className="absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2 lg:w-[74%]">
+        <div className="absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2 lg:w-[80%]">
           <div className="arch gold-frame overflow-hidden">
-            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 40vw, 72vw" priority className="h-full" />
+            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 44vw, 72vw" priority className="h-full" />
           </div>
         </div>
         {/* labels sit above the photograph so no stop is ever hidden behind it */}
@@ -119,8 +119,8 @@ export default function HeroOrbit({ main, side }: Props) {
           })}
         </svg>
         {/* Secondary photo: larger, anchored to the lower-left of the main image; the phone headline may overlap it. */}
-        <div className="absolute bottom-[7%] left-[0%] z-20 w-[44.8%] sm:bottom-[7%] sm:w-[36%]">
-          <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 16vw, 45vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
+        <div className="absolute bottom-[7%] left-[0%] z-20 w-[44.8%] sm:bottom-[7%] sm:w-[36%] lg:w-[40%]">
+          <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 20vw, 45vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
         </div>
       </div>
       <p className="mt-1 hidden items-center sm:flex justify-center gap-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
