@@ -35,7 +35,7 @@ export default function JourneyTimeline() {
           {steps.map(([t, d], i) => (
             <li key={t} data-reveal className={`${i >= 4 && !all ? 'hidden sm:flex' : 'flex'} gap-4 border-t border-gold-500/40 pt-5`}>
               <span className="font-display text-4xl font-semibold leading-none text-gold-500">{String(i + 1).padStart(2, '0')}</span>
-              <div><h3 className="text-lg font-bold leading-snug">{t}</h3><p className="mt-1 text-sm text-ink-500">{d}</p></div>
+              <div><h3 className="text-lg font-semibold leading-snug">{t}</h3><p className="mt-1 text-sm text-ink-500">{d}</p></div>
             </li>
           ))}
         </ol>
