@@ -16,6 +16,7 @@ export const NAV: NavItem[] = [
   },
   { label: 'Packages', to: '/packages' },
   { label: 'Gallery', to: '/gallery' },
+  { label: 'FAQ', to: '/faq' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ]
@@ -26,6 +27,7 @@ export const FOOTER_LINKS = {
     { label: 'About Meezan', to: '/about' },
     { label: 'Packages', to: '/packages' },
     { label: 'Gallery', to: '/gallery' },
+    { label: 'FAQ', to: '/faq' },
     { label: 'Contact', to: '/contact' },
   ],
   pilgrimage: [

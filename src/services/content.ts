@@ -4,7 +4,7 @@
  * and keep the return types - no component changes are needed.
  * Functions are synchronous today so pages can be prerendered at build time.
  */
-import { generalFaqs } from '@/data/faqs'
+import { allFaqs, faqSections, generalFaqs } from '@/data/faqs'
 import { galleryImages, galleryVideos, HOME_GALLERY_IDS } from '@/data/gallery'
 import { packages } from '@/data/packages'
 import { testimonials } from '@/data/testimonials'
@@ -19,3 +19,5 @@ export const getHomeGallery = () =>
 export const getTestimonials = (kind?: PackageKind) =>
   kind ? testimonials.filter((t) => t.trip.toLowerCase().includes(kind)) : testimonials
 export const getFaqs = () => generalFaqs
+export const getFaqSections = () => faqSections
+export const getAllFaqs = () => allFaqs

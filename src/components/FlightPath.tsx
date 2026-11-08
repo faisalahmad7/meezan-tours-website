@@ -1,32 +1,35 @@
 /**
- * Hero orbit: a slim gold aircraft circles the Kaaba arch on a fine elliptical track, leaving a fading comet trail,
- * the way pilgrims circle the Kaaba. Purely decorative; sized and placed by the parent stage.
+ * Hero route: one slim gold aircraft flies a clean arc from Mumbai to Makkah while the route draws itself behind it.
+ * No trail, no loop: the line is simply "the part already flown", then it fades and the flight starts again.
+ * Decorative only. Sized and placed by the parent. The plane and the drawing line share one timeline (see .fp-* in index.css).
  */
-const TRACK = 'M100 10 A92 110 0 1 1 99.99 10'
+const ROUTE = 'M14 124 C 104 -8, 282 -8, 386 70'
 const PLANE = 'M12 0 L4 -2 L-1 -10 L-4 -10 L-2 -2 L-8 -2 L-10 -5 L-12 -5 L-11 0 L-12 5 L-10 5 L-8 2 L-2 2 L-4 10 L-1 10 L4 2 Z'
 
 export default function FlightPath({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 200 240" aria-hidden="true" focusable="false" className={`orbit pointer-events-none ${className}`}>
+    <svg viewBox="0 0 400 150" aria-hidden="true" focusable="false" className={`fp ${className}`}>
       <defs>
-        <radialGradient id="orbit-halo"><stop offset="0" stopColor="#f0d588" stopOpacity=".8" /><stop offset="1" stopColor="#f0d588" stopOpacity="0" /></radialGradient>
-        <filter id="orbit-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6" /></filter>
+        <linearGradient id="fp-line" x1="0" x2="1"><stop offset="0" stopColor="#f0d588" stopOpacity=".25" /><stop offset="1" stopColor="#fff1c2" stopOpacity="1" /></linearGradient>
       </defs>
-      {/* tracks */}
-      <ellipse cx="100" cy="120" rx="92" ry="110" fill="none" stroke="#d9b96a" strokeOpacity=".32" strokeWidth=".5" strokeDasharray=".6 3" strokeLinecap="round" />
-      <ellipse cx="100" cy="120" rx="98" ry="117" fill="none" stroke="#d9b96a" strokeOpacity=".14" strokeWidth=".4" />
-      {/* comet trail: three nested dashes, longest faintest, all ending at the aircraft */}
-      <g fill="none" strokeLinecap="round">
-        <path d={TRACK} pathLength="1" stroke="#f0d588" strokeOpacity=".18" strokeWidth="1.2" className="orbit-tail orbit-tail-1" />
-        <path d={TRACK} pathLength="1" stroke="#f0d588" strokeOpacity=".42" strokeWidth="1.6" className="orbit-tail orbit-tail-2" />
-        <path d={TRACK} pathLength="1" stroke="#fff7dc" strokeOpacity=".95" strokeWidth="1.9" filter="url(#orbit-blur)" className="orbit-tail orbit-tail-3" />
+      {/* the full route, always faintly visible */}
+      <path d={ROUTE} fill="none" stroke="#e9d8a6" strokeOpacity=".5" strokeWidth="1.2" strokeDasharray="1.5 6" strokeLinecap="round" />
+      {/* the part already flown */}
+      <path d={ROUTE} pathLength="1" fill="none" stroke="url(#fp-line)" strokeWidth="2" strokeLinecap="round" className="fp-draw" />
+
+      {/* origin */}
+      <circle cx="14" cy="124" r="4.5" fill="#fbf8f0" stroke="#d9b96a" strokeWidth="1.5" />
+      <text x="14" y="143" fill="#fff7dc" fontSize="9.5" fontWeight="700" letterSpacing="1.6" style={{ paintOrder: 'stroke', stroke: 'rgba(8,42,33,.65)', strokeWidth: 3 }}>MUMBAI</text>
+      {/* destination: a tiny Kaaba */}
+      <g transform="translate(386 70)">
+        <rect x="-7" y="-7" width="14" height="14" rx="1.5" fill="#101a16" stroke="#d9b96a" strokeWidth="1.3" />
+        <rect x="-7" y="-3.2" width="14" height="2.4" fill="#d9b96a" />
       </g>
-      <g className="orbit-plane" style={{ offsetPath: `path('${TRACK}')` }}>
-        <circle r="7" fill="url(#orbit-halo)" />
-        <g transform="scale(.52)"><path d={PLANE} fill="#fff7dc" stroke="#d9b96a" strokeWidth="1" strokeLinejoin="round" /></g>
+      <text x="392" y="94" textAnchor="end" fill="#fff7dc" fontSize="9.5" fontWeight="700" letterSpacing="1.6" style={{ paintOrder: 'stroke', stroke: 'rgba(8,42,33,.65)', strokeWidth: 3 }}>MAKKAH</text>
+
+      <g className="fp-plane" style={{ offsetPath: `path('${ROUTE}')` }}>
+        <g transform="scale(.62)"><path d={PLANE} fill="#fff7dc" stroke="#d9b96a" strokeWidth="1.1" strokeLinejoin="round" /></g>
       </g>
-      {/* two tiny fixed stars on the track */}
-      <g fill="#f0d588"><circle cx="100" cy="10" r="1.2" className="orbit-twinkle" /><circle cx="100" cy="230" r="1.2" className="orbit-twinkle" style={{ animationDelay: '1.2s' }} /></g>
     </svg>
   )
 }

@@ -7,10 +7,46 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" as="image" href="/images/brand/meezan-badge-280.png" />
+    <style>
+      /* Splash shown on every load/refresh. Pure CSS fallback hides it after 4s even if JavaScript never runs. */
+      #meezan-loader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#fbf8f0;transition:opacity .55s ease,visibility .55s ease;animation:ml-failsafe 0s linear 4s forwards}
+      #meezan-loader.done{opacity:0;visibility:hidden}
+      #meezan-loader .ml-wrap{position:relative;width:min(46vw,168px);aspect-ratio:1}
+      #meezan-loader .ml-badge{position:absolute;inset:11%;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 10px 36px -10px rgba(19,66,52,.45),0 0 0 1px rgba(201,162,74,.5);animation:ml-pulse 1.8s ease-in-out infinite}
+      #meezan-loader .ml-badge img{display:block;width:100%;height:100%;object-fit:cover}
+      #meezan-loader svg{position:absolute;inset:0;width:100%;height:100%;animation:ml-spin 1.6s linear infinite}
+      @keyframes ml-spin{to{transform:rotate(360deg)}}
+      @keyframes ml-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+      @keyframes ml-failsafe{to{opacity:0;visibility:hidden}}
+      @media (prefers-reduced-motion:reduce){#meezan-loader svg,#meezan-loader .ml-badge{animation:none}}
+    </style>
     <!--app-head-->
   </head>
   <body>
+    <div id="meezan-loader" role="presentation" aria-hidden="true">
+      <div class="ml-wrap">
+        <div class="ml-badge"><img src="/images/brand/meezan-badge-280.png" width="140" height="140" alt="" decoding="sync" /></div>
+        <svg viewBox="0 0 100 100" focusable="false"><circle cx="50" cy="50" r="47" fill="none" stroke="#e8c767" stroke-opacity=".28" stroke-width="1.2"/><circle cx="50" cy="50" r="47" fill="none" stroke="#c9a24a" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="70 226"/></svg>
+      </div>
+    </div>
     <div id="root"><!--app-html--></div>
+    <script>
+      (function () {
+        var el = document.getElementById('meezan-loader');
+        if (!el) return;
+        var start = Date.now();
+        function hide() {
+          var wait = Math.max(0, 900 - (Date.now() - start));
+          setTimeout(function () {
+            el.className += ' done';
+            setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 700);
+          }, wait);
+        }
+        if (document.readyState === 'complete') hide();
+        else window.addEventListener('load', hide);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
