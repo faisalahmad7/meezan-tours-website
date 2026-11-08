@@ -52,7 +52,7 @@ export default function Home() {
               <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
-          <div data-hero className="relative z-30 order-2 -mx-5 -mt-7 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/85 to-transparent px-5 pb-1 pt-10 sm:-mt-8 sm:pt-12 lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0">
+          <div data-hero className="relative z-30 order-2 -mx-5 -mt-24 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/70 to-transparent px-5 pb-1 pt-20 [text-shadow:0_2px_14px_rgb(8_42_33/0.85)] sm:-mt-28 sm:pt-24 lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
             <p className="eyebrow mb-4">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-display-xl text-white">Your sacred journey, guided with care.</h1>
             <p className="mt-4 font-display text-xl italic text-gold-300 sm:text-2xl">From your first intention to your safe return.</p>

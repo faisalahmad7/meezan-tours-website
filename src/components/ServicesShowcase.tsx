@@ -4,6 +4,7 @@ import { whatsappLink } from '@/data/site'
 import { WhatsAppIcon } from './BrandIcons'
 import Modal from './Modal'
 import Picture from './Picture'
+import SectionHeading from './SectionHeading'
 import ScrollRow from './ScrollRow'
 import ServicesDoodles from './ServicesDoodles'
 const Tag = ({ children }: { children: string }) => (
@@ -47,12 +48,7 @@ export default function ServicesShowcase() {
       <ServicesDoodles className="-z-10 opacity-[0.2]" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_32%_at_50%_9%,#fbf8f0_35%,transparent_100%)]" aria-hidden="true" />
       <div className="container">
-        <div data-reveal className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
-          <p className="eyebrow eyebrow-strong mb-4 justify-center">What we arrange for you</p>
-          <h2 className="text-display-lg">Every detail arranged. Every pilgrim valued.</h2>
-          <span aria-hidden="true" className="mx-auto mt-5 block h-1 w-20 rounded-full bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500" />
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-700">Meezan does far more than book flights and hotels. Here is what goes into every journey. Inclusions differ by package, so each service notes where that applies.</p>
-        </div>
+        <SectionHeading bold center eyebrow="Our services" title="Every detail arranged. Every pilgrim valued." intro="Meezan does far more than book flights and hotels. Here is what goes into every journey. Inclusions differ by package, so each service notes where that applies." />
         <div data-reveal className="mb-10 grid gap-3 overflow-hidden rounded-xl2 border border-gold-500/50 bg-white p-3 shadow-soft sm:gap-4 sm:p-4 lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
           <div className="px-3 pb-1 pt-4 sm:px-5 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:pt-5">
             <Tag>Varies by package</Tag>

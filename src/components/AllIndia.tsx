@@ -14,17 +14,18 @@ const mid = `M${MUM[0]} ${MUM[1]} C 560 190, 900 140, ${MAKKAH[0]} ${MAKKAH[1]}`
  * Glowing journey line that sits as a band along the bottom of the section, behind the content and the buttons.
  * On phones it is drawn much larger and cropped to the Mumbai-Madinah-Makkah stretch (the origin dots are off-screen there).
  */
-function RouteGlow() {
+function RouteGlow({ phone }: { phone?: boolean }) {
+  const k = phone ? 'p' : 'd'
   return (
-    <svg viewBox="0 0 1200 440" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false" className="route-glow pointer-events-none absolute bottom-0 left-[-44vw] h-auto w-[168vw] max-w-none sm:inset-x-0 sm:left-0 sm:mx-auto sm:w-full sm:max-w-[1500px]">
+    <svg viewBox={phone ? '300 30 880 410' : '0 0 1200 440'} preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false" className={phone ? 'route-glow pointer-events-none absolute inset-x-0 bottom-0 h-auto w-full sm:hidden' : 'route-glow pointer-events-none absolute inset-x-0 bottom-0 mx-auto hidden h-auto w-full max-w-[1500px] sm:block'}>
       <defs>
-        <pattern id="route-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#d9b96a" fillOpacity=".22" /></pattern>
-        <radialGradient id="route-halo"><stop offset="0" stopColor="#f0d588" stopOpacity=".6" /><stop offset="1" stopColor="#d9b96a" stopOpacity="0" /></radialGradient>
-        <linearGradient id="route-line" x1="0" x2="1"><stop offset="0" stopColor="#d9b96a" stopOpacity=".35" /><stop offset=".5" stopColor="#f0d588" /><stop offset="1" stopColor="#d9b96a" /></linearGradient>
-        <filter id="route-blur" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="8" /></filter>
+        <pattern id={`route-dots-${k}`} width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#d9b96a" fillOpacity=".22" /></pattern>
+        <radialGradient id={`route-halo-${k}`}><stop offset="0" stopColor="#f0d588" stopOpacity=".6" /><stop offset="1" stopColor="#d9b96a" stopOpacity="0" /></radialGradient>
+        <linearGradient id={`route-line-${k}`} x1="0" x2="1"><stop offset="0" stopColor="#d9b96a" stopOpacity=".35" /><stop offset=".5" stopColor="#f0d588" /><stop offset="1" stopColor="#d9b96a" /></linearGradient>
+        <filter id={`route-blur-${k}`} x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="8" /></filter>
       </defs>
-      <rect x="10" y="240" width="300" height="190" rx="30" fill="url(#route-dots)" />
-      <rect x="800" y="240" width="380" height="190" rx="30" fill="url(#route-dots)" />
+      <rect x="10" y="240" width="300" height="190" rx="30" fill={`url(#route-dots-${k})`} />
+      <rect x="800" y="240" width="380" height="190" rx="30" fill={`url(#route-dots-${k})`} />
       {ORIGINS.map(([x, y]) => (
         <g key={`${x}-${y}`}>
           <path d={`M${x} ${y} Q ${(x + MUM[0]) / 2} ${(y + MUM[1]) / 2 + (y < MUM[1] ? -34 : 34)}, ${MUM[0]} ${MUM[1]}`} fill="none" stroke="#d9b96a" strokeOpacity=".45" strokeWidth="1.5" strokeDasharray="2 9" strokeLinecap="round" className="route-flow" />
@@ -35,15 +36,15 @@ function RouteGlow() {
       <text x="40" y="262" fill="#fbf8f0" fillOpacity=".75" fontSize="22" letterSpacing="3">YOUR CITY</text>
       {[up, mid].map((d) => (
         <g key={d} fill="none" strokeLinecap="round">
-          <path d={d} stroke="#f0d588" strokeOpacity=".75" strokeWidth="10" filter="url(#route-blur)" className="route-pulse" />
-          <path d={d} stroke="url(#route-line)" strokeWidth="2.5" strokeDasharray="3 10" className="route-flow" />
+          <path d={d} stroke="#f0d588" strokeOpacity=".75" strokeWidth="10" filter={`url(#route-blur-${k})`} className="route-pulse" />
+          <path d={d} stroke={`url(#route-line-${k})`} strokeWidth="2.5" strokeDasharray="3 10" className="route-flow" />
         </g>
       ))}
-      <g className="route-plane" style={{ offsetPath: `path('${up}')` }}><circle r="20" fill="url(#route-halo)" /><circle r="6" fill="#fff7dc" /></g>
-      <g className="route-plane route-plane-b" style={{ offsetPath: `path('${mid}')` }}><circle r="20" fill="url(#route-halo)" /><circle r="6" fill="#fff7dc" /></g>
+      <g className="route-plane" style={{ offsetPath: `path('${up}')` }}><circle r="20" fill={`url(#route-halo-${k})`} /><circle r="6" fill="#fff7dc" /></g>
+      <g className="route-plane route-plane-b" style={{ offsetPath: `path('${mid}')` }}><circle r="20" fill={`url(#route-halo-${k})`} /><circle r="6" fill="#fff7dc" /></g>
       {([[MUM, 'Mumbai', 'Airport departure'], [MADINAH, 'Madinah', ''], [MAKKAH, 'Makkah', '']] as const).map(([[x, y], name, sub]) => (
         <g key={name}>
-          <circle cx={x} cy={y} r="50" fill="url(#route-halo)" className="route-pulse" />
+          <circle cx={x} cy={y} r="50" fill={`url(#route-halo-${k})`} className="route-pulse" />
           <circle cx={x} cy={y} r="10" fill="#f0d588" />
           <circle cx={x} cy={y} r="22" fill="none" stroke="#f0d588" strokeOpacity=".55" />
           <text x={x} y={y + 54} textAnchor="middle" fill="#fbf8f0" fontSize="32" fontWeight="600" fontFamily="'Playfair Display Variable','Playfair Display',Georgia,serif">{name}</text>
@@ -59,7 +60,8 @@ function RouteGlow() {
  */
 export default function AllIndia() {
   return (
-    <section className="pattern-dark on-dark relative isolate overflow-hidden pb-24 pt-6 text-white sm:pb-44 sm:pt-8 lg:pb-60">
+    <section className="pattern-dark on-dark relative isolate overflow-hidden pb-28 pt-6 text-white sm:pb-44 sm:pt-8 lg:pb-60">
+      <RouteGlow phone />
       <RouteGlow />
       {/* soft fades so the lattice pattern never meets the sections above and below with a visible seam */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#134234] to-transparent" />
