@@ -39,32 +39,31 @@ export default function Home() {
         jsonLd={[businessSchema(), websiteSchema()]}
       />
       {/*
-        HERO. Phone order: the photographs with the route round them, then the small headline OVERLAPPING the foot of the main photo,
-        then the "Based in Pune" line, the tagline, the text and the buttons.
+        HERO. Phone order: photographs and route first, followed by the headline, location line, tagline, text and buttons.
         From sm up the headline block (small line, headline, tagline) keeps its earlier layout.
-        From lg up: headline and text in the left column, photographs and the route ring in the right column (the ring is capped by the screen height so it fits).
+        From lg up: the headline and text stay in the left column while the photographs and route ring fill the right column.
       */}
       <section className="pattern-dark on-dark relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-950/80 via-transparent to-brand-950/60" aria-hidden="true" />
         <HeroWatermark />
-        <div className="container relative grid gap-x-10 pb-10 pt-6 sm:pb-14 sm:pt-10 lg:grid-cols-[0.95fr_1.05fr] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:py-16 xl:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid w-full max-w-[1720px] grid-cols-1 gap-x-8 px-5 pb-10 pt-6 sm:px-8 sm:pb-14 sm:pt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-x-[clamp(1.25rem,2vw,2.5rem)] lg:grid-rows-[auto_auto] lg:gap-y-0 lg:px-8 lg:pt-8 lg:pb-8 xl:px-10 2xl:px-12">
           {/* right column on desktop: the photographs with the pilgrim route running round them in an oval */}
           <div className="contents lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:block lg:self-center">
-            <div className="order-1 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:max-w-[min(44rem,calc((100vh_-_6rem)_*_0.8))]">
+            <div className="order-1 min-w-0 -mx-5 sm:mx-auto sm:w-full sm:max-w-lg lg:ml-auto lg:mr-0 lg:w-full lg:max-w-[min(100%,calc((100svh_-_10.75rem)_*_0.8))]">
               <HeroOrbit main={heroMain} side={heroSide} />
             </div>
           </div>
-          <div data-hero className="relative z-30 order-2 -mx-5 -mt-44 max-w-none bg-gradient-to-t from-[#134234] via-[#134234]/80 to-transparent px-5 pb-16 pt-14 text-center [text-shadow:0_2px_14px_rgb(8_42_33/0.9)] sm:-mt-28 sm:pb-1 sm:pt-24 sm:text-left lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-xl lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
+          <div data-hero className="relative z-30 order-2 min-w-0 -mx-5 mt-0 max-w-none px-5 pb-2 pt-6 text-center [text-shadow:0_2px_14px_rgb(8_42_33/0.9)] sm:-mt-28 sm:pb-1 sm:pt-24 sm:text-left lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:max-w-none lg:self-end lg:bg-none lg:p-0 lg:[text-shadow:none]">
             <p className="eyebrow mb-4 hidden sm:inline-flex">Based in Pune. Trusted by pilgrims across India.</p>
             <h1 className="font-display text-[1.65rem] leading-[1.12] text-white sm:text-display-xl">Your sacred journey, guided with care.</h1>
             <p className="mt-4 hidden font-display text-xl italic text-gold-300 sm:block sm:text-2xl">From your first intention to your safe return.</p>
           </div>
-          <div data-hero className="order-3 max-w-xl lg:col-start-1 lg:row-start-2 lg:self-start">
+          <div data-hero className="order-3 min-w-0 max-w-xl lg:col-start-1 lg:row-start-2 lg:max-w-none lg:self-start">
             {/* phone only: these two lines come after the overlapping headline */}
             <p className="eyebrow mb-3 items-start gap-2 before:mt-2 before:shrink-0 sm:hidden">Based in Pune. Trusted by pilgrims across India.</p>
             <p className="mb-3 font-display text-lg italic text-gold-300 sm:hidden">From your first intention to your safe return.</p>
-            <p className="mt-3 text-lg text-white/85 lg:mt-5">With 18+ years of experience, Meezan Tours arranges flights, visas, stay and ziyarat for Hajj and Umrah, so you can give your full attention to worship.</p>
-            <div className="mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
+            <p className="mt-3 text-lg text-white/85 lg:mt-3">With 18+ years of experience, Meezan Tours arranges flights, visas, stay and ziyarat for Hajj and Umrah, so you can give your full attention to worship.</p>
+            <div className="mt-8 grid max-w-xl gap-3 sm:grid-cols-2 lg:max-w-none">
               <Link to="/hajj" className="hero-cta hero-cta-gold"><Landmark className="h-6 w-6 shrink-0" aria-hidden="true" /><span className="min-w-0"><span className="block whitespace-nowrap text-base font-semibold leading-tight sm:text-lg">Hajj packages</span><span className="block text-xs opacity-75">Group departures</span></span><span className="btn-chip ml-auto"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Link>
               <Link to="/umrah" className="hero-cta hero-cta-glass"><MoonStar className="h-6 w-6 shrink-0" aria-hidden="true" /><span className="min-w-0"><span className="block whitespace-nowrap text-base font-semibold leading-tight sm:text-lg">Umrah packages</span><span className="block text-xs opacity-75">All year round</span></span><span className="btn-chip ml-auto"><ArrowRight className="h-4 w-4" aria-hidden="true" /></span></Link>
             </div>

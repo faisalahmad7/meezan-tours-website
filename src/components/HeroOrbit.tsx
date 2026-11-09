@@ -56,7 +56,7 @@ function Vehicle({ leg }: { leg: (typeof LEGS)[number] }) {
   const ke = e / LOOP
   const fade = 0.012
   return (
-    <g className="ho-vehicle" opacity="0">
+    <g className={`ho-vehicle ${leg.kind === 'coach' ? 'ho-coach-track' : ''}`} opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes={`0;${f(ks)};${f(ks + fade)};${f(ke - fade)};${f(ke)};1`} dur={`${LOOP}s`} repeatCount="indefinite" />
       <animateMotion path={leg.d} dur={`${LOOP}s`} repeatCount="indefinite" rotate={leg.kind === 'flight' ? 'auto' : '0'} calcMode="linear" keyPoints="0;0;1;1" keyTimes={`0;${f(ks)};${f(ke)};1`} />
       <circle r="13" fill="#082a21" stroke="#e8c767" strokeWidth="1.4" />
@@ -94,15 +94,15 @@ export default function HeroOrbit({ main, side }: Props) {
               l.kind === 'flight' ? (
                 <path key={l.id} d={l.d} stroke="#f0d588" strokeWidth="2.6" strokeDasharray="7 7" className="ho-flow" />
               ) : (
-                <path key={l.id} d={l.d} stroke="#fbf8f0" strokeOpacity=".9" strokeWidth="2.4" strokeDasharray="2.5 7" className="ho-flow" />
+                <path key={l.id} d={l.d} stroke="#fbf8f0" strokeOpacity=".95" strokeWidth="2.5" strokeDasharray="2.5 7" className="ho-flow ho-coach-track" />
               ),
             )}
           </g>
           {LEGS.map((l) => <Vehicle key={l.id} leg={l} />)}
         </svg>
-        <div className="absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2 lg:w-[74%]">
+        <div className="absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2 lg:w-[80%]">
           <div className="arch gold-frame overflow-hidden">
-            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 40vw, 72vw" priority className="h-full" />
+            <HeroSlides slides={main} ratio="3/4" sizes="(min-width:1024px) 44vw, 72vw" priority className="h-full" />
           </div>
         </div>
         {/* labels sit above the photograph so no stop is ever hidden behind it */}
@@ -118,9 +118,9 @@ export default function HeroOrbit({ main, side }: Props) {
             )
           })}
         </svg>
-        {/* small side photo: on phones it floats above the headline that overlaps the foot of the main photo */}
-        <div className="absolute bottom-[42%] left-[0%] z-20 w-[32%] sm:bottom-[9%]">
-          <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 14vw, 36vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
+        {/* Secondary photo: larger, anchored to the lower-left of the main image; the phone headline may overlap it. */}
+        <div className="absolute bottom-[7%] left-[0%] z-20 w-[44.8%] sm:bottom-[7%] sm:w-[36%] lg:w-[40%]">
+          <HeroSlides slides={side} ratio="4/3" sizes="(min-width:1024px) 20vw, 45vw" delayMs={3200} intervalMs={5200} className="rounded-xl2 border-2 border-gold-400/80 shadow-lift" />
         </div>
       </div>
       <p className="mt-1 hidden items-center sm:flex justify-center gap-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
