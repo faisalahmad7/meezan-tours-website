@@ -21,11 +21,14 @@ export default function Gallery() {
       <PageHero eyebrow="Gallery" title="Moments from our pilgrims' journeys" crumbs={[{ name: 'Gallery', path: '/gallery' }]} intro="Real photographs from Meezan group departures." />
       <section className="section">
         <div className="container">
-          <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div role="group" aria-label="Filter photos" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
+          <div className="sticky top-[4.25rem] z-30 -mx-5 mb-10 border-y border-gold-500/40 bg-ivory/95 backdrop-blur md:mx-0 lg:top-24">
+            <div role="group" aria-label="Filter photos" className="no-scrollbar flex gap-1 overflow-x-auto px-5 md:justify-center md:px-0">
               {galleryCategories.map((c) => (
-                <button key={c} type="button" aria-pressed={cat === c} onClick={() => setCat(c)} className={`group inline-flex min-h-[2.75rem] shrink-0 items-center gap-2 rounded-full border px-5 text-sm font-semibold transition ${cat === c ? 'border-brand-900 bg-brand-900 text-white' : 'border-sand-300 bg-white text-ink-700 hover:border-gold-500'}`}>
+                <button key={c} type="button" aria-pressed={cat === c} onClick={() => setCat(c)}
+                  className={`group relative shrink-0 px-5 py-4 font-display text-xl font-semibold transition sm:text-2xl lg:px-7 lg:text-[1.75rem] ${cat === c ? 'text-brand-900' : 'text-ink-500 hover:text-brand-700'}`}>
                   {c}
+                  <span aria-hidden="true" className={`absolute inset-x-4 bottom-0 h-[3px] origin-center rounded-full bg-gold-500 transition duration-300 ${cat === c ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-50'}`} />
+                  <span aria-hidden="true" className={`absolute -bottom-[5px] left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-gold-500 transition ${cat === c ? 'opacity-100' : 'opacity-0'}`} />
                 </button>
               ))}
             </div>

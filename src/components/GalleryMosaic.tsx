@@ -30,7 +30,7 @@ function Seal() {
 export default function GalleryMosaic({ items }: { items: GalleryImage[] }) {
   return (
     <div className="relative">
-      <ul className="grid auto-rows-[9.5rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] md:grid-cols-12 md:gap-4 lg:auto-rows-[13rem]">
+      <ul className="grid auto-rows-[9.5rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] md:grid-cols-12 md:gap-4 lg:auto-rows-[16rem]">
         {items.slice(0, 5).map((g, i) => (
           <li key={g.id} className={`group relative ${LAYOUT[i]} overflow-hidden rounded-xl2 shadow-soft`}>
             <Link to="/gallery" aria-label={`${g.title}. Open the gallery`} className="block h-full">
