@@ -1,5 +1,6 @@
 import { X } from 'lucide-react'
 import { useEffect, useRef, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 
 interface Props {
   open: boolean
@@ -27,8 +28,8 @@ export default function Modal({ open, onClose, label, children, width = 'max-w-2
       prev?.focus?.()
     }
   }, [open, onClose])
-  if (!open) return null
-  return (
+  if (!open || typeof document === 'undefined') return null
+  return createPortal(
     <div className="fixed inset-0 z-[60] flex items-end justify-center p-0 sm:items-center sm:p-6" role="presentation">
       <div className="modal-backdrop absolute inset-0 bg-brand-950/70 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div role="dialog" aria-modal="true" aria-label={label} className={`modal-card relative max-h-[88vh] w-full ${width} overflow-y-auto rounded-t-3xl border border-gold-500/60 bg-ivory p-6 shadow-lift sm:rounded-3xl sm:p-9`}>
@@ -37,6 +38,7 @@ export default function Modal({ open, onClose, label, children, width = 'max-w-2
         </button>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

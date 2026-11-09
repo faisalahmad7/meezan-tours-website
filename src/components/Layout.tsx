@@ -4,6 +4,7 @@ import { whatsappLink } from '@/data/site'
 import { useMotion } from '@/lib/useMotion'
 import Footer from './Footer'
 import Header from './Header'
+import ScrollToTop from './ScrollToTop'
 import { WhatsAppIcon } from './BrandIcons'
 
 export default function Layout() {
@@ -19,6 +20,7 @@ export default function Layout() {
       <Header />
       <main id="main"><Outlet /></main>
       <Footer />
+      <ScrollToTop />
       <a
         href={whatsappLink('Assalamu Alaikum, I would like to enquire about Hajj / Umrah packages.')}
         target="_blank"

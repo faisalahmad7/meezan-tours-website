@@ -45,7 +45,7 @@ export default function VideoTestimonials({ kind }: { kind?: PackageKind }) {
               />
               <span className="absolute inset-0 bg-gradient-to-t from-brand-950/70 to-transparent" />
               <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-brand-950/80 px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-gold-300"><Play className="h-3 w-3 fill-current" aria-hidden="true" />Video testimonial</span>
-              <span className="absolute left-1/2 top-1/2 inline-flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold-400 bg-brand-950/70 text-gold-400 backdrop-blur transition group-hover:scale-110 group-hover:bg-gold-400 group-hover:text-brand-950"><Play className="ml-1 h-7 w-7 fill-current" aria-hidden="true" /></span>
+              <span className="absolute left-1/2 top-1/2 inline-flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold-400 bg-brand-950/70 text-gold-400 opacity-0 backdrop-blur transition group-hover:scale-110 group-hover:bg-gold-400 group-hover:text-brand-950 group-hover:opacity-100 group-focus-visible:opacity-100 group-active:opacity-100"><Play className="ml-1 h-7 w-7 fill-current" aria-hidden="true" /></span>
             </span>
             <span className="flex flex-1 flex-col p-5">
               <span className="font-display text-xl font-semibold text-white">{v.name}</span>

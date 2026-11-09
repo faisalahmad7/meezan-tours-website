@@ -5,5 +5,12 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.associations": { "*.css": "tailwindcss" },
   "css.lint.unknownAtRules": "ignore",
-  "search.exclude": { "dist": true, "dist-ssr": true, "node_modules": true }
+  "search.exclude": {
+    "dist": true,
+    "dist-ssr": true,
+    "node_modules": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

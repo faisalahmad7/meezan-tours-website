@@ -209,6 +209,39 @@
 .scroll-hint svg { animation: hint-nudge 1.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .scroll-hint svg { animation: none; } }
 
+
+
+
+/* Gallery section: its own distinct gold frame on PC, silver stays, no fade from the section above */
+@media (min-width: 1024px) {
+  .gallery-bg {
+    border-top: 5px solid #c9a24a !important;
+    border-bottom: 5px solid #c9a24a !important;
+    box-shadow: 0 -1px 0 #8a6a22, 0 1px 0 #8a6a22, 0 0 50px rgb(32 126 93 / .14);
+  }
+  /* thin inner gold line, 10px inside the thick border, top and bottom */
+  .gallery-bg::after {
+    content: '';
+    position: absolute;
+    inset: 10px 0;
+    border-top: 1px solid rgb(201 162 74 / .65);
+    border-bottom: 1px solid rgb(201 162 74 / .65);
+    pointer-events: none;
+    z-index: -1;
+  }
+  /* soft emerald and gold glow at the left and right sides only */
+  .gallery-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 28% 60% at 0% 50%, rgb(32 126 93 / .14), transparent 70%),
+      radial-gradient(ellipse 28% 60% at 100% 50%, rgb(232 199 103 / .18), transparent 70%);
+  }
+}
+
 /* Desktop hero: keep the coach route on a clearly separate inner lane without changing phone geometry. */
 @media (min-width: 1024px) {
   .ho-coach-track {
@@ -217,3 +250,4 @@
     transform: scale(0.955);
   }
 }
+
