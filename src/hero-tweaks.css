@@ -1,0 +1,70 @@
+/* ==========================================================================
+   Hero + navbar tweaks. Only touches: hero text size/position, hero picture
+   size, navbar height, logo highlight. To undo: delete the line
+   `import './hero-tweaks.css'` in src/main.tsx.
+   ========================================================================== */
+
+/* ---- Navbar: a little shorter, logo highlighted on a refined plate ---- */
+header a[aria-label^='Meezan Tours'] {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fbf8f0 100%);
+  box-shadow:
+    0 0 0 1px rgb(201 162 74 / 0.65),
+    0 0 0 5px rgb(201 162 74 / 0.12),
+    0 12px 24px -14px rgb(16 26 22 / 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+header a[aria-label^='Meezan Tours']:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgb(201 162 74 / 0.9),
+    0 0 0 6px rgb(201 162 74 / 0.2),
+    0 16px 28px -14px rgb(16 26 22 / 0.55);
+}
+header a[aria-label^='Meezan Tours'] img { height: 2.9rem; width: auto; }
+@media (min-width: 640px) { header a[aria-label^='Meezan Tours'] img { height: 3.2rem; } }
+@media (min-width: 1024px) {
+  header > .container { height: 5.25rem; }
+  header a[aria-label^='Meezan Tours'] img { height: 3.7rem; }
+}
+
+/* ---- Hero (desktop): ONE shared size unit for text AND pictures ----
+   --u is "one design pixel". It shrinks and grows with the browser window, so
+   when you zoom to 125% (the window gets smaller in CSS pixels) the text and the
+   pictures shrink together and stay in exactly the same proportion. To make the
+   whole hero bigger or smaller, change the numbers below (they are all in --u). */
+@media (min-width: 1024px) {
+  :root { --u: min(100vw / 1920, 100svh / 960); }
+
+  div[class*='0.95fr'] {
+    padding-top: calc(var(--u) * 14);
+    padding-bottom: calc(var(--u) * 14);
+  }
+
+  /* pictures + route ring (both pictures scale with this box) */
+  div[class*='0.95fr'] > .contents > div {
+    max-width: min(100%, calc(var(--u) * 745));
+  }
+
+  /* text blocks: shifted toward the centre and down */
+  div[class*='0.95fr'] > [data-hero] {
+    margin-left: calc(var(--u) * 100);
+    max-width: calc(var(--u) * 610);
+    transform: translateY(calc(var(--u) * 30));
+  }
+
+  div[class*='0.95fr'] > [data-hero] h1 { font-size: calc(var(--u) * 63); line-height: 1.07; }
+  div[class*='0.95fr'] > [data-hero] p.eyebrow { font-size: max(10.5px, calc(var(--u) * 13.5)); }
+  div[class*='0.95fr'] > [data-hero] p.font-display.italic { font-size: calc(var(--u) * 25.5); }
+  div[class*='0.95fr'] > [data-hero] > p.text-lg { font-size: max(14.5px, calc(var(--u) * 18.5)); line-height: 1.6; }
+  div[class*='0.95fr'] > [data-hero] .hero-cta { min-height: calc(var(--u) * 74); }
+  div[class*='0.95fr'] > [data-hero] .hero-cta .text-lg { font-size: max(15px, calc(var(--u) * 19.5)); }
+  div[class*='0.95fr'] > [data-hero] .hero-cta .text-xs { font-size: max(11px, calc(var(--u) * 12.5)); }
+  div[class*='0.95fr'] > [data-hero] .hero-link { font-size: max(14px, calc(var(--u) * 17)); }
+  div[class*='0.95fr'] > [data-hero] .text-5xl,
+  div[class*='0.95fr'] > [data-hero] .text-6xl { font-size: calc(var(--u) * 60); }
+  div[class*='0.95fr'] > [data-hero] [class*='max-w-[16rem]'] { font-size: max(13px, calc(var(--u) * 16.5)); max-width: calc(var(--u) * 290); }
+}

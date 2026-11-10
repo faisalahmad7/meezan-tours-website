@@ -1,0 +1,57 @@
+/* ==========================================================================
+   Meezan enhancement layer (v3.1) - ADDS polish, removes nothing.
+   Loaded after index.css. Same fonts, colours, patterns, gold and silver
+   gallery as before. Delete the import in src/main.tsx to switch it off.
+   ========================================================================== */
+
+/* ---- richer emerald sections: original lattice kept, a second larger lattice,
+        a soft light from the corner and fine gold edges added on top ---- */
+.pattern-dark {
+  background-color: #134234;
+  background-image:
+    radial-gradient(ellipse 60% 70% at 8% 0%, rgb(76 181 141 / 0.22), transparent 70%),
+    radial-gradient(ellipse 55% 60% at 100% 100%, rgb(8 42 33 / 0.65), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23e8c767' stroke-opacity='.07'%3E%3Cpath d='M120 0 150 90 240 120 150 150 120 240 90 150 0 120 90 90Z'/%3E%3Ccircle cx='120' cy='120' r='36'/%3E%3Ccircle cx='120' cy='120' r='72'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.08'%3E%3Cpath d='M40 0 50 30 80 40 50 50 40 80 30 50 0 40 30 30Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3C/g%3E%3C/svg%3E");
+  box-shadow: inset 0 1px 0 rgb(232 199 103 / 0.35), inset 0 -1px 0 rgb(232 199 103 / 0.25);
+}
+
+/* ---- light sections: original lattice plus soft marble veining ---- */
+.pattern-light {
+  background-color: #f6f2e8;
+  background-image:
+    radial-gradient(ellipse 45% 40% at 85% 10%, rgb(255 255 255 / 0.85), transparent 70%),
+    radial-gradient(ellipse 40% 35% at 5% 90%, rgb(201 162 74 / 0.10), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23207e5d' stroke-opacity='.07'%3E%3Cpath d='M40 0 50 30 80 40 50 50 40 80 30 50 0 40 30 30Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---- sand sections get a faint lattice too, so they are never plain ---- */
+.bg-sand-100 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23207e5d' stroke-opacity='.05'%3E%3Cpath d='M40 0 50 30 80 40 50 50 40 80 30 50 0 40 30 30Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---- buttons: same pills, now with a gentle step on hover and press on click ---- */
+.btn { transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.25s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0) scale(0.98); }
+.btn-gold:hover { box-shadow: 0 12px 26px -12px rgb(201 162 74 / 0.85); }
+.btn-primary:hover { box-shadow: 0 12px 26px -12px rgb(32 126 93 / 0.8); }
+
+/* ---- cards: lift and a fine gold edge on hover ---- */
+.card { transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.25s ease; }
+@media (hover: hover) {
+  .card:hover { transform: translateY(-2px); border-color: rgb(201 162 74 / 0.7); box-shadow: 0 22px 44px -22px rgb(16 26 22 / 0.35); }
+}
+
+/* ---- headings: a touch more refined ---- */
+h1, h2 { letter-spacing: -0.018em; }
+[data-hero] h1 { text-wrap: balance; }
+
+/* ---- nicer focus + selection, same colours ---- */
+::selection { background: #207e5d; color: #fff; }
+.input { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.input:focus { box-shadow: 0 0 0 3px rgb(32 126 93 / 0.16); outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover, .card:hover { transform: none; }
+}
