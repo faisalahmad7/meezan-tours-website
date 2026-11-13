@@ -3,9 +3,10 @@ import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 
 /**
- * Local development only: serves /admin (admin.html) and runs the serverless functions in api/admin
- * inside the Vite dev server, the same way Vercel runs them in production. Variables come from
- * .env.local (see .env.example).
+ * The admin dashboard exists ONLY on authorised computers: this plugin serves /admin (admin.html)
+ * and runs the admin API (admin-server/) inside the local dev server. Nothing of it is built or
+ * deployed, so the public website has no /admin and no API. Settings come from .env.local, which
+ * lives only on the authorised laptops (see docs/ADMIN.md).
  */
 function adminDev(): Plugin {
   return {
@@ -15,6 +16,13 @@ function adminDev(): Plugin {
       Object.assign(process.env, loadEnv(server.config.mode, process.cwd(), ''))
       server.middlewares.use(async (req, res, next) => {
         const url = req.url ?? '/'
+        const isAdmin = /^\/admin(\/|\?|\.html|$)/.test(url) || url.startsWith('/api/admin/')
+        // The admin answers only to this computer, even if the dev server is opened to the network.
+        const ip = req.socket.remoteAddress ?? ''
+        if (isAdmin && !['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(ip)) {
+          res.statusCode = 403
+          return res.end('The Meezan admin can only be opened on this computer.')
+        }
         if (/^\/admin(\/|\?|$)/.test(url)) {
           req.url = '/admin.html'
           return next()
@@ -22,7 +30,7 @@ function adminDev(): Plugin {
         const m = /^\/api\/admin\/([a-z-]+)(\?.*)?$/.exec(url)
         if (!m) return next()
         try {
-          const mod = await server.ssrLoadModule(`/api/admin/${m[1]}.ts`)
+          const mod = await server.ssrLoadModule(`/admin-server/admin/${m[1]}.ts`)
           const handler = mod[req.method ?? 'GET'] as ((r: Request) => Promise<Response>) | undefined
           if (!handler) {
             res.statusCode = 405
@@ -58,8 +66,8 @@ export default defineConfig(({ isSsrBuild }) => ({
     target: 'es2020',
     cssCodeSplit: true,
     rollupOptions: {
-      // Two pages: the public site (prerendered) and the admin dashboard (never prerendered).
-      ...(isSsrBuild ? {} : { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)), admin: fileURLToPath(new URL('./admin.html', import.meta.url)) } }),
+      // Only the public site is built. The admin (admin.html) is never part of a build or deployment.
+      ...(isSsrBuild ? {} : { input: { main: fileURLToPath(new URL('./index.html', import.meta.url)) } }),
       // The SSR build imports blog chunks eagerly on purpose (see entry-server.tsx); this notice is expected there.
       onwarn(w, warn) {
         if (w.message.includes('dynamic import will not move module into another chunk')) return

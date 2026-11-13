@@ -84,15 +84,6 @@
       ]
     },
     {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
-        }
-      ]
-    },
-    {
       "source": "/assets/(.*)",
       "headers": [
         {
@@ -126,12 +117,6 @@
           "value": "SAMEORIGIN"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/admin/:path*",
-      "destination": "/admin"
     }
   ]
 }

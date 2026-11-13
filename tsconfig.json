@@ -17,5 +17,5 @@
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] }
   },
-  "include": ["src", "api", "vite.config.ts", "tailwind.config.ts"]
+  "include": ["src", "admin-server", "vite.config.ts", "tailwind.config.ts"]
 }

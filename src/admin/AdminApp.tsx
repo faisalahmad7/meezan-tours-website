@@ -106,7 +106,7 @@ function NotConfigured({ problems }: { problems: string[] }) {
       <div className="mb-6"><Brand /></div>
       <div className="rounded-2xl bg-white p-6 shadow-lift">
         <h1 className="font-display text-2xl font-semibold text-ink-900">Admin not set up yet</h1>
-        <p className="mt-2 text-sm text-ink-500">Add these settings in Vercel (Project Settings, Environment Variables), then redeploy. On your own computer, put them in <code>.env.local</code>. See docs/ADMIN.md.</p>
+        <p className="mt-2 text-sm text-ink-500">Add these settings to the <code>.env.local</code> file in the project folder on this computer, then start the admin again. See docs/ADMIN.md.</p>
         <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-ink-900">{problems.map((p) => <li key={p}>{p}</li>)}</ul>
       </div>
     </Centered>
