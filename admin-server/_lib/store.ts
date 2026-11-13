@@ -76,6 +76,9 @@ function githubStore(gh: NonNullable<Config['github']>): Store {
     })
     if (!res.ok) {
       const text = await res.text().catch(() => '')
+      if (res.status === 401) throw new HttpError(502, 'GitHub refused the token: it is wrong or has expired. Put a valid GITHUB_TOKEN in .env.local and restart the admin.')
+      if (res.status === 403 && /not accessible by personal access token|permission/i.test(text))
+        throw new HttpError(502, `The GitHub token is not allowed to save to ${gh.repo}. Edit the token at github.com/settings/personal-access-tokens: give it access to this repository and set "Contents" to "Read and write". No restart is needed.`)
       throw new HttpError(res.status === 404 ? 404 : 502, `GitHub ${res.status}: ${text.slice(0, 200)}`)
     }
     return (accept.includes('raw') ? await res.text() : await res.json()) as T
