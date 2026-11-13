@@ -6,8 +6,17 @@ export interface HeadData {
   /** Route path, e.g. "/hajj". Used for the canonical URL. */
   path: string
   image?: string
+  /** Alt text for the social image (defaults to the title). */
+  imageAlt?: string
   noindex?: boolean
   jsonLd?: object[]
+  /** Open Graph type; defaults to "website". Articles also get article:* tags. */
+  type?: 'website' | 'article'
+  article?: { publishedTime: string; modifiedTime: string; section?: string; tags?: string[] }
+  /** Same-origin font files to preload (avoids a late font swap on text-heavy pages). */
+  preloadFonts?: string[]
+  /** RSS/Atom feed advertised with <link rel="alternate">. */
+  feed?: { title: string; href: string }
 }
 
 let serverHead: HeadData | null = null
@@ -33,11 +42,12 @@ interface Tag {
 function tags(d: HeadData): Tag[] {
   const url = canonicalFor(d.path)
   const image = abs(d.image ?? '/og-image.jpg')
+  const alt = d.imageAlt ?? d.title
   return [
     { kind: 'meta-name', key: 'description', value: d.description },
     { kind: 'meta-name', key: 'robots', value: d.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large' },
     { kind: 'link', key: 'canonical', value: url },
-    { kind: 'meta-prop', key: 'og:type', value: 'website' },
+    { kind: 'meta-prop', key: 'og:type', value: d.type ?? 'website' },
     { kind: 'meta-prop', key: 'og:site_name', value: SITE.name },
     { kind: 'meta-prop', key: 'og:locale', value: 'en_IN' },
     { kind: 'meta-prop', key: 'og:title', value: d.title },
@@ -46,15 +56,33 @@ function tags(d: HeadData): Tag[] {
     { kind: 'meta-prop', key: 'og:image', value: image },
     { kind: 'meta-prop', key: 'og:image:width', value: '1200' },
     { kind: 'meta-prop', key: 'og:image:height', value: '630' },
-    { kind: 'meta-prop', key: 'og:image:alt', value: d.title },
+    { kind: 'meta-prop', key: 'og:image:alt', value: alt },
     { kind: 'meta-name', key: 'geo.region', value: 'IN-MH' },
     { kind: 'meta-name', key: 'geo.placename', value: 'Pune' },
     { kind: 'meta-name', key: 'twitter:card', value: 'summary_large_image' },
-    { kind: 'meta-name', key: 'twitter:image:alt', value: d.title },
+    { kind: 'meta-name', key: 'twitter:image:alt', value: alt },
     { kind: 'meta-name', key: 'twitter:title', value: d.title },
     { kind: 'meta-name', key: 'twitter:description', value: d.description },
     { kind: 'meta-name', key: 'twitter:image', value: image },
   ]
+}
+
+/**
+ * Page-specific extras (article:* tags, font preloads, feed link). They can repeat and are absent
+ * on most pages, so they carry a data-seo-x marker and are replaced wholesale on navigation.
+ */
+function extras(d: HeadData): string[] {
+  const out: string[] = []
+  const a = d.article
+  if (d.type === 'article' && a) {
+    out.push(`<meta property="article:published_time" content="${esc(a.publishedTime)}" data-seo-x />`)
+    out.push(`<meta property="article:modified_time" content="${esc(a.modifiedTime)}" data-seo-x />`)
+    if (a.section) out.push(`<meta property="article:section" content="${esc(a.section)}" data-seo-x />`)
+    for (const t of a.tags ?? []) out.push(`<meta property="article:tag" content="${esc(t)}" data-seo-x />`)
+  }
+  for (const f of d.preloadFonts ?? []) out.push(`<link rel="preload" href="${esc(f)}" as="font" type="font/woff2" crossorigin data-seo-x />`)
+  if (d.feed) out.push(`<link rel="alternate" type="application/rss+xml" title="${esc(d.feed.title)}" href="${esc(abs(d.feed.href))}" data-seo-x />`)
+  return out
 }
 
 /** Build-time: returns the <head> markup injected into every prerendered page. */
@@ -65,6 +93,7 @@ export function headToHtml(d: HeadData): string {
     else if (t.kind === 'meta-name') out.push(`<meta name="${t.key}" content="${esc(t.value)}" />`)
     else out.push(`<meta property="${t.key}" content="${esc(t.value)}" />`)
   }
+  out.push(...extras(d))
   for (const ld of d.jsonLd ?? []) {
     out.push(
       `<script type="application/ld+json" data-seo-ld>${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`,
@@ -92,6 +121,10 @@ export function applyHead(d: HeadData) {
     }
     el.setAttribute(t.kind === 'link' ? 'href' : 'content', t.value)
   }
+  document.head.querySelectorAll('[data-seo-x]').forEach((n) => n.remove())
+  const tpl = document.createElement('template')
+  tpl.innerHTML = extras(d).join('')
+  document.head.append(...Array.from(tpl.content.childNodes))
   document.head.querySelectorAll('script[data-seo-ld]').forEach((n) => n.remove())
   for (const ld of d.jsonLd ?? []) {
     const s = document.createElement('script')

@@ -20,7 +20,7 @@ const Cell = ({ icon: Icon, label, children }: { icon: ComponentType<{ className
 )
 
 export default function Footer() {
-  const nav = [...FOOTER_LINKS.explore, ...FOOTER_LINKS.pilgrimage]
+  const nav = [...FOOTER_LINKS.explore, ...FOOTER_LINKS.pilgrimage, ...FOOTER_LINKS.resources]
   return (
     <footer className="pattern-dark on-dark border-t-4 border-gold-500/70 pt-24 text-white sm:pt-28">
       <div className="container">

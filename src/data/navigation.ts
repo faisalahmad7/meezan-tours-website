@@ -35,6 +35,8 @@ export const FOOTER_LINKS = {
     { label: 'Umrah', to: '/umrah' },
     { label: 'Ziyarat', to: '/ziyarat' },
   ],
+  /** The blog is reachable from the footer only (not the header or menus), by design. */
+  resources: [{ label: 'Blog', to: '/blog' }],
   legal: [
     { label: 'Privacy Policy', to: '/privacy-policy' },
     { label: 'Terms of Service', to: '/terms' },

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
+import { BlogRoute } from './lib/blogRoute'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import FaqPage from './pages/Faq'
@@ -27,6 +28,10 @@ export default function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="privacy-policy" element={<Privacy />} />
         <Route path="terms" element={<Terms />} />
+        {/* Blog pages live in their own chunk; linked from the footer only. */}
+        <Route path="blog" element={<BlogRoute page="BlogIndex" />} />
+        <Route path="blog/category/:category" element={<BlogRoute page="BlogCategory" />} />
+        <Route path="blog/:slug" element={<BlogRoute page="BlogPost" />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
