@@ -2,15 +2,18 @@
  * Blog content access layer. Blog components read content only through these functions,
  * so the data source can later be swapped for the admin dashboard / CMS without touching the UI.
  *
- * - Post metadata (src/data/blog/posts.ts) is small and bundled with the app: listings, search,
+ * - Post metadata (src/content/blog/posts.json) is small and bundled with the app: listings, search,
  *   cards, related posts, sitemap and SEO tags all work from it.
- * - Article bodies (src/data/blog/articles/<slug>.ts) are heavy, so each one becomes its own
+ * - Article bodies (src/content/blog/articles/<slug>.json) are heavy, so each one becomes its own
  *   JavaScript chunk that is loaded only when that article is opened. The prerender step
  *   registers every body up front (see entry-server.tsx), so the static HTML is always complete.
  */
 import { blogAuthors, blogCategories, MIN_POSTS_TO_INDEX_CATEGORY } from '@/data/blog/categories'
 import { blogPosts } from '@/data/blog/posts'
-import type { BlogArticle, BlogCategoryId, BlogPostMeta, Block } from '@/data/blog/types'
+import type { BlogArticle, BlogCategoryId, BlogPostMeta } from '@/data/blog/types'
+import { articleWordCount, norm, readingMinutesFor } from '@/lib/blogText'
+
+export { articleWordCount, plainText, readingMinutesFor, slugify, tocOf } from '@/lib/blogText'
 
 export const BLOG = {
   name: 'Meezan Journal',
@@ -23,10 +26,13 @@ export const BLOG = {
 const byNewest = (a: BlogPostMeta, b: BlogPostMeta) =>
   b.publishedAt.localeCompare(a.publishedAt) || blogPosts.indexOf(a) - blogPosts.indexOf(b)
 
+/** Only published posts exist as far as the public site is concerned. */
+const published = blogPosts.filter((p) => p.status !== 'draft')
+
 /* ------------------------------------------------------------------ metadata */
 
-export const getPosts = () => [...blogPosts].sort(byNewest)
-export const getPost = (slug: string) => blogPosts.find((p) => p.slug === slug)
+export const getPosts = () => [...published].sort(byNewest)
+export const getPost = (slug: string) => published.find((p) => p.slug === slug)
 export const getFeaturedPosts = () => getPosts().filter((p) => p.featured)
 export const getCategories = () => blogCategories
 export const getCategory = (id: string) => blogCategories.find((c) => c.id === id)
@@ -60,8 +66,6 @@ const ALIASES: Record<string, string> = {
   pack: 'packing', ladies: 'women', woman: 'women', kids: 'children', child: 'children',
   parents: 'elderly', old: 'elderly', vaccine: 'vaccination',
 }
-const norm = (s: string) =>
-  s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’`]/g, "'")
 const terms = (q: string) =>
   norm(q).split(/[^a-z0-9']+/).filter((t) => t.length > 1).map((t) => ALIASES[t] ?? t)
 
@@ -97,9 +101,9 @@ export function searchPosts(query: string) {
 // Browser only: one lazy chunk per article. (The prerender registers all bodies eagerly instead.)
 const loaders: Record<string, () => Promise<{ default: BlogArticle }>> = import.meta.env.SSR
   ? {}
-  : import.meta.glob<{ default: BlogArticle }>('../data/blog/articles/*.ts')
+  : import.meta.glob<{ default: BlogArticle }>('../content/blog/articles/*.json')
 const cache = new Map<string, BlogArticle>()
-const slugOf = (file: string) => file.replace(/^.*\//, '').replace(/\.ts$/, '')
+const slugOf = (file: string) => file.replace(/^.*\//, '').replace(/\.json$/, '')
 
 /** Build time: entry-server registers every article so the prerendered HTML is complete. */
 export function registerArticles(mods: Record<string, { default: BlogArticle }>) {
@@ -111,7 +115,7 @@ export const getArticleSync = (slug: string) => cache.get(slug)
 export async function loadArticle(slug: string) {
   const hit = cache.get(slug)
   if (hit) return hit
-  const loader = loaders[`../data/blog/articles/${slug}.ts`]
+  const loader = loaders[`../content/blog/articles/${slug}.json`]
   if (!loader) return undefined
   const mod = await loader()
   cache.set(slug, mod.default)
@@ -123,44 +127,10 @@ export const prefetchArticle = (slug: string) => {
   void loadArticle(slug).catch(() => undefined)
 }
 
-/* ------------------------------------------------------------------ text helpers */
-
-/** Strip the inline markup: "**a** [b](/c)" -> "a b". */
-export const plainText = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '$1').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-
-const blockText = (b: Block): string => {
-  switch (b.type) {
-    case 'p': case 'h2': case 'h3': return b.text
-    case 'ul': case 'ol': return b.items.join(' ')
-    case 'callout': return [b.title, b.text, ...(b.items ?? [])].filter(Boolean).join(' ')
-    case 'steps': return b.items.map((i) => `${i.title} ${i.text}`).join(' ')
-    case 'checklist': return [b.title, ...b.items].filter(Boolean).join(' ')
-    case 'table': return [b.caption, ...b.head, ...b.rows.flat()].filter(Boolean).join(' ')
-    case 'facts': return b.items.map((i) => `${i.label} ${i.value}`).join(' ')
-    case 'arabic': return [b.transliteration, b.translation].filter(Boolean).join(' ')
-    case 'cta': return `${b.title} ${b.text}`
-    case 'image': return b.image.caption ?? ''
-  }
-}
-
-export function articleWordCount(a: BlogArticle) {
-  const text = [a.summary, ...a.blocks.map(blockText), ...a.faqs.map((f) => `${f.q} ${f.a}`)].map(plainText).join(' ')
-  return text.split(/\s+/).filter(Boolean).length
-}
-
-export const readingMinutesFor = (words: number) => Math.max(1, Math.round(words / 220))
-
-export const slugify = (s: string) =>
-  norm(plainText(s)).replace(/'/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-
-/** H2 headings become the table of contents; ids are stable slugs of the heading text. */
-export const tocOf = (a: BlogArticle) =>
-  a.blocks.flatMap((b) => (b.type === 'h2' ? [{ id: b.id ?? slugify(b.text), text: plainText(b.text) }] : []))
-
 /** Build-time check used by scripts/prerender.mjs: flags drift between stored and real reading time. */
 export function auditBlog() {
   const issues: string[] = []
-  for (const p of blogPosts) {
+  for (const p of published) {
     const a = cache.get(p.slug)
     if (!a) { issues.push(`missing article body for "${p.slug}"`); continue }
     const real = readingMinutesFor(articleWordCount(a))

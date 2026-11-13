@@ -11,7 +11,8 @@
  * No raw HTML is ever rendered.
  */
 
-export type BlogCategoryId = 'umrah-guides' | 'preparation' | 'planning' | 'hajj'
+/** Category ids are defined in src/content/blog/categories.json (editable in the admin). */
+export type BlogCategoryId = string
 
 export interface BlogCategory {
   id: BlogCategoryId
@@ -64,6 +65,8 @@ export interface BlogPostMeta {
   /** 1200x630 JPG for social previews, e.g. /images/blog/og/<slug>.jpg */
   ogImage: string
   featured?: boolean
+  /** "draft" posts are kept in the content files but never rendered, listed or put in the sitemap. */
+  status?: 'published' | 'draft'
   /** Closing call-to-action shown above the footer. */
   cta?: { title: string; text: string }
 }

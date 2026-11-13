@@ -1,61 +1,7 @@
+import data from '@/content/packages.json'
 import type { TravelPackage } from './types'
 
-/**
- * Packages exactly as listed on the original live site (snapshot of 5 Nov 2026).
- * The original cards also had hidden "+11 / +6 / +2 More" inclusion lists that were NOT
- * present in the snapshot. Add them to `details.inclusions` when the owner supplies them.
- * Ratings and review counts are the figures the original site displayed: owner must confirm.
- */
-export const packages: TravelPackage[] = [
-  {
-    id: 'hajj-long',
-    kind: 'hajj',
-    name: 'Long Duration Hajj Package',
-    duration: '30 - 35 days',
-    destinations: 'Makkah & Madinah',
-    highlights: ['5-star accommodation in Makkah', 'Direct / indirect view of the Haram', 'VIP transport services'],
-    previousPriceInr: 724999,
-    priceInr: 699999,
-    priceNote: 'Per person',
-    rating: 4.9,
-    reviewCount: 245,
-    image: { slug: 'kaaba-clock', focus: '50% 62%' },
-    details: { hotel: '5-star accommodation in Makkah', distanceFromHaram: 'Direct / indirect view of the Haram', transport: 'VIP transport services' },
-  },
-  {
-    id: 'hajj-short',
-    kind: 'hajj',
-    name: 'Short Duration Hajj Package (Aziziya Non Shifting)',
-    duration: '17 - 20 days',
-    destinations: 'Makkah & Madinah',
-    highlights: ['4-star accommodation', 'Close proximity to the Haram', 'Group transport'],
-    previousPriceInr: 699999,
-    priceInr: 649999,
-    priceNote: 'Per person',
-    taxNote: 'Includes 5% GST. TCS 2% extra.',
-    rating: 4.7,
-    reviewCount: 189,
-    image: { slug: 'mina-tent', focus: '50% 50%' },
-    details: { hotel: '4-star accommodation, Aziziya (non-shifting)', distanceFromHaram: 'Close proximity to the Haram', transport: 'Group transport' },
-  },
-  {
-    id: 'umrah-saudia',
-    kind: 'umrah',
-    name: 'Saudi Airlines - Semi Deluxe Umrah Tour',
-    duration: '16 days',
-    destinations: 'Makkah & Madinah',
-    dates: 'Departure 12 Nov 2026 - Return 27 Nov 2026',
-    departureDate: '2026-11-12',
-    highlights: ['Direct flight', 'Makkah hotel 600 m from the Haram'],
-    previousPriceInr: 105000,
-    priceInr: 103000,
-    priceNote: 'Per person',
-    badge: 'Most popular',
-    rating: 4.9,
-    reviewCount: 316,
-    image: { slug: 'group-mosque', focus: '50% 40%' },
-    details: { flight: 'Saudi Airlines, direct flight', hotel: 'Semi deluxe, Makkah', distanceFromHaram: '600 m from the Haram (Makkah)' },
-  },
-]
+/** Packages are edited in /admin > Packages (stored in src/content/packages.json). */
+export const packages = data as TravelPackage[]
 
 export const formatInr = (n: number) => '\u20B9' + n.toLocaleString('en-IN')

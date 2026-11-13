@@ -1,0 +1,93 @@
+{
+  "name": "Meezan Tours & Travels",
+  "shortName": "Meezan",
+  "url": "https://www.meezantours.com",
+  "tagline": "Hajj & Umrah tour operator in Pune",
+  "description": "Meezan Tours & Travels is a Pune-based Hajj and Umrah tour operator with 18+ years of experience, organising group and personalised pilgrimages for pilgrims across India, with flights, visas, accommodation and guided support.",
+  "licence": {
+    "number": "MH03572726/Cat-II/9943/2026",
+    "role": "Hajj Group Organiser",
+    "authority": "Ministry of Minority Affairs (MOMA), Hajj Cell, Government of India",
+    "certificateUrl": "https://drive.google.com/file/d/1E8dVedJBH7X8jsQSZRBjv95rz955L-qT/view?usp=sharing"
+  },
+  "stats": [
+    {
+      "value": "18+",
+      "label": "Years of experience"
+    },
+    {
+      "value": "25K+",
+      "label": "Happy pilgrims"
+    },
+    {
+      "value": "4.9",
+      "label": "Average rating"
+    }
+  ],
+  "phones": [
+    {
+      "label": "Primary",
+      "display": "+91 92703 30016",
+      "tel": "+919270330016"
+    },
+    {
+      "label": "Alternate",
+      "display": "+91 91755 83737",
+      "tel": "+919175583737"
+    },
+    {
+      "label": "Alternate",
+      "display": "+91 79723 46995",
+      "tel": "+917972346995"
+    }
+  ],
+  "whatsapp": {
+    "number": "919270330016",
+    "display": "+91 92703 30016"
+  },
+  "email": "meezantour@gmail.com",
+  "address": {
+    "line1": "Shop No. 8, 549, Kulsum Complex",
+    "line2": "Nana Peth",
+    "city": "Pune",
+    "region": "Maharashtra",
+    "postalCode": "411002",
+    "country": "IN"
+  },
+  "hours": [
+    {
+      "days": "Monday to Saturday",
+      "time": "10:00 AM - 7:00 PM",
+      "open": "10:00",
+      "close": "19:00"
+    },
+    {
+      "days": "Sunday",
+      "time": "Closed"
+    }
+  ],
+  "social": [
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@MeezanTours"
+    },
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/meezantoursonline"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/meezantours/"
+    },
+    {
+      "label": "Threads",
+      "url": "https://www.threads.com/@meezantours"
+    }
+  ],
+  "mapEmbed": "https://www.google.com/maps?q=Meezan+Tours+%26+Travels+Kulsum+Complex+Nana+Peth+Pune+411002&output=embed",
+  "mapLink": "https://www.google.com/maps/place/Meezan+Tours+%26+Travels/data=!4m2!3m1!1s0x0:0xc032b957bcb5c22",
+  "googleReviews": {
+    "rating": null,
+    "reviewCount": null
+  }
+}

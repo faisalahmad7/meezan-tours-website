@@ -1,11 +1,4 @@
-/**
- * The "first Umrah" reading route on the blog home: the order in which a first-time pilgrim
- * actually needs these guides. Each stage lists post slugs from posts.ts.
- */
-export const readingPath: { stage: string; text: string; slugs: string[] }[] = [
-  { stage: 'Choose when and how', text: 'Pick a season and a package that suits your family.', slugs: ['best-time-for-umrah', 'how-to-choose-umrah-package'] },
-  { stage: 'Sort the paperwork', text: 'Passport, visa, vaccinations and a timeline.', slugs: ['umrah-visa-for-indians', 'umrah-preparation-checklist'] },
-  { stage: 'Pack', text: 'Light bags, the right clothes, the right medicines.', slugs: ['umrah-packing-list'] },
-  { stage: 'Learn the rites', text: 'Ihram, tawaf, sa\'i and halq, in order.', slugs: ['how-to-perform-umrah'] },
-  { stage: 'Arrive prepared', text: 'Daily life in Makkah and Madinah.', slugs: ['first-umrah-things-to-know', 'umrah-with-family'] },
-]
+import data from '@/content/blog/reading-path.json'
+
+/** The "first Umrah" reading route on the blog home (stored in src/content/blog/reading-path.json). */
+export const readingPath: { stage: string; text: string; slugs: string[] }[] = data

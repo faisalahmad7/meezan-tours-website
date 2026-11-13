@@ -1,0 +1,41 @@
+{
+  "main": [
+    {
+      "slug": "kaaba-clock",
+      "alt": "The Kaaba in Masjid al-Haram with pilgrims in tawaf and the Makkah clock tower behind",
+      "focus": "50% 68%"
+    },
+    {
+      "slug": "kaaba-quran",
+      "alt": "The Kaaba at dusk with a pilgrim holding a Quran and prayer beads",
+      "focus": "50% 55%"
+    },
+    {
+      "slug": "haram-group-portrait",
+      "alt": "Meezan pilgrims in white ihram standing in front of the Kaaba in Makkah",
+      "focus": "50% 50%"
+    }
+  ],
+  "side": [
+    {
+      "slug": "haram-group-wide",
+      "alt": "Meezan pilgrims in ihram standing together at Masjid al-Haram with the Kaaba behind them",
+      "focus": "50% 62%"
+    },
+    {
+      "slug": "airport-banner-group",
+      "alt": "Meezan pilgrims holding the green Meezan Tours & Travels banner at the airport before departure",
+      "focus": "50% 70%"
+    },
+    {
+      "slug": "group-jabal",
+      "alt": "Meezan pilgrims in ihram with the Meezan banner in front of a rocky hill",
+      "focus": "50% 55%"
+    },
+    {
+      "slug": "group-banner-hill",
+      "alt": "Meezan pilgrims holding the green Meezan Tours & Travels banner",
+      "focus": "50% 55%"
+    }
+  ]
+}

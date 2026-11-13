@@ -1,54 +1,11 @@
+import data from '@/content/blog/categories.json'
 import type { BlogAuthor, BlogCategory } from './types'
 
-/** Category order here is the order of the filter chips. */
-export const blogCategories: BlogCategory[] = [
-  {
-    id: 'umrah-guides',
-    name: 'Umrah guides',
-    short: 'The rites, step by step, and what to expect',
-    description:
-      'Step-by-step guides to performing Umrah and to daily life in Makkah and Madinah: ihram, tawaf, sa\'i and halq, with practical advice for first-timers and families.',
-    seoTitle: 'Umrah Guides: Rites, Tips and First-Time Advice | Meezan',
-  },
-  {
-    id: 'preparation',
-    name: 'Preparation & packing',
-    short: 'Checklists for documents, health and luggage',
-    description:
-      'Checklists for pilgrims from India preparing for Umrah and Hajj: what to arrange and when, which documents to carry, and what to pack for men, women and elders.',
-    seoTitle: 'Umrah Preparation and Packing Checklists | Meezan Tours',
-  },
-  {
-    id: 'planning',
-    name: 'Planning & visas',
-    short: 'When to go, visas and choosing a package',
-    description:
-      'Plan your Umrah with confidence: the best time of year to travel, how the Umrah visa works for Indian citizens, and what to ask before you book a package.',
-    seoTitle: 'Umrah Planning: Seasons, Visas and Packages | Meezan Tours',
-  },
-  {
-    id: 'hajj',
-    name: 'Hajj',
-    short: 'How Hajj works for pilgrims from India',
-    description:
-      'Guides to Hajj for pilgrims from India: how the Haj Committee and private Hajj Group Organisers work, the rites day by day, and how Hajj differs from Umrah.',
-    seoTitle: 'Hajj Guides for Pilgrims from India | Meezan Tours',
-  },
-]
+/** Stored in src/content/blog/categories.json; order = order of the filter chips. */
+export const blogCategories = data.categories as BlogCategory[]
 
-/**
- * Content is attributed to the company's team rather than to a named individual, because no
- * individual author details have been supplied. Add named authors here when the owner provides them.
- */
-export const blogAuthors: BlogAuthor[] = [
-  {
-    id: 'meezan-team',
-    name: 'Meezan Tours editorial team',
-    role: 'Hajj Group Organiser, Pune',
-    bio: 'Written by the team at Meezan Tours & Travels, a Pune-based Hajj and Umrah operator with 18+ years of experience, registered with the Ministry of Minority Affairs (Hajj Cell) as a Hajj Group Organiser. Rules that change are checked against official Saudi and Indian sources on the review date shown.',
-    url: '/about',
-  },
-]
+/** Content is attributed to the company's team unless named authors are added. */
+export const blogAuthors = data.authors as BlogAuthor[]
 
 /** Category pages with fewer posts than this are rendered but marked noindex and left out of the sitemap. */
-export const MIN_POSTS_TO_INDEX_CATEGORY = 2
+export const MIN_POSTS_TO_INDEX_CATEGORY: number = data.minPostsToIndexCategory

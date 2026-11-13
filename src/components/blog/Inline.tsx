@@ -17,7 +17,9 @@ export default function Inline({ text }: { text: string }) {
         const m = /^\[([^\]]+)\]\(([^)\s]+)\)$/.exec(part)
         if (m) {
           const [, label, href] = m
-          if (href.startsWith('/')) return <Link key={i} to={href}>{label}</Link>
+          if (/^\/(?!\/)/.test(href)) return <Link key={i} to={href}>{label}</Link>
+          // Only web, mail and phone links are rendered as links; anything else stays plain text.
+          if (!/^(https?:\/\/|mailto:|tel:)/.test(href)) return <Fragment key={i}>{label}</Fragment>
           return (
             <a key={i} href={href} target="_blank" rel="noopener noreferrer">
               {label}
