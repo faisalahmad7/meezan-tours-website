@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "admin": "vite --port 5173 --strictPort --open /admin",
     "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
