@@ -15,27 +15,25 @@ Old guide URLs from the previous site are redirected (301) to the matching artic
 
 ## Where the content is
 
-Everything is plain, JSON-serialisable data, so the admin dashboard / CMS can later read and write the same shapes.
+Content is stored as JSON in `src/content/blog/` and is edited in the admin dashboard (`/admin`, see docs/ADMIN.md).
 
 | File | What it holds |
 | --- | --- |
 | `src/data/blog/types.ts` | The content model (`BlogPostMeta`, `BlogArticle`, `Block`, `BlogCategory`, `BlogAuthor`) |
-| `src/data/blog/posts.ts` | Post index: title, SEO title, description, excerpt, category, tags, dates, image, reading time, CTA |
-| `src/data/blog/articles/<slug>.ts` | Article body: "In short" summary, content blocks, FAQs, sources |
-| `src/data/blog/categories.ts` | Categories, authors, and the noindex threshold for small categories |
-| `src/data/blog/readingPath.ts` | The "read in this order" route on the blog home |
+| `src/content/blog/posts.json` | Post index (with draft/published status): title, SEO title, description, excerpt, category, tags, dates, image, reading time, CTA |
+| `src/content/blog/articles/<slug>.json` | Article body: "In short" summary, content blocks, FAQs, sources |
+| `src/content/blog/categories.json` | Categories, authors, and the noindex threshold for small categories |
+| `src/content/blog/reading-path.json` | The "read in this order" route on the blog home |
+| `src/data/blog/*.ts` | Typed wrappers that import the JSON |
 | `src/services/blog.ts` | The only place components read blog content from (swap for API calls later) |
 
 Article body blocks: `p`, `h2`, `h3`, `ul`, `ol`, `callout` (tip / note / important / verify), `steps`, `checklist`, `table`, `image`, `facts`, `arabic`, `cta`. Inline text supports `**bold**`, `[label](/internal)` and `[label](https://external)`; raw HTML is never rendered.
 
 ## Adding or editing a post
 
-1. Add an entry to `src/data/blog/posts.ts` (keep `seoTitle` under ~60 characters and `description` under ~160).
-2. Create `src/data/blog/articles/<slug>.ts` exporting a `BlogArticle` (copy an existing one).
-3. Use photos from `src/data/imageManifest.ts` (real Meezan photos only).
-4. Make the social image: `python scripts/blog-og.py` (needs Pillow). It writes `public/images/blog/og/<slug>.jpg`.
-5. `npm run build`. The build prints a **blog audit** line: it flags a missing body, a reading time that does not match the text, or an over-long title/description.
-6. When an article's facts are re-checked, update `updatedAt` in `posts.ts` (it drives "Last reviewed", `dateModified` and the sitemap `lastmod`).
+Use the admin dashboard: **Blog posts → New post**. It validates every field, works out the reading time, draws the social image and publishes on save. Save as **Draft** to keep a post off the site until it is ready.
+
+Editing by hand still works: add an entry to `src/content/blog/posts.json`, create `src/content/blog/articles/<slug>.json`, run `python scripts/blog-og.py` for the social image, then `npm run build` (its **blog audit** line flags a missing body, a wrong reading time or an over-long title/description). When an article's facts are re-checked, update `updatedAt` (it drives "Last reviewed", `dateModified` and the sitemap `lastmod`).
 
 ## How it is built (for developers)
 

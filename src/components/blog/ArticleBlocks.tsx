@@ -5,7 +5,7 @@ import Picture from '@/components/Picture'
 import { WhatsAppIcon } from '@/components/BrandIcons'
 import { whatsappLink } from '@/data/site'
 import type { Block, CalloutTone } from '@/data/blog/types'
-import { slugify } from '@/services/blog'
+import { slugify } from '@/lib/blogText'
 import Inline from './Inline'
 
 const TONES: Record<CalloutTone, { label: string; Icon: ComponentType<{ className?: string }>; cls: string }> = {

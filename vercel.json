@@ -3,27 +3,135 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/hajj-packages", "destination": "/hajj", "permanent": true },
-    { "source": "/umrah-packages", "destination": "/umrah", "permanent": true },
-    { "source": "/umrah-packages-from-pune", "destination": "/umrah", "permanent": true },
-    { "source": "/umrah-packages-from-mumbai", "destination": "/umrah", "permanent": true },
-    { "source": "/15-days-umrah-package", "destination": "/umrah", "permanent": true },
-    { "source": "/20-days-umrah-package", "destination": "/umrah", "permanent": true },
-    { "source": "/guides/umrah-checklist", "destination": "/blog/umrah-preparation-checklist", "permanent": true },
-    { "source": "/guides/how-to-perform-umrah", "destination": "/blog/how-to-perform-umrah", "permanent": true },
-    { "source": "/guides/hajj-guide-for-indian-pilgrims", "destination": "/blog/hajj-guide-for-indian-pilgrims", "permanent": true },
-    { "source": "/guides", "destination": "/blog", "permanent": true },
-    { "source": "/blog/feed", "destination": "/blog/feed.xml", "permanent": true },
-    { "source": "/terms-of-service", "destination": "/terms", "permanent": true },
-    { "source": "/cookie-policy", "destination": "/privacy-policy", "permanent": true }
+    {
+      "source": "/hajj-packages",
+      "destination": "/hajj",
+      "permanent": true
+    },
+    {
+      "source": "/umrah-packages",
+      "destination": "/umrah",
+      "permanent": true
+    },
+    {
+      "source": "/umrah-packages-from-pune",
+      "destination": "/umrah",
+      "permanent": true
+    },
+    {
+      "source": "/umrah-packages-from-mumbai",
+      "destination": "/umrah",
+      "permanent": true
+    },
+    {
+      "source": "/15-days-umrah-package",
+      "destination": "/umrah",
+      "permanent": true
+    },
+    {
+      "source": "/20-days-umrah-package",
+      "destination": "/umrah",
+      "permanent": true
+    },
+    {
+      "source": "/guides/umrah-checklist",
+      "destination": "/blog/umrah-preparation-checklist",
+      "permanent": true
+    },
+    {
+      "source": "/guides/how-to-perform-umrah",
+      "destination": "/blog/how-to-perform-umrah",
+      "permanent": true
+    },
+    {
+      "source": "/guides/hajj-guide-for-indian-pilgrims",
+      "destination": "/blog/hajj-guide-for-indian-pilgrims",
+      "permanent": true
+    },
+    {
+      "source": "/guides",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/feed",
+      "destination": "/blog/feed.xml",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/terms",
+      "permanent": true
+    },
+    {
+      "source": "/cookie-policy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    }
   ],
   "headers": [
-    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/images/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/(.*)", "headers": [
-      { "key": "X-Content-Type-Options", "value": "nosniff" },
-      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-      { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
-    ] }
+    {
+      "source": "/admin(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/admin/:path*",
+      "destination": "/admin.html"
+    }
   ]
 }
