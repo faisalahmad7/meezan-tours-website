@@ -1,0 +1,147 @@
+import type { BlogArticle } from '../types'
+
+const article: BlogArticle = {
+  slug: 'umrah-with-family',
+  summary:
+    'Umrah with children or elderly parents works well with planning. Travel in the cooler months, choose a hotel close to the Haram, build rest into every day, and arrange a **wheelchair** for tawaf and sa\'i for anyone who cannot walk long distances. Carry medicines with prescriptions, keep everyone identifiable, and agree a meeting point. Women may perform Umrah without a mahram, and every child needs their own passport and visa.',
+  blocks: [
+    {
+      type: 'p',
+      text: 'Some of the most moving journeys we arrange are family ones: a son taking his mother for her first Umrah, three generations praying together in the Haram. They also need the most planning. The rule that works best is simple: **plan the whole trip around the slowest member of the family**, not the fastest.',
+    },
+
+    { type: 'h2', text: 'Plan around the person who needs the most care' },
+    {
+      type: 'table',
+      caption: 'What to arrange, and for whom',
+      head: ['If you are travelling with', 'Plan for'],
+      rows: [
+        ['Elderly parents', 'Winter travel, a hotel close to the Haram, a wheelchair for the rites, rest days, a doctor\'s check-up before booking'],
+        ['Someone with limited mobility', 'A hotel with lifts and level access, wheelchair use in both mosques, extra time between prayers'],
+        ['Young children', 'Their own passport and visa, an ID band with your phone number, a carrier rather than a large pushchair, short outings'],
+        ['A pregnant family member', 'A doctor\'s advice before booking, proof of COVID-19 vaccination under current Saudi rules, a slower pace'],
+        ['Women travelling without a male relative', 'An operator and group you trust; a mahram is no longer required for Umrah'],
+      ],
+    },
+    {
+      type: 'p',
+      text: 'The season matters most of all. From November to February, Makkah\'s daytime temperatures average around 30°C, compared with more than 40°C in summer. See our guide to the [best time for Umrah](/blog/best-time-for-umrah).',
+    },
+
+    { type: 'h2', text: 'Elderly parents' },
+    { type: 'h3', text: 'Before you book' },
+    {
+      type: 'ul',
+      items: [
+        'Arrange a **medical check-up** and ask the doctor directly whether they are fit for the walking and the heat.',
+        'Under Saudi Arabia\'s current health rules, pilgrims **over 65** need proof of **COVID-19 vaccination**, in addition to the meningitis vaccine that every pilgrim needs.',
+        'Pack medicines for the whole trip plus extra days, with copies of prescriptions, in the hand luggage.',
+        'Tell your operator about every mobility or health need **before** you book, so hotel and transport can be planned around them.',
+      ],
+    },
+    { type: 'h3', text: 'Wheelchairs and pacing the rites' },
+    {
+      type: 'p',
+      text: 'An elderly pilgrim who cannot walk long distances can perform tawaf and sa\'i in a wheelchair, pushed by a family member or a hired helper. Both mosques have routes for wheelchairs, and the upper floors are usually less crowded than the ground floor around the Kaaba. Wheelchairs can be hired or borrowed at the Haram, and the services available change from season to season, so ask your group leader how it works during your stay.',
+    },
+    {
+      type: 'p',
+      text: 'It is fine to **rest between tawaf and sa\'i**. Many scholars also allow short breaks within them when needed. Sit down, drink water, and continue when ready.',
+    },
+    {
+      type: 'callout',
+      tone: 'tip',
+      title: 'Ihram and illness',
+      text: 'If an elderly pilgrim needs to cover their head, wear something stitched or use something scented for medical reasons while in ihram, they may; a compensation (fidyah) may apply. Ask a scholar or your group\'s guide before the journey.',
+    },
+    {
+      type: 'image',
+      image: {
+        slug: 'tent-seated-fan',
+        alt: 'Elderly pilgrims in ihram resting on white sheets inside a ventilated tent with luggage nearby',
+        caption: 'Rest is part of the plan, especially for elderly pilgrims.',
+      },
+    },
+
+    { type: 'h2', text: 'Children' },
+    {
+      type: 'ul',
+      items: [
+        'Every child needs their **own passport, visa and permit**, whatever their age.',
+        'Ask your paediatrician which vaccinations your child needs, and carry the certificates.',
+        'A child\'s Umrah is valid and rewarded. For a young child, a parent makes the intention on their behalf and carries or walks them through the rites. It does not replace the obligatory Hajj later in life.',
+        'Put an **ID band** on young children with your name, phone number and hotel. Dress them in a bright colour that is easy to spot.',
+        'A soft carrier is often easier than a pushchair in dense crowds.',
+        'Keep outings short and plan around nap times. Children feel the heat faster than adults.',
+      ],
+    },
+
+    { type: 'h2', text: 'Women in the family' },
+    {
+      type: 'p',
+      text: 'Since October 2022, Saudi Arabia has allowed women to perform Umrah **without a mahram**. Many women still prefer to travel with family or in a women-friendly group, and operators may have their own policies, so ask yours. In Masjid an-Nabawi, the Rawdah has **separate visiting times for women**, booked on the Nusuk app. For questions about menstruation and tawaf, see the FAQs in our [step-by-step Umrah guide](/blog/how-to-perform-umrah).',
+    },
+
+    { type: 'h2', text: 'Keeping everyone together' },
+    {
+      type: 'ul',
+      items: [
+        'Give everyone a card with the hotel name and address in Arabic, and your phone number.',
+        'Agree **one meeting point** for after every prayer, because men and women pray in separate areas.',
+        'Pair each child or elderly relative with a named adult. Nobody walks alone.',
+        'Take a photo of each family member every morning, so you can show what they are wearing if someone goes missing.',
+        'Save your group leader\'s number on every phone.',
+      ],
+    },
+    {
+      type: 'image',
+      image: {
+        slug: 'group-hill-banner-small',
+        alt: 'Four pilgrims in white ihram holding a Meezan banner with a rocky hill and umbrellas behind',
+        caption: 'Husbands and wives, side by side, with their Meezan group.',
+      },
+    },
+
+    { type: 'h2', text: 'Choosing a package that suits a family' },
+    {
+      type: 'p',
+      text: 'When you compare packages, ask about the things that matter most to families: the **walking distance** from the hotel to the nearest mosque gate, lifts and room sharing (double, triple or quad), meals, transport between cities, and whether a group leader travels with you. Our [ten questions to ask before booking](/blog/how-to-choose-umrah-package) cover each one.',
+    },
+    {
+      type: 'p',
+      text: 'Meezan arranges both group departures and private packages for families. Our group guides assist elderly pilgrims through the rites, and we plan around mobility needs when you tell us about them in advance.',
+    },
+    {
+      type: 'cta',
+      title: 'Travelling with parents or children?',
+      text: 'Tell us about your family before you book, and we will suggest dates, hotels and a pace that suits everyone.',
+      link: { label: 'Contact our team', to: '/contact' },
+    },
+  ],
+  faqs: [
+    {
+      q: 'Can I take a baby or young child for Umrah?',
+      a: 'Yes. Children of any age can travel, but each needs their own passport, visa and permit. Ask your paediatrician about vaccinations, and plan short outings around the child\'s routine.',
+    },
+    {
+      q: 'Can an elderly parent perform tawaf in a wheelchair?',
+      a: 'Yes. Pilgrims who cannot walk long distances perform tawaf and sa\'i in a wheelchair, pushed by a family member or helper. Both mosques have wheelchair routes, and the upper floors are usually less crowded.',
+    },
+    {
+      q: 'Do women need a mahram for Umrah?',
+      a: 'Not under current Saudi rules: since October 2022 women have been allowed to perform Umrah without a male guardian. Operators may have their own policies for women travelling alone, so ask yours.',
+    },
+    {
+      q: 'What is the best time of year for Umrah with elderly parents?',
+      a: 'The winter months, from about November to February, when the weather in Makkah is mildest. Avoid the summer heat and, unless they are strong walkers, the crowds of Ramadan.',
+    },
+  ],
+  sources: [
+    { label: 'Health requirements for Umrah pilgrims (1447H / 2026)', publisher: 'Saudi Ministry of Health', url: 'https://www.moh.gov.sa/en/HealthAwareness/Pilgrims-Health/Documents/Health-Regulations-Umrah-EN.pdf' },
+    { label: 'Women no longer need a male guardian for Hajj and Umrah', publisher: 'Arab News', url: 'https://www.arabnews.com/saudi-arabia/male-guardians-are-no-longer-required-to-accompany-female-pilgrims-during-hajj-umrah-2179356' },
+    { label: 'Children of all ages allowed into the Grand Mosque in Makkah', publisher: 'Gulf News', url: 'https://gulfnews.com/world/gulf/saudi/saudi-arabia-children-of-all-ages-allowed-into-the-grand-mosque-in-mecca-1.89908857' },
+    { label: 'Nusuk Umrah', publisher: 'Ministry of Hajj and Umrah', url: 'https://umrah.nusuk.sa/' },
+  ],
+}
+
+export default article
