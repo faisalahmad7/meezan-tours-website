@@ -1,0 +1,217 @@
+{
+  "slug": "umrah-visa-for-indians",
+  "summary": "Indian citizens usually get an Umrah visa through a licensed operator, who books a package with a Saudi Umrah company; packages can also be bought on the official **Nusuk Umrah** platform. You need a passport valid for at least six months, a photograph, a confirmed hotel booking and the meningitis vaccine. Since November 2025 the visa must be used to **enter Saudi Arabia within 30 days** of being issued, and it allows a stay of **up to 90 days**.",
+  "blocks": [
+    {
+      "type": "callout",
+      "tone": "verify",
+      "title": "Rules checked on 13 November 2026",
+      "text": "Umrah visa rules are set by the Saudi Ministry of Hajj and Umrah and have changed several times since 2025. Treat this guide as an overview and confirm the current requirements with your operator before you pay."
+    },
+    {
+      "type": "facts",
+      "title": "The Umrah visa in brief",
+      "items": [
+        {
+          "label": "Issued through",
+          "value": "Licensed Umrah companies and Nusuk Umrah"
+        },
+        {
+          "label": "Entry window",
+          "value": "30 days from issue"
+        },
+        {
+          "label": "Maximum stay",
+          "value": "90 days from entry, no extension"
+        },
+        {
+          "label": "Health insurance",
+          "value": "Mandatory, included with the visa"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "How the Umrah visa works for Indian citizens"
+    },
+    {
+      "type": "p",
+      "text": "An Umrah visa is not something you apply for on its own at an embassy counter. It is issued as part of an Umrah package: the hotels, transport and services in Saudi Arabia are booked with a Saudi Umrah company licensed by the Ministry of Hajj and Umrah, and the visa is issued against that booking. Most pilgrims in India do this through an Indian travel operator that works with such a company. Indian citizens can also buy packages directly on the official **Nusuk Umrah** platform, where India is among the listed countries."
+    },
+    {
+      "type": "p",
+      "text": "Since June 2025, an Umrah visa is only issued once the hotel booking has been recorded on **Nusuk Masar**, the Ministry's system for service providers. In practice, this means your accommodation has to be confirmed before your visa can be processed."
+    },
+    {
+      "type": "steps",
+      "items": [
+        {
+          "title": "Choose a package",
+          "text": "Agree dates, hotels and flights with your operator, in writing."
+        },
+        {
+          "title": "Hand over documents",
+          "text": "Passport scan, photograph and any other details your operator asks for."
+        },
+        {
+          "title": "Hotel recorded on Nusuk Masar",
+          "text": "Your operator's Saudi partner records the hotel contract; the visa can then be processed."
+        },
+        {
+          "title": "Visa issued",
+          "text": "You receive an electronic visa. Check that your name, passport number and date of birth match your passport exactly."
+        },
+        {
+          "title": "Travel within 30 days",
+          "text": "Enter Saudi Arabia within 30 days of the issue date, or the visa is cancelled."
+        },
+        {
+          "title": "Umrah permit on Nusuk",
+          "text": "Every pilgrim needs an Umrah permit on the Nusuk app, with dates that match the package."
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Documents you will usually need"
+    },
+    {
+      "type": "checklist",
+      "id": "visa-documents",
+      "title": "Documents",
+      "items": [
+        "Passport valid for at least six months",
+        "Recent passport-size photograph on a white background",
+        "Confirmed flight booking",
+        "Confirmed hotel booking (arranged through the package)",
+        "Meningitis (ACYW) vaccination, at least 10 days before arrival",
+        "Proof of COVID-19 vaccination if over 65, pregnant or chronically ill",
+        "PAN details, which Indian operators need for tax on overseas tour packages"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Your operator may ask for more, for example for children travelling with one parent. Every child needs their own passport and visa. Health requirements come from the Saudi Ministry of Health and are covered in our [preparation checklist](/blog/umrah-preparation-checklist)."
+    },
+    {
+      "type": "h2",
+      "text": "Rules to know before you travel"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "**30-day entry window.** Since November 2025, the visa is cancelled automatically if you have not entered Saudi Arabia within 30 days of it being issued. Previously the window was three months, and some older websites still say so.",
+        "**Up to 90 days in the country**, counted from the day you enter. The Umrah visa cannot be extended.",
+        "**Insurance is compulsory** and processed with the visa. It covers emergency medical treatment and certain other risks during your stay.",
+        "**Leave before the visa expires.** Saudi Arabia penalises overstaying, and the penalties can be severe.",
+        "**No Umrah visas during the Hajj pause.** See the next section."
+      ]
+    },
+    {
+      "type": "image",
+      "image": {
+        "slug": "flight-akasa",
+        "alt": "Pilgrims in ihram holding red Meezan bags beside an aircraft at night",
+        "caption": "Meezan pilgrims in ihram boarding their flight."
+      }
+    },
+    {
+      "type": "h2",
+      "text": "The annual pause around Hajj"
+    },
+    {
+      "type": "p",
+      "text": "Saudi Arabia stops issuing Umrah visas to international pilgrims for several weeks before Hajj. For the 1448 AH season, the Ministry's calendar sets the last date for visas to be issued as **9 March 2027**, the last date to enter Saudi Arabia as **23 March 2027**, and the last date to leave as **7 April 2027**. Umrah reopens after Hajj; in 2026, visas were issued again from 31 May. Our guide to the [best time for Umrah](/blog/best-time-for-umrah) shows how this fits with the seasons."
+    },
+    {
+      "type": "h2",
+      "text": "Can Indians perform Umrah on a tourist visa?"
+    },
+    {
+      "type": "p",
+      "text": "Saudi Arabia allows Muslims holding other types of visa, including the tourist visa, to perform Umrah outside the Hajj season, provided they book an Umrah permit on Nusuk. However, most Indian passport holders are not eligible for the Saudi tourist e-visa. Indians who hold a valid visa for the United States, the United Kingdom or the Schengen area, used at least once, or who live in those countries, may qualify. The conditions change, so check them on the official Visit Saudi website before relying on this route. For most families, an Umrah package and visa remain the straightforward option."
+    },
+    {
+      "type": "callout",
+      "tone": "note",
+      "title": "The new multiple-entry Umrah visa",
+      "text": "In July 2026, Saudi Arabia announced a one-year, multiple-entry Umrah visa, with a total stay of up to 90 days, not valid in the Hajj season, and with a Nusuk package and permit needed for each visit. At the time of writing we could not confirm when Indian passport holders will be able to apply for it. Ask our team for the latest position."
+    },
+    {
+      "type": "h2",
+      "text": "Women and children"
+    },
+    {
+      "type": "p",
+      "text": "Since October 2022, Saudi Arabia has allowed women to come for Umrah **without a mahram** (a male guardian). Individual operators may still have their own policies for women travelling alone, so ask before you book. Children of any age can travel, but each needs their own passport, visa and permit. Our guide to [Umrah with family](/blog/umrah-with-family) has practical advice for both."
+    },
+    {
+      "type": "cta",
+      "title": "Visa questions? Ask before you book.",
+      "text": "Meezan coordinates the visa as part of every Umrah package. Our team will give you the current document list for your dates.",
+      "link": {
+        "label": "See Umrah tours",
+        "to": "/umrah"
+      }
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How long is an Umrah visa valid?",
+      "a": "You must enter Saudi Arabia within 30 days of the visa being issued, a rule in force since November 2025. After entry, you can stay for up to 90 days. The visa cannot be extended."
+    },
+    {
+      "q": "Can I apply for an Umrah visa myself?",
+      "a": "Umrah visas are issued against a package booked with a licensed Saudi Umrah company. Indian citizens can buy such packages on the official Nusuk Umrah platform, or go through an Indian operator who books the package and handles the visa for them."
+    },
+    {
+      "q": "Is health insurance included with the Umrah visa?",
+      "a": "Yes. Insurance is compulsory for Umrah pilgrims and is processed together with the visa. It covers emergency medical treatment during the stay; ask your operator for the details of the cover."
+    },
+    {
+      "q": "Can a woman get an Umrah visa without a mahram?",
+      "a": "Yes. Saudi Arabia has allowed women to perform Umrah without a mahram since October 2022. Operators may have their own policies, so ask yours before booking."
+    },
+    {
+      "q": "When are Umrah visas not issued?",
+      "a": "During the pause around Hajj. For the 1448 AH season, the last date for visas to be issued is 9 March 2027 and the last date to enter Saudi Arabia is 23 March 2027."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Nusuk Umrah: packages, permits and countries served",
+      "publisher": "Ministry of Hajj and Umrah",
+      "url": "https://umrah.nusuk.sa/"
+    },
+    {
+      "label": "Umrah visa entry period reduced to one month",
+      "publisher": "Gulf News",
+      "url": "https://gulfnews.com/world/gulf/saudi/saudi-arabia-announces-new-amendments-to-umrah-visa-rules-1.500328262"
+    },
+    {
+      "label": "No Umrah visa without an approved hotel booking on Nusuk Masar",
+      "publisher": "Gulf News",
+      "url": "https://gulfnews.com/world/gulf/saudi/no-umrah-visa-without-approved-hotel-booking-on-nusuk-masar-1.500163540"
+    },
+    {
+      "label": "Saudi Arabia introduces a one-year multiple-entry Umrah visa",
+      "publisher": "The National",
+      "url": "https://www.thenationalnews.com/news/gulf/2026/07/20/saudi-arabia-introduces-one-year-multiple-entry-umrah-visa/"
+    },
+    {
+      "label": "Umrah season 1448 calendar",
+      "publisher": "Arab News Pakistan",
+      "url": "https://www.arabnews.pk/node/2645656"
+    },
+    {
+      "label": "Women no longer need a male guardian for Hajj and Umrah",
+      "publisher": "Arab News",
+      "url": "https://www.arabnews.com/saudi-arabia/male-guardians-are-no-longer-required-to-accompany-female-pilgrims-during-hajj-umrah-2179356"
+    },
+    {
+      "label": "Health requirements for Umrah pilgrims",
+      "publisher": "Saudi Ministry of Health",
+      "url": "https://www.moh.gov.sa/en/HealthAwareness/Pilgrims-Health/Documents/Health-Regulations-Umrah-EN.pdf"
+    }
+  ]
+}

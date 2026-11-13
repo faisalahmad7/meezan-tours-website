@@ -2,9 +2,9 @@
  * Blog content access layer. Blog components read content only through these functions,
  * so the data source can later be swapped for the admin dashboard / CMS without touching the UI.
  *
- * - Post metadata (src/data/blog/posts.ts) is small and bundled with the app: listings, search,
+ * - Post metadata (src/content/blog/posts.json) is small and bundled with the app: listings, search,
  *   cards, related posts, sitemap and SEO tags all work from it.
- * - Article bodies (src/data/blog/articles/<slug>.ts) are heavy, so each one becomes its own
+ * - Article bodies (src/content/blog/articles/<slug>.json) are heavy, so each one becomes its own
  *   JavaScript chunk that is loaded only when that article is opened. The prerender step
  *   registers every body up front (see entry-server.tsx), so the static HTML is always complete.
  */
@@ -23,10 +23,13 @@ export const BLOG = {
 const byNewest = (a: BlogPostMeta, b: BlogPostMeta) =>
   b.publishedAt.localeCompare(a.publishedAt) || blogPosts.indexOf(a) - blogPosts.indexOf(b)
 
+/** Only published posts exist as far as the public site is concerned. */
+const published = blogPosts.filter((p) => p.status !== 'draft')
+
 /* ------------------------------------------------------------------ metadata */
 
-export const getPosts = () => [...blogPosts].sort(byNewest)
-export const getPost = (slug: string) => blogPosts.find((p) => p.slug === slug)
+export const getPosts = () => [...published].sort(byNewest)
+export const getPost = (slug: string) => published.find((p) => p.slug === slug)
 export const getFeaturedPosts = () => getPosts().filter((p) => p.featured)
 export const getCategories = () => blogCategories
 export const getCategory = (id: string) => blogCategories.find((c) => c.id === id)
@@ -97,9 +100,9 @@ export function searchPosts(query: string) {
 // Browser only: one lazy chunk per article. (The prerender registers all bodies eagerly instead.)
 const loaders: Record<string, () => Promise<{ default: BlogArticle }>> = import.meta.env.SSR
   ? {}
-  : import.meta.glob<{ default: BlogArticle }>('../data/blog/articles/*.ts')
+  : import.meta.glob<{ default: BlogArticle }>('../content/blog/articles/*.json')
 const cache = new Map<string, BlogArticle>()
-const slugOf = (file: string) => file.replace(/^.*\//, '').replace(/\.ts$/, '')
+const slugOf = (file: string) => file.replace(/^.*\//, '').replace(/\.json$/, '')
 
 /** Build time: entry-server registers every article so the prerendered HTML is complete. */
 export function registerArticles(mods: Record<string, { default: BlogArticle }>) {
@@ -111,7 +114,7 @@ export const getArticleSync = (slug: string) => cache.get(slug)
 export async function loadArticle(slug: string) {
   const hit = cache.get(slug)
   if (hit) return hit
-  const loader = loaders[`../data/blog/articles/${slug}.ts`]
+  const loader = loaders[`../content/blog/articles/${slug}.json`]
   if (!loader) return undefined
   const mod = await loader()
   cache.set(slug, mod.default)
@@ -160,7 +163,7 @@ export const tocOf = (a: BlogArticle) =>
 /** Build-time check used by scripts/prerender.mjs: flags drift between stored and real reading time. */
 export function auditBlog() {
   const issues: string[] = []
-  for (const p of blogPosts) {
+  for (const p of published) {
     const a = cache.get(p.slug)
     if (!a) { issues.push(`missing article body for "${p.slug}"`); continue }
     const real = readingMinutesFor(articleWordCount(a))

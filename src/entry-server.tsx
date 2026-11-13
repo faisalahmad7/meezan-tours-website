@@ -8,7 +8,7 @@ import * as blogPages from './pages/blog'
 import { registerArticles } from './services/blog'
 
 // Prerender with every blog article body available synchronously.
-registerArticles(import.meta.glob<{ default: BlogArticle }>('./data/blog/articles/*.ts', { eager: true }))
+registerArticles(import.meta.glob<{ default: BlogArticle }>('./content/blog/articles/*.json', { eager: true }))
 registerBlogPages(blogPages)
 
 export { prerenderRoutes } from './routes'

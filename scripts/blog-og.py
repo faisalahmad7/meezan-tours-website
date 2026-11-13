@@ -1,7 +1,7 @@
 """
 Builds the 1200x630 social-preview images for the blog (public/images/blog/og/<slug>.jpg).
 
-Reads every post from src/data/blog/posts.ts (slug, title, image slug, focus) and composes:
+Reads every post from src/content/blog/posts.json (slug, title, image slug, focus) and composes:
 the post's gallery photo, an emerald gradient, a fine gold frame, the title in Playfair Display
 and the Meezan badge. Re-run after adding or renaming a post:
 
@@ -11,13 +11,14 @@ Only existing site assets are used (gallery photos, the badge and the Playfair f
 """
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
-POSTS = ROOT / 'src/data/blog/posts.ts'
+POSTS = ROOT / 'src/content/blog/posts.json'
 GALLERY = ROOT / 'public/images/gallery'
 OUT = ROOT / 'public/images/blog/og'
 BADGE = ROOT / 'public/images/brand/meezan-badge-280.png'
@@ -35,25 +36,16 @@ def font(size: int, weight: int) -> ImageFont.FreeTypeFont:
     return f
 
 
-def unq(s: str) -> str:
-    return s.replace("\\'", "'")
-
-
 def read_posts() -> list[dict]:
-    src = POSTS.read_text(encoding='utf-8')
     posts = []
-    for chunk in re.split(r"\n  \{\n", src)[1:]:
-        slug = re.search(r"slug: '([^']+)'", chunk)
-        title = re.search(r"\n    title: '((?:[^'\\]|\\.)*)'", chunk)
-        img = re.search(r"image: \{\s*slug: '([^']+)'", chunk)
-        focus = re.search(r"focus: '([\d.]+)% ([\d.]+)%'", chunk)
-        if slug and title and img:
-            posts.append({
-                'slug': slug.group(1),
-                'title': unq(title.group(1)),
-                'image': img.group(1),
-                'focus': (float(focus.group(1)) / 100, float(focus.group(2)) / 100) if focus else (0.5, 0.5),
-            })
+    for p in json.loads(POSTS.read_text(encoding='utf-8')):
+        m = re.match(r'([\d.]+)% ([\d.]+)%', p['image'].get('focus') or '')
+        posts.append({
+            'slug': p['slug'],
+            'title': p['title'],
+            'image': p['image']['slug'],
+            'focus': (float(m.group(1)) / 100, float(m.group(2)) / 100) if m else (0.5, 0.5),
+        })
     return posts
 
 
@@ -135,7 +127,7 @@ def compose(title: str, photo: Path, focus: tuple[float, float], kicker: str, ou
 def main() -> None:
     posts = read_posts()
     if not posts:
-        raise SystemExit('no posts found in posts.ts')
+        raise SystemExit('no posts found in posts.json')
     for p in posts:
         compose(p['title'], largest_photo(p['image']), p['focus'], 'Meezan Journal', OUT / f"{p['slug']}.jpg")
     compose('Hajj and Umrah guides from a team that travels with pilgrims', largest_photo('haram-group-wide'), (0.5, 0.45), 'Meezan Journal', OUT / 'blog.jpg')
