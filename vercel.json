@@ -131,7 +131,7 @@
   "rewrites": [
     {
       "source": "/admin/:path*",
-      "destination": "/admin.html"
+      "destination": "/admin"
     }
   ]
 }
